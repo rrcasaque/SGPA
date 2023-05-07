@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="6fbb332b-4071-4051-9f94-181fc77e905c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/historical/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/historical/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/historical/EventType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/historical/EventType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/part/CreatePartUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/part/CreatePartUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/part/PartDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/part/PartDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/utils/DAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/utils/DAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +51,26 @@
     &quot;last_opened_file_path&quot;: &quot;C:/Users/mario/Documents/DOOS4/TrabalhoDOO/SGPA&quot;
   }
 }</component>
+  <component name="RunManager">
+    <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.sgpa.HelloApplication" />
+      <module name="SGPA" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.sgpa.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.HelloApplication" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
