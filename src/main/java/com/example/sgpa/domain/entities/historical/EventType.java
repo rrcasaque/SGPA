@@ -4,6 +4,4 @@ public enum EventType {
     RESERVATION,
     CHECKOUT,
     RETURN,
-    TECHNICIAN_LOGIN,
-    TECHNICIAN_LOGOUT
 }
