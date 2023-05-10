@@ -9,8 +9,5 @@
         <module name="SGPA" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="SGPA" target="17" />
-    </bytecodeTargetLevel>
   </component>
 </project>
