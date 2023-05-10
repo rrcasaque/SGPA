@@ -5,6 +5,8 @@ import java.util.Objects;
 public class Part {
     private int id;
     private String description;
+
+    private StatusPart status;
     private int maxDaysCheckedOutForStudent;
     private int maxDaysCheckedOutForProfessor;
 
@@ -21,6 +23,14 @@ public class Part {
     public Part(int id, String description, int maxDaysCheckedOutForStudent, int maxDaysCheckedOutForProfessor) {
         this(description, maxDaysCheckedOutForStudent, maxDaysCheckedOutForProfessor);
         this.id = id;
+    }
+
+    public StatusPart getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusPart status) {
+        this.status = status;
     }
 
     public int getId() {
