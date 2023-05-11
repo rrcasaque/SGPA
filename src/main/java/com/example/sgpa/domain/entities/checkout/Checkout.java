@@ -6,9 +6,6 @@ import com.example.sgpa.domain.entities.user.Professor;
 import com.example.sgpa.domain.entities.user.Technician;
 import com.example.sgpa.domain.entities.user.User;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -16,9 +13,9 @@ public class Checkout {
     private int checkOutId;
     private Technician technician;
     private User user;
+
     private Set<CheckedOutItem> checkedOutItems;
     private Reservation associatedReservation;
-
     public Checkout(){}
 
     public Checkout(User user, Technician technician){
@@ -30,13 +27,21 @@ public class Checkout {
         this.user = reservation.getRequester();
         this.technician = reservation.getTechnician();
         this.associatedReservation = reservation;
-        reservation.getItems().forEach(itemPart -> checkedOutItems.add(new CheckedOutItem(itemPart)));
+        reservation.getItems().forEach(itemPart -> checkedOutItems.add(new CheckedOutItem(itemPart, this)));
     }
 
-    public Checkout(List<ItemPart> parts, User user, Technician technician){
+    public Checkout(Set<ItemPart> parts, User user, Technician technician){
         this.user = user;
         this.technician = technician;
-        parts.forEach(itemPart -> checkedOutItems.add(new CheckedOutItem(itemPart)));
+        parts.forEach(itemPart -> checkedOutItems.add(new CheckedOutItem(itemPart, this)));
+    }
+
+    public Set<CheckedOutItem> getCheckedOutItems() {
+        return checkedOutItems;
+    }
+
+    public Reservation getAssociatedReservation() {
+        return associatedReservation;
     }
 
     public int getCheckOutId() {
@@ -64,30 +69,11 @@ public class Checkout {
     }
 
     public void addCheckedOutItem(ItemPart item){
-        checkedOutItems.add(new CheckedOutItem(item));
+        checkedOutItems.add(new CheckedOutItem(item, this));
     }
 
-    public void addCheckedOutItems(List<ItemPart> items){
-        items.forEach(itemPart-> checkedOutItems.add(new CheckedOutItem(itemPart)));
-    }
-    private class CheckedOutItem {
-        private ItemPart itemPart;
-        private LocalDate dueDate;
-        private LocalDateTime returnDate;
-
-        private CheckedOutItem(ItemPart item){
-            this.itemPart = item;
-            this.dueDate = getDueDate();
-        }
-        private LocalDate getDueDate(){
-            if (user instanceof Professor)
-                return LocalDate.now().plusDays(itemPart.getPart().getMaxDaysCheckedOutForProfessor());
-            return LocalDate.now().plusDays(itemPart.getPart().getMaxDaysCheckedOutForStudent());
-        }
-
-        public void setReturnDate(LocalDateTime returnDate) {
-            this.returnDate = returnDate;
-        }
+    public void addCheckedOutItems(Set<ItemPart> items){
+        items.forEach(itemPart-> checkedOutItems.add(new CheckedOutItem(itemPart, this)));
     }
 
     @Override
