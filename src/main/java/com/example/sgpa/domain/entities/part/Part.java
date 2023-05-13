@@ -5,7 +5,6 @@ import java.util.Objects;
 public class Part {
     private int id;
     private String description;
-
     private StatusPart status;
     private int maxDaysCheckedOutForStudent;
     private int maxDaysCheckedOutForProfessor;

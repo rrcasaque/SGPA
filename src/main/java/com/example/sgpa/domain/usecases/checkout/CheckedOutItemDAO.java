@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface CheckedOutItemDAO extends DAO<CheckedOutItem, Integer> {
     List<CheckedOutItem> findLate();
-    List<CheckedOutItem> findLateByUser(User user);
-    List<CheckedOutItem> findByUser(User user);
-    List<CheckedOutItem> findByPeriodUser(User user);
-    List<CheckedOutItem> findLateByPeriod(User user);
+    List<CheckedOutItem> findLateByUser(String userId);
+    List<CheckedOutItem> findByUser(String userId);
+    List<CheckedOutItem> findByPeriodUser(String userId);
+    List<CheckedOutItem> findLateByPeriod(String userId);
 }

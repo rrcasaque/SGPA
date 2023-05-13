@@ -14,14 +14,22 @@ public class CheckedOutItem {
     public CheckedOutItem(ItemPart item, Checkout relatedCheckout){
         this.itemPart = item;
         this.relatedCheckout = relatedCheckout;
-        this.dueDate = getDueDate();
+        setDueDate();
     }
-    private LocalDate getDueDate(){
-        if (relatedCheckout.getUser() instanceof Professor)
-            return LocalDate.now().plusDays(itemPart.getPart().getMaxDaysCheckedOutForProfessor());
-        return LocalDate.now().plusDays(itemPart.getPart().getMaxDaysCheckedOutForStudent());
+    private LocalDate setDueDate(){
+        if (relatedCheckout.getUser() instanceof Professor) {
+            this.dueDate = LocalDate.now().plusDays(itemPart.getPart().getMaxDaysCheckedOutForProfessor());
+        }else {
+            this.dueDate = LocalDate.now().plusDays(itemPart.getPart().getMaxDaysCheckedOutForStudent());
+        }
     }
 
+    public ItemPart getItemPart() {
+        return itemPart;
+    }
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
     public void setReturnDate(LocalDateTime returnDate) {
         this.returnDate = returnDate;
     }
