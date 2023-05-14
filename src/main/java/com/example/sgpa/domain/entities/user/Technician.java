@@ -20,4 +20,8 @@ public class Technician extends User {
         this.login = login;
         this.password = password;
     }
+
+    public String getPassword() {
+        return password;
+    }
 }

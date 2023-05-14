@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public interface DAO<T,K> {
     K create(T obj);
-    Optional<T> findOne(T obj);
+    Optional<T> findOne(K type);
     List<T> findAll();
     void update(T obj);
     boolean delete(T obj);
