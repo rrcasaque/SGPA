@@ -6,10 +6,10 @@ import java.util.Optional;
 import com.example.sgpa.domain.entities.reservation.Reservation;
 import com.example.sgpa.domain.entities.user.User;
 
-public class CheckRegisteredMovementsUseCase {
+public class CheckRegisteredMovementsByUserUseCase {
 	private ReservationDAO reservationDAO;
 
-	public CheckRegisteredMovementsUseCase(ReservationDAO reservationDAO) {		
+	public CheckRegisteredMovementsByUserUseCase(ReservationDAO reservationDAO) {		
 		this.reservationDAO = reservationDAO;
 	}
 	
