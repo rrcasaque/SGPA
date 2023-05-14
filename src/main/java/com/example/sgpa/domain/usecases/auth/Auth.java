@@ -16,12 +16,12 @@ public class Auth {
 	
 	public boolean authenticate(String institutionalId, String password){
 		Optional<User> user = userDAO.findOneByIdAndType(UserType.TECHNICIAN,institutionalId);
-		Technician technician = (Technician) user.get(); 
-		if(technician == null)
-			throw new RuntimeException("Technician user not found");		
+		if (user.isEmpty())
+			throw new RuntimeException("Technician user not found");
+		Technician technician = (Technician) user.get();
 		if(!technician.getPassword().equals(password))
-			throw new RuntimeException("Incorrect password");	
+			throw new RuntimeException("Incorrect password");
+
 		return true;		
 	}
-	
 }
