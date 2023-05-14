@@ -10,13 +10,11 @@ public class Event {
     private final LocalDateTime timeStamp;
     private User requester;
     private Technician technician;
-    private int sessionId;
 
-    public Event(EventType type, User requester, Technician technician, int sessionId) {
+    public Event(EventType type, User requester, Technician technician) {
         this.type = type;
         this.requester = requester;
         this.technician = technician;
-        this.sessionId = sessionId;
         this.timeStamp = LocalDateTime.now();
     }
 
