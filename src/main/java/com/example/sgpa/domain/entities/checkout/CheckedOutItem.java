@@ -16,7 +16,7 @@ public class CheckedOutItem {
         this.relatedCheckout = relatedCheckout;
         setDueDate();
     }
-    private LocalDate setDueDate(){
+    private void setDueDate(){
         if (relatedCheckout.getUser() instanceof Professor) {
             this.dueDate = LocalDate.now().plusDays(itemPart.getPart().getMaxDaysCheckedOutForProfessor());
         }else {

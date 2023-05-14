@@ -2,10 +2,10 @@ package com.example.sgpa.domain.entities.checkout;
 
 import com.example.sgpa.domain.entities.part.ItemPart;
 import com.example.sgpa.domain.entities.reservation.Reservation;
-import com.example.sgpa.domain.entities.user.Professor;
 import com.example.sgpa.domain.entities.user.Technician;
 import com.example.sgpa.domain.entities.user.User;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -13,8 +13,7 @@ public class Checkout {
     private int checkOutId;
     private Technician technician;
     private User user;
-
-    private Set<CheckedOutItem> checkedOutItems;
+    private final Set<CheckedOutItem> checkedOutItems = new HashSet<>();
     private Reservation associatedReservation;
     public Checkout(){}
 

@@ -1,59 +1,72 @@
 package com.example.sgpa.domain.usecases.checkout;
 
+import com.example.sgpa.domain.entities.Session.Session;
 import com.example.sgpa.domain.entities.checkout.CheckedOutItem;
 import com.example.sgpa.domain.entities.checkout.Checkout;
+import com.example.sgpa.domain.entities.historical.Event;
+import com.example.sgpa.domain.entities.historical.EventDAO;
+import com.example.sgpa.domain.entities.historical.EventType;
 import com.example.sgpa.domain.entities.part.ItemPart;
+import com.example.sgpa.domain.entities.part.StatusPart;
 import com.example.sgpa.domain.entities.user.Technician;
 import com.example.sgpa.domain.entities.user.User;
-import com.example.sgpa.domain.usecases.part.PartDAO;
+import com.example.sgpa.domain.usecases.part.CheckForITemPartAvailabilityUseCase;
+import com.example.sgpa.domain.usecases.part.ItemPartDAO;
+import com.example.sgpa.domain.usecases.user.CheckForUserPendingsIssuesUseCase;
 import com.example.sgpa.domain.usecases.user.UserDAO;
 import com.example.sgpa.domain.usecases.utils.EntityNotFoundException;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class CreateCheckOutUseCase {
+    private ItemPartDAO itemPartDAO;
     private UserDAO userDAO;
     private CheckOutDAO checkOutDAO;
     private CheckedOutItemDAO checkedOutItemDAO;
+    private EventDAO eventDAO;
+    private CheckForUserPendingsIssuesUseCase checkForUserPendingsIssuesUseCase;
+    private CheckForITemPartAvailabilityUseCase checkForITemPartAvailabilityUseCase;
     CreateCheckOutUseCase(UserDAO userDAO,
+                          ItemPartDAO itemPartDAO,
                           CheckOutDAO checkOutDAO,
-                          CheckedOutItemDAO checkedOutItemDAO){
+                          CheckedOutItemDAO checkedOutItemDAO,
+                          EventDAO eventDAO,
+                          CheckForUserPendingsIssuesUseCase checkForUserPendingsIssuesUseCase,
+                          CheckForITemPartAvailabilityUseCase checkForITemPartAvailabilityUseCase){
         this.userDAO = userDAO;
+        this.itemPartDAO =itemPartDAO;
         this.checkOutDAO = checkOutDAO;
         this.checkedOutItemDAO = checkedOutItemDAO;
+        this.eventDAO = eventDAO;
+        this.checkForUserPendingsIssuesUseCase = checkForUserPendingsIssuesUseCase;
+        this.checkForITemPartAvailabilityUseCase = checkForITemPartAvailabilityUseCase;
     }
-    Checkout createCheckou(int technicianId, String userId, Set<ItemPart> itemParts){
-        //fazer validação e criação do usuário
+    Checkout createCheckout(String userId, Set<ItemPart> itemParts){
+
         Optional<User> user = userDAO.findOne(userId);
         if (user.isEmpty())
             throw new EntityNotFoundException("User not found");
 
-        List<CheckedOutItem> lateItems = checkedOutItemDAO.findLateByUser(userId);
-        if (!lateItems.isEmpty()){
-            StringBuilder message = new StringBuilder("User has the followinf overdue parts:\n");
-            lateItems.forEach(checkedOutItem -> message
-                    .append("PatrimonialId: ")
-                    .append(checkedOutItem.getItemPart().getPatrimonialId())
-                    .append(". Part description: ")
-                    .append(checkedOutItem.getItemPart().getPart().getDescription())
-                    .append(". Due Date: ")
-                    .append(checkedOutItem.getDueDate().toString())
-                    .append("\n"));
-            throw new RuntimeException(message.toString());
-        }
+        checkForUserPendingsIssuesUseCase.checkForUserPendingIssues(userId);
 
-        //fazer validação e criação da lista de peças
-        Checkout checkout = new Checkout(itemParts, user, );
+        checkForITemPartAvailabilityUseCase.checkForAvailabilityOfTheParts(itemParts);
+
+        Technician loggedTechnician = Session.getLoggedTechnician();
+
+        Checkout checkout = new Checkout(itemParts, user.get(), loggedTechnician);
+
         int id = checkOutDAO.create(checkout);
-        checkout.getCheckedOutItems().forEach(checkedOutItem -> checkedOutItemDAO.create(checkedOutItem));
-        //Checkout checkout = checkOutDAO.findOne(id);
+
+        checkout.setCheckOutId(id);
+
+        itemParts.forEach(itemPart -> itemPart.setStatus(StatusPart.CHECKED_OUT));
+
+        eventDAO.create(new Event(EventType.CHECKOUT, user.get(), loggedTechnician, Session.getSessionId()));
+
+        return checkout;
     }
-
-
-
-
 
 }

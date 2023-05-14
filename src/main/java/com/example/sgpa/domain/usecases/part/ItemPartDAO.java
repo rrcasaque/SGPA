@@ -6,11 +6,11 @@ import com.example.sgpa.domain.usecases.utils.DAO;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface ItemPartDAO extends DAO<ItemPart, String> {
-    String create(ItemPart obj);
-    Optional<ItemPart> findOne(ItemPart obj);
-    List<ItemPart> findAll();
-    void update(ItemPart obj);
-    boolean delete(ItemPart obj);
+   Set<ItemPart> findReservedItemParts();
+   Set<ItemPart> findCheckedOutsItemParts();
+   Set<ItemPart> findCheckedOutsItemPartsByUser(String userId);
+   boolean isItemPartAvailable(String patrimonialId);
 }
