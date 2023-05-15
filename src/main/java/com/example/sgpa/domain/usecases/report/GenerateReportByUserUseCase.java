@@ -1,6 +1,7 @@
 package com.example.sgpa.domain.usecases.report;
 
 import java.util.Date;
+import java.util.List;
 
 import com.example.sgpa.domain.entities.reservation.Reservation;
 import com.example.sgpa.domain.entities.user.User;
@@ -14,6 +15,8 @@ public class GenerateReportByUserUseCase {
 	}
 
 	public Reservation generate(User user, Date start, Date end) {		
-		return reservationDAO.getReport(user, start, end);
+		List<Reservation> reservationList = reservationDAO.getReport(user, start, end); 
+		if(reservationList.isEmpty())
+			throw new RuntimeException("data not found for the informed parameters");
 	}
 }
