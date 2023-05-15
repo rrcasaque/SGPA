@@ -5,6 +5,7 @@ import com.example.sgpa.domain.entities.user.Professor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class CheckedOutItem {
     private Checkout relatedCheckout;
@@ -34,4 +35,16 @@ public class CheckedOutItem {
         this.returnDate = returnDate;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CheckedOutItem that = (CheckedOutItem) o;
+        return Objects.equals(relatedCheckout, that.relatedCheckout) && Objects.equals(itemPart, that.itemPart);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(relatedCheckout, itemPart);
+    }
 }

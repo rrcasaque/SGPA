@@ -19,13 +19,13 @@ import java.util.Optional;
 import java.util.Set;
 
 public class CreateCheckOutUseCase {
-    private ItemPartDAO itemPartDAO;
-    private UserDAO userDAO;
-    private CheckOutDAO checkOutDAO;
-    private CheckedOutItemDAO checkedOutItemDAO;
-    private EventDAO eventDAO;
-    private CheckForUserPendingsIssuesUseCase checkForUserPendingsIssuesUseCase;
-    private CheckForITemPartAvailabilityUseCase checkForITemPartAvailabilityUseCase;
+    private final ItemPartDAO itemPartDAO;
+    private final UserDAO userDAO;
+    private final CheckOutDAO checkOutDAO;
+    private final CheckedOutItemDAO checkedOutItemDAO;
+    private final EventDAO eventDAO;
+    private final CheckForUserPendingsIssuesUseCase checkForUserPendingsIssuesUseCase;
+    private final CheckForITemPartAvailabilityUseCase checkForITemPartAvailabilityUseCase;
     CreateCheckOutUseCase(UserDAO userDAO,
                           ItemPartDAO itemPartDAO,
                           CheckOutDAO checkOutDAO,
@@ -42,27 +42,19 @@ public class CreateCheckOutUseCase {
         this.checkForITemPartAvailabilityUseCase = checkForITemPartAvailabilityUseCase;
     }
     Checkout createCheckout(String userId, Set<ItemPart> itemParts){
-
         Optional<User> user = userDAO.findOne(userId);
         if (user.isEmpty())
             throw new EntityNotFoundException("User not found");
-
         checkForUserPendingsIssuesUseCase.checkForUserPendingIssues(userId);
-
         checkForITemPartAvailabilityUseCase.checkForAvailabilityOfTheParts(itemParts);
-
         Technician loggedTechnician = Session.getLoggedTechnician();
-
         Checkout checkout = new Checkout(itemParts, user.get(), loggedTechnician);
-
         int id = checkOutDAO.create(checkout);
-
         checkout.setCheckOutId(id);
-
+        checkout.getCheckedOutItems().forEach(checkedOutItemDAO::create);
         itemParts.forEach(itemPart -> itemPart.setStatus(StatusPart.CHECKED_OUT));
-
+        itemParts.forEach(itemPartDAO::update);
         eventDAO.create(new Event(EventType.CHECKOUT, user.get(), loggedTechnician));
-
         return checkout;
     }
 
