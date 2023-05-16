@@ -1,35 +1,44 @@
 package com.example.sgpa.domain.entities.historical;
 
+import com.example.sgpa.domain.entities.part.ItemPart;
 import com.example.sgpa.domain.entities.user.Technician;
 import com.example.sgpa.domain.entities.user.User;
 
 import java.time.LocalDateTime;
 
 public class Event {
+    private int id;
     private EventType type;
     private final LocalDateTime timeStamp;
     private User requester;
     private Technician technician;
-    private int sessionId;
-
-    public Event(EventType type, User requester, Technician technician, int sessionId) {
+    private ItemPart itemPart;
+    public Event(EventType type, User requester, Technician technician, ItemPart itemPart) {
         this.type = type;
         this.requester = requester;
         this.technician = technician;
-        this.sessionId = sessionId;
+        this.itemPart = itemPart;
         this.timeStamp = LocalDateTime.now();
     }
-
     public EventType getType() {
         return type;
     }
-
-    public void setType(EventType type) {
-        this.type = type;
-    }
-
     public LocalDateTime getTimeStamp() {
         return timeStamp;
     }
-
+    public int getId() {
+        return id;
+    }
+    public User getRequester() {
+        return requester;
+    }
+    public Technician getTechnician() {
+        return technician;
+    }
+    public ItemPart getItemPart() {
+        return itemPart;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
 }
