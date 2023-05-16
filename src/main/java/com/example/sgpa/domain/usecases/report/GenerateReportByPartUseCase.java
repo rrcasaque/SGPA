@@ -14,9 +14,10 @@ public class GenerateReportByPartUseCase {
 		this.reservationDAO = reservationDAO;
 	}
 	
-	public Reservation generate(Part part, Date start, Date end) {		
-		List<Reservation> reservationList = reservationDAO.getReport(part, start, end); 
+	public List<Reservation> generate(Part part, Date start, Date end) {		
+		List<Reservation> reservationList = reservationDAO.getReportByPart(part, start, end); 
 		if(reservationList.isEmpty())
 			throw new RuntimeException("data not found for the informed parameters");
+		return reservationList;
 	}
 }
