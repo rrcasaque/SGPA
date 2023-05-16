@@ -16,7 +16,6 @@ public class Checkout {
     private final Set<CheckedOutItem> checkedOutItems = new HashSet<>();
     private Reservation associatedReservation;
     public Checkout(){}
-
     public Checkout(User user, Technician technician){
         this.user = user;
         this.technician = technician;
