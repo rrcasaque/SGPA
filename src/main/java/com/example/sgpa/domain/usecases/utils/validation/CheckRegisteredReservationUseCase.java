@@ -14,8 +14,8 @@ public class CheckRegisteredReservationUseCase {
 	}
 	
 	public void check(Date start, Date end){
-		List<Reservation> reservationList = reservationDAO.findByDate(start,end);
+		List<Reservation> reservationList = reservationDAO.getReportByDate(start,end);
 		if(reservationList.isEmpty())
-			throw new RuntimeException("moves not found!");
+			throw new RuntimeException("moves not found!");		
 	}
 }
