@@ -10,7 +10,6 @@ import com.example.sgpa.domain.entities.reservation.Reservation;
 import com.example.sgpa.domain.entities.reservation.ReservedItem;
 import com.example.sgpa.domain.entities.user.Technician;
 import com.example.sgpa.domain.entities.user.User;
-import com.example.sgpa.domain.usecases.checkout.CheckedOutItemDAO;
 import com.example.sgpa.domain.usecases.part.CheckForITemPartAvailabilityUseCase;
 import com.example.sgpa.domain.usecases.part.ItemPartDAO;
 import com.example.sgpa.domain.usecases.user.CheckForUserPendingsIssuesUseCase;
@@ -29,7 +28,7 @@ public class CreateReservationUseCase {
     private final EventDAO eventDAO;
     private final CheckForUserPendingsIssuesUseCase checkForUserPendingsIssuesUseCase;
     private final CheckForITemPartAvailabilityUseCase checkForITemPartAvailabilityUseCase;
-    CreateReservationUseCase(UserDAO userDAO,
+    public CreateReservationUseCase(UserDAO userDAO,
                           ItemPartDAO itemPartDAO,
                           ReservationDAO reservationDAO,
                           EventDAO eventDAO,
@@ -42,7 +41,7 @@ public class CreateReservationUseCase {
         this.checkForUserPendingsIssuesUseCase = checkForUserPendingsIssuesUseCase;
         this.checkForITemPartAvailabilityUseCase = checkForITemPartAvailabilityUseCase;
     }
-    Reservation createReservation(String userId, Set<ItemPart> itemParts, LocalDateTime dateTimeScheduledForCheckout){
+    public Reservation createReservation(String userId, Set<ItemPart> itemParts, LocalDateTime dateTimeScheduledForCheckout){
         Optional<User> user = userDAO.findOne(userId);
         if (user.isEmpty())
             throw new EntityNotFoundException("User not found");
@@ -55,7 +54,7 @@ public class CreateReservationUseCase {
         itemParts.forEach(itemPart -> itemPart.setStatus(StatusPart.RESERVED));
         itemParts.forEach(itemPartDAO::update);
         itemParts.forEach(itemPart -> reservationDAO.createReservedItem(new ReservedItem(itemPart, reservation)));
-        eventDAO.create(new Event(EventType.RESERVATION, user.get(), loggedTechnician));
+        itemParts.forEach(itemPart -> eventDAO.create(new Event(EventType.RESERVATION, user.get(), loggedTechnician, itemPart)));
         return reservation;
     }
 }

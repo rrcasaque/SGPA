@@ -26,7 +26,7 @@ public class CreateCheckOutUseCase {
     private final EventDAO eventDAO;
     private final CheckForUserPendingsIssuesUseCase checkForUserPendingsIssuesUseCase;
     private final CheckForITemPartAvailabilityUseCase checkForITemPartAvailabilityUseCase;
-    CreateCheckOutUseCase(UserDAO userDAO,
+    public CreateCheckOutUseCase(UserDAO userDAO,
                           ItemPartDAO itemPartDAO,
                           CheckOutDAO checkOutDAO,
                           CheckedOutItemDAO checkedOutItemDAO,
@@ -41,7 +41,7 @@ public class CreateCheckOutUseCase {
         this.checkForUserPendingsIssuesUseCase = checkForUserPendingsIssuesUseCase;
         this.checkForITemPartAvailabilityUseCase = checkForITemPartAvailabilityUseCase;
     }
-    Checkout createCheckout(String userId, Set<ItemPart> itemParts){
+    public Checkout createCheckout(String userId, Set<ItemPart> itemParts){
         Optional<User> user = userDAO.findOne(userId);
         if (user.isEmpty())
             throw new EntityNotFoundException("User not found");
@@ -54,7 +54,8 @@ public class CreateCheckOutUseCase {
         checkout.getCheckedOutItems().forEach(checkedOutItemDAO::create);
         itemParts.forEach(itemPart -> itemPart.setStatus(StatusPart.CHECKED_OUT));
         itemParts.forEach(itemPartDAO::update);
-        eventDAO.create(new Event(EventType.CHECKOUT, user.get(), loggedTechnician));
+        itemParts.forEach(itemPart ->
+                eventDAO.create(new Event(EventType.CHECKOUT, user.get(), loggedTechnician, itemPart)));
         return checkout;
     }
 

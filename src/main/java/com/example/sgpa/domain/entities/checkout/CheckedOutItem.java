@@ -31,6 +31,12 @@ public class CheckedOutItem {
     public LocalDate getDueDate() {
         return dueDate;
     }
+    public Checkout getRelatedCheckout() {
+        return relatedCheckout;
+    }
+    public LocalDateTime getReturnDate() {
+        return returnDate;
+    }
     public void setReturnDate(LocalDateTime returnDate) {
         this.returnDate = returnDate;
     }
