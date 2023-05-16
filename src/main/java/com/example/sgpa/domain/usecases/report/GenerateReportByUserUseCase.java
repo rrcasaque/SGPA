@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.example.sgpa.domain.entities.reservation.Reservation;
 import com.example.sgpa.domain.entities.user.User;
+import com.example.sgpa.domain.usecases.reservation.ReservationDAO;
 
 public class GenerateReportByUserUseCase {
 	
@@ -14,9 +15,10 @@ public class GenerateReportByUserUseCase {
 		this.reservationDAO = reservationDAO;
 	}
 
-	public Reservation generate(User user, Date start, Date end) {		
-		List<Reservation> reservationList = reservationDAO.getReport(user, start, end); 
+	public List<Reservation> generate(User user, Date start, Date end) {		
+		List<Reservation> reservationList = reservationDAO.getReportByUser(user, start, end); 
 		if(reservationList.isEmpty())
 			throw new RuntimeException("data not found for the informed parameters");
+		return reservationList;
 	}
 }

@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.example.sgpa.domain.entities.reservation.Reservation;
 import com.example.sgpa.domain.entities.user.User;
+import com.example.sgpa.domain.usecases.reservation.ReservationDAO;
 
 public class CheckRegisteredMovementsByUserUseCase {
 	private ReservationDAO reservationDAO;
@@ -14,7 +15,7 @@ public class CheckRegisteredMovementsByUserUseCase {
 	}
 	
 	public void check(User user){		
-		List<Reservation> reservationList = reservationDAO.getAllReservations();
+		List<Reservation> reservationList = reservationDAO.findAll();
 		boolean state = false;
 		for(Reservation reservation : reservationList){
 			if(reservation.getRequester().equals(user))
