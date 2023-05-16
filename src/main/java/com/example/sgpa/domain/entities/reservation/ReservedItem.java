@@ -1,14 +1,14 @@
 package com.example.sgpa.domain.entities.reservation;
 
-import com.example.sgpa.domain.entities.part.ItemPart;
+import com.example.sgpa.domain.entities.part.PartItem;
 
 import java.util.Objects;
 
 public class ReservedItem {
-    ItemPart itemPart;
+    PartItem itemPart;
     Reservation relatedReservation;
 
-    public ReservedItem(ItemPart itemPart, Reservation relatedReservation) {
+    public ReservedItem(PartItem itemPart, Reservation relatedReservation) {
         this.itemPart = itemPart;
         this.relatedReservation = relatedReservation;
     }

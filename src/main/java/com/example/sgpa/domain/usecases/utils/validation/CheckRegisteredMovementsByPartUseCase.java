@@ -3,7 +3,7 @@ package com.example.sgpa.domain.usecases.utils.validation;
 import java.util.List;
 import java.util.Set;
 
-import com.example.sgpa.domain.entities.part.ItemPart;
+import com.example.sgpa.domain.entities.part.PartItem;
 import com.example.sgpa.domain.entities.part.Part;
 import com.example.sgpa.domain.entities.reservation.Reservation;
 import com.example.sgpa.domain.usecases.reservation.ReservationDAO;
@@ -19,8 +19,8 @@ public class CheckRegisteredMovementsByPartUseCase {
 		List<Reservation> reservationList = reservationDAO.findAll();
 		boolean state = false;
 		for(Reservation reservation : reservationList){
-			Set<ItemPart> itemPartSet = reservation.getItems();	
-			for(ItemPart itemPart : itemPartSet)
+			Set<PartItem> itemPartSet = reservation.getItems();
+			for(PartItem itemPart : itemPartSet)
 				if(itemPart.getPart().getId() == part.getId())
 					state = true;
 		}

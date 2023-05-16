@@ -1,14 +1,14 @@
 package com.example.sgpa.domain.entities.checkout;
 
-import com.example.sgpa.domain.entities.part.ItemPart;
+import com.example.sgpa.domain.entities.part.PartItem;
 
 import java.util.Objects;
 
 public class CheckedOutItemKey {
     private Checkout Checkout;
-    private ItemPart itemPart;
+    private PartItem itemPart;
 
-    public CheckedOutItemKey(com.example.sgpa.domain.entities.checkout.Checkout checkout, ItemPart itemPart) {
+    public CheckedOutItemKey(com.example.sgpa.domain.entities.checkout.Checkout checkout, PartItem itemPart) {
         Checkout = checkout;
         this.itemPart = itemPart;
     }

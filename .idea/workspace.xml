@@ -5,25 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6fbb332b-4071-4051-9f94-181fc77e905c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/user/UserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_8_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_8_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_8_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_8_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_17_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_win_17_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_17_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_win_17_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_17_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_win_17_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_17_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_win_17_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/checkout/CheckedOutItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/checkout/CheckedOutItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/checkout/CheckedOutItemKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/checkout/CheckedOutItemKey.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/checkout/Checkout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/checkout/Checkout.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/historical/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/historical/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/part/ItemPart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/part/PartItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/reservation/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/reservation/Reservation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/reservation/ReservedItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/reservation/ReservedItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/checkout/CreateCheckOutUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/checkout/CreateCheckOutUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/checkout/ReturnPartUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/checkout/ReturnPartUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/part/CheckForITemPartAvailabilityUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/part/CheckForITemPartAvailabilityUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/part/CreatePartUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/part/CreatePartUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/part/ItemPartDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/part/PartItemDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/part/PartDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/part/PartDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/reservation/CreateReservationUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/reservation/CreateReservationUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/reservation/ReservationDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/reservation/ReservationDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/utils/validation/CheckRegisteredMovementsByPartUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/utils/validation/CheckRegisteredMovementsByPartUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,13 +33,18 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
         <option value="Enum" />
-        <option value="Interface" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -54,9 +59,7 @@
     </option>
   </component>
   <component name="ProjectId" id="2PLk7NkOhQhbuwWo80CH0q6EQfn" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -65,11 +68,16 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/vitor/SGPA"
+    "last_opened_file_path": "C:/Users/mario/Documents/DOOS4/TrabalhoDOO/SGPA",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
 }]]></component>
   <component name="RunManager">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="corretto-17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.example.sgpa.HelloApplication" />
       <module name="SGPA" />
       <extension name="coverage">
@@ -100,11 +108,38 @@
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="dev" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="dev" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>

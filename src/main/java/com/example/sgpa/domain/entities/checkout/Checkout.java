@@ -1,6 +1,6 @@
 package com.example.sgpa.domain.entities.checkout;
 
-import com.example.sgpa.domain.entities.part.ItemPart;
+import com.example.sgpa.domain.entities.part.PartItem;
 import com.example.sgpa.domain.entities.reservation.Reservation;
 import com.example.sgpa.domain.entities.user.Technician;
 import com.example.sgpa.domain.entities.user.User;
@@ -28,7 +28,7 @@ public class Checkout {
         reservation.getItems().forEach(itemPart -> checkedOutItems.add(new CheckedOutItem(itemPart, this)));
     }
 
-    public Checkout(Set<ItemPart> parts, User user, Technician technician){
+    public Checkout(Set<PartItem> parts, User user, Technician technician){
         this.user = user;
         this.technician = technician;
         parts.forEach(itemPart -> checkedOutItems.add(new CheckedOutItem(itemPart, this)));
@@ -66,11 +66,11 @@ public class Checkout {
         this.user = user;
     }
 
-    public void addCheckedOutItem(ItemPart item){
+    public void addCheckedOutItem(PartItem item){
         checkedOutItems.add(new CheckedOutItem(item, this));
     }
 
-    public void addCheckedOutItems(Set<ItemPart> items){
+    public void addCheckedOutItems(Set<PartItem> items){
         items.forEach(itemPart-> checkedOutItems.add(new CheckedOutItem(itemPart, this)));
     }
 

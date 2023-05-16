@@ -2,34 +2,34 @@ package com.example.sgpa.domain.entities.part;
 
 import java.util.Objects;
 
-public class ItemPart {
-    private String PatrimonialId;
+public class PartItem {
+    private String patrimonialId;
     private StatusPart status;
     private String situation;
     private Part part;
 
-    public ItemPart() {
+    public PartItem() {
     }
 
-    public ItemPart(StatusPart status, String situation, Part part) {
+    public PartItem(StatusPart status, String situation, Part part) {
         this.status = status;
         this.situation = situation;
         this.part = part;
     }
 
-    public ItemPart(String patrimonialId, StatusPart status, String situation, Part part) {
-        PatrimonialId = patrimonialId;
+    public PartItem(String patrimonialId, StatusPart status, String situation, Part part) {
+        this.patrimonialId = patrimonialId;
         this.status = status;
         this.situation = situation;
         this.part = part;
     }
 
     public String getPatrimonialId() {
-        return PatrimonialId;
+        return patrimonialId;
     }
 
     public void setPatrimonialId(String patrimonialId) {
-        PatrimonialId = patrimonialId;
+        this.patrimonialId = patrimonialId;
     }
 
     public StatusPart getStatus() {
@@ -60,12 +60,12 @@ public class ItemPart {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ItemPart itemPart = (ItemPart) o;
-        return Objects.equals(PatrimonialId, itemPart.PatrimonialId);
+        PartItem itemPart = (PartItem) o;
+        return Objects.equals(patrimonialId, itemPart.patrimonialId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(PatrimonialId);
+        return Objects.hash(patrimonialId);
     }
 }

@@ -5,12 +5,11 @@ import com.example.sgpa.domain.entities.checkout.CheckedOutItem;
 import com.example.sgpa.domain.entities.historical.Event;
 import com.example.sgpa.domain.entities.historical.EventDAO;
 import com.example.sgpa.domain.entities.historical.EventType;
-import com.example.sgpa.domain.entities.part.ItemPart;
+import com.example.sgpa.domain.entities.part.PartItem;
 import com.example.sgpa.domain.entities.part.StatusPart;
 import com.example.sgpa.domain.entities.user.Technician;
 import com.example.sgpa.domain.entities.user.User;
-import com.example.sgpa.domain.entities.user.UserType;
-import com.example.sgpa.domain.usecases.part.ItemPartDAO;
+import com.example.sgpa.domain.usecases.part.PartItemDAO;
 import com.example.sgpa.domain.usecases.user.UserDAO;
 import com.example.sgpa.domain.usecases.utils.EntityNotFoundException;
 
@@ -19,12 +18,12 @@ import java.util.Optional;
 
 public class ReturnPartUseCase {
     CheckedOutItemDAO checkedOutItemDAO;
-    ItemPartDAO itemPartDAO;
+    PartItemDAO itemPartDAO;
     EventDAO eventDAO;
     UserDAO userDAO;
 
     public ReturnPartUseCase(CheckedOutItemDAO checkedOutItemDAO,
-                             ItemPartDAO itemPartDAO,
+                             PartItemDAO itemPartDAO,
                              EventDAO eventDAO,
                              UserDAO userDAO) {
         this.checkedOutItemDAO = checkedOutItemDAO;
@@ -42,7 +41,7 @@ public class ReturnPartUseCase {
             throw new EntityNotFoundException("There is no checked out item with the informed patrimonial identification");
         CheckedOutItem checkedOutItem = CheckedOutItemOptional.get();
         checkedOutItem.setReturnDate(LocalDateTime.now());
-        ItemPart itemPart = checkedOutItem.getItemPart();
+        PartItem itemPart = checkedOutItem.getItemPart();
         itemPart.setStatus(StatusPart.AVAILABLE);
         checkedOutItemDAO.update(checkedOutItem);
         itemPartDAO.update(itemPart);

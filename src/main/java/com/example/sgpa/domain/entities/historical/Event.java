@@ -1,6 +1,6 @@
 package com.example.sgpa.domain.entities.historical;
 
-import com.example.sgpa.domain.entities.part.ItemPart;
+import com.example.sgpa.domain.entities.part.PartItem;
 import com.example.sgpa.domain.entities.user.Technician;
 import com.example.sgpa.domain.entities.user.User;
 
@@ -12,8 +12,8 @@ public class Event {
     private final LocalDateTime timeStamp;
     private User requester;
     private Technician technician;
-    private ItemPart itemPart;
-    public Event(EventType type, User requester, Technician technician, ItemPart itemPart) {
+    private PartItem itemPart;
+    public Event(EventType type, User requester, Technician technician, PartItem itemPart) {
         this.type = type;
         this.requester = requester;
         this.technician = technician;
@@ -35,7 +35,7 @@ public class Event {
     public Technician getTechnician() {
         return technician;
     }
-    public ItemPart getItemPart() {
+    public PartItem getItemPart() {
         return itemPart;
     }
     public void setId(int id) {
