@@ -12,7 +12,6 @@ public class Part {
     }
 
     public Part(String description, int maxDaysCheckedOutForStudent, int maxDaysCheckedOutForProfessor) {
-        this.id = id;
         this.description = description;
         this.maxDaysCheckedOutForStudent = maxDaysCheckedOutForStudent;
         this.maxDaysCheckedOutForProfessor = maxDaysCheckedOutForProfessor;

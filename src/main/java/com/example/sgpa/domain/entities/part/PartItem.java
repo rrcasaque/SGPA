@@ -5,22 +5,22 @@ import java.util.Objects;
 public class PartItem {
     private String patrimonialId;
     private StatusPart status;
-    private String situation;
+    private String observation;
     private Part part;
 
     public PartItem() {
     }
 
-    public PartItem(StatusPart status, String situation, Part part) {
+    public PartItem(StatusPart status, String observation, Part part) {
         this.status = status;
-        this.situation = situation;
+        this.observation = observation;
         this.part = part;
     }
 
-    public PartItem(String patrimonialId, StatusPart status, String situation, Part part) {
+    public PartItem(String patrimonialId, StatusPart status, String observation, Part part) {
         this.patrimonialId = patrimonialId;
         this.status = status;
-        this.situation = situation;
+        this.observation = observation;
         this.part = part;
     }
 
@@ -40,12 +40,12 @@ public class PartItem {
         this.status = status;
     }
 
-    public String getSituation() {
-        return situation;
+    public String getObservation() {
+        return observation;
     }
 
-    public void setSituation(String situation) {
-        this.situation = situation;
+    public void setObservation(String observation) {
+        this.observation = observation;
     }
 
     public Part getPart() {
