@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6fbb332b-4071-4051-9f94-181fc77e905c" name="Changes" comment="feat: criação dos métodos de CreatePartUseCase">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/part/CreatePartItemUseCase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/part/UpdatePartItemUseCase.java" afterDir="false" />
+    <list default="true" id="6fbb332b-4071-4051-9f94-181fc77e905c" name="Changes" comment="feat: (CDU005) UpdatePartItemUseCase">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/part/DeletePartItemUserCase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/part/Part.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/part/Part.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/part/PartItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/part/PartItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/part/CreatePartUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/part/CreatePartUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/part/UpdatePartItemUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/part/UpdatePartItemUseCase.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +96,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684280151062</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="feat: (CDU005) UpdatePartItemUseCase">
+      <created>1684288708241</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1684288708241</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -122,19 +126,7 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="dev" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -142,6 +134,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat: criação dos métodos de CreatePartUseCase" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: criação dos métodos de CreatePartUseCase" />
+    <MESSAGE value="feat: (CDU005) UpdatePartItemUseCase" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: (CDU005) UpdatePartItemUseCase" />
   </component>
 </project>

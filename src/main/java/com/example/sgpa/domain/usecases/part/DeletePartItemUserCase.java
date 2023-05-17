@@ -7,25 +7,19 @@ import com.example.sgpa.domain.usecases.utils.EntityNotFoundException;
 import java.util.Objects;
 import java.util.Optional;
 
-public class UpdatePartItemUseCase {
+public class DeletePartItemUserCase {
+
     private PartItemDAO partItemDAO;
 
-    public UpdatePartItemUseCase(PartItemDAO itemPartDAO) {
+    public DeletePartItemUserCase(PartItemDAO itemPartDAO) {
         this.partItemDAO = itemPartDAO;
     }
 
-    // faz sentido ter o local de armazenamento salvo?
-    public PartItem updatePartItem(String patrimonialId, String newObservation) {
+    public boolean deletePartItem(String patrimonialId) {
         Optional<PartItem> optPartItem = partItemDAO.findOne(patrimonialId);
         if (optPartItem.isEmpty())
             throw new EntityNotFoundException("Part Item not found");
-        if (Objects.equals(newObservation, "")) {
-            throw new RuntimeException("Invalid null description");
-        }
         Session.getLoggedTechnician();
-        optPartItem.get().setObservation(newObservation);
-        partItemDAO.update(optPartItem.get());
-        return optPartItem.get();
+        return partItemDAO.delete(optPartItem.get());
     }
-
 }
