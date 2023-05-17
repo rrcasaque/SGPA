@@ -5,12 +5,12 @@ import com.example.sgpa.domain.entities.checkout.Checkout;
 import com.example.sgpa.domain.entities.historical.Event;
 import com.example.sgpa.domain.entities.historical.EventDAO;
 import com.example.sgpa.domain.entities.historical.EventType;
-import com.example.sgpa.domain.entities.part.ItemPart;
+import com.example.sgpa.domain.entities.part.PartItem;
 import com.example.sgpa.domain.entities.part.StatusPart;
 import com.example.sgpa.domain.entities.user.Technician;
 import com.example.sgpa.domain.entities.user.User;
 import com.example.sgpa.domain.usecases.part.CheckForITemPartAvailabilityUseCase;
-import com.example.sgpa.domain.usecases.part.ItemPartDAO;
+import com.example.sgpa.domain.usecases.part.PartItemDAO;
 import com.example.sgpa.domain.usecases.user.CheckForUserPendingsIssuesUseCase;
 import com.example.sgpa.domain.usecases.user.UserDAO;
 import com.example.sgpa.domain.usecases.utils.EntityNotFoundException;
@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.Set;
 
 public class CreateCheckOutUseCase {
-    private final ItemPartDAO itemPartDAO;
+    private final PartItemDAO itemPartDAO;
     private final UserDAO userDAO;
     private final CheckOutDAO checkOutDAO;
     private final CheckedOutItemDAO checkedOutItemDAO;
@@ -27,7 +27,7 @@ public class CreateCheckOutUseCase {
     private final CheckForUserPendingsIssuesUseCase checkForUserPendingsIssuesUseCase;
     private final CheckForITemPartAvailabilityUseCase checkForITemPartAvailabilityUseCase;
     public CreateCheckOutUseCase(UserDAO userDAO,
-                          ItemPartDAO itemPartDAO,
+                          PartItemDAO itemPartDAO,
                           CheckOutDAO checkOutDAO,
                           CheckedOutItemDAO checkedOutItemDAO,
                           EventDAO eventDAO,
@@ -41,7 +41,7 @@ public class CreateCheckOutUseCase {
         this.checkForUserPendingsIssuesUseCase = checkForUserPendingsIssuesUseCase;
         this.checkForITemPartAvailabilityUseCase = checkForITemPartAvailabilityUseCase;
     }
-    public Checkout createCheckout(String userId, Set<ItemPart> itemParts){
+    public Checkout createCheckout(String userId, Set<PartItem> itemParts){
         Optional<User> user = userDAO.findOne(userId);
         if (user.isEmpty())
             throw new EntityNotFoundException("User not found");

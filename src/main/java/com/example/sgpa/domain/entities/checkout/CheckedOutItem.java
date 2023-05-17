@@ -1,6 +1,6 @@
 package com.example.sgpa.domain.entities.checkout;
 
-import com.example.sgpa.domain.entities.part.ItemPart;
+import com.example.sgpa.domain.entities.part.PartItem;
 import com.example.sgpa.domain.entities.user.Professor;
 
 import java.time.LocalDate;
@@ -9,10 +9,10 @@ import java.util.Objects;
 
 public class CheckedOutItem {
     private Checkout relatedCheckout;
-    private ItemPart itemPart;
+    private PartItem itemPart;
     private LocalDate dueDate;
     private LocalDateTime returnDate;
-    public CheckedOutItem(ItemPart item, Checkout relatedCheckout){
+    public CheckedOutItem(PartItem item, Checkout relatedCheckout){
         this.itemPart = item;
         this.relatedCheckout = relatedCheckout;
         setDueDate();
@@ -25,7 +25,7 @@ public class CheckedOutItem {
         }
     }
 
-    public ItemPart getItemPart() {
+    public PartItem getItemPart() {
         return itemPart;
     }
     public LocalDate getDueDate() {

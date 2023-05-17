@@ -1,6 +1,6 @@
 package com.example.sgpa.domain.entities.reservation;
 
-import com.example.sgpa.domain.entities.part.ItemPart;
+import com.example.sgpa.domain.entities.part.PartItem;
 import com.example.sgpa.domain.entities.user.Technician;
 import com.example.sgpa.domain.entities.user.User;
 
@@ -15,7 +15,7 @@ public class Reservation {
     private LocalDateTime dateTimeScheduledForCheckout;
     private User requester;
     private Technician technician;
-    private final Set<ItemPart> items = new HashSet<>();
+    private final Set<PartItem> items = new HashSet<>();
     public Reservation(LocalDateTime dateTimeScheduledForCheckout,
                        User requester, Technician technician) {
         this.dateTimeScheduledForCheckout = dateTimeScheduledForCheckout;
@@ -49,19 +49,19 @@ public class Reservation {
     public Technician getTechnician() {
         return technician;
     }
-    public Set<ItemPart> getItems() {
+    public Set<PartItem> getItems() {
         return items;
     }
-    public void addItem(ItemPart item){
+    public void addItem(PartItem item){
         items.add(item);
     }
-    public void addItems(List<ItemPart> items){
+    public void addItems(List<PartItem> items){
         items.addAll(items);
     }
-    public void removeItem(ItemPart item){
+    public void removeItem(PartItem item){
         items.remove(item);
     }
-    public void removeItems(List<ItemPart> items){
+    public void removeItems(List<PartItem> items){
         items.removeAll(items);
     }
     @Override
