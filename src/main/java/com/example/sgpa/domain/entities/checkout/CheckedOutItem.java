@@ -40,7 +40,9 @@ public class CheckedOutItem {
     public void setReturnDate(LocalDateTime returnDate) {
         this.returnDate = returnDate;
     }
-
+    public boolean isLate(){
+        return LocalDate.now().isAfter(dueDate) && returnDate == null;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
