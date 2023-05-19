@@ -1,5 +1,6 @@
 package com.example.sgpa.application.repository.inmemory;
 
+import com.example.sgpa.domain.entities.checkout.CheckedOutItemKey;
 import com.example.sgpa.domain.entities.checkout.Checkout;
 import com.example.sgpa.domain.usecases.checkout.CheckOutDAO;
 import com.example.sgpa.domain.usecases.checkout.CheckedOutItemDAO;
@@ -11,29 +12,34 @@ import java.util.Optional;
 
 public class inMemoryCheckOutDAO implements CheckOutDAO {
     private static final Map<Integer, Checkout> db = new HashMap<>();
-    private static int checkoutId;
+    private static int nbr_checkouts;
     @Override
-    public Integer create(Checkout obj) {
-        return null;
+    public Integer create(Checkout checkout) {
+        nbr_checkouts++;
+        db.put(nbr_checkouts, checkout);
+        return nbr_checkouts;
     }
 
     @Override
-    public Optional<Checkout> findOne(Integer type) {
-        return Optional.empty();
+    public Optional<Checkout> findOne(Integer key) {
+        return Optional.ofNullable(db.get(key));
     }
 
     @Override
     public List<Checkout> findAll() {
-        return null;
+        return db.values().stream().toList();
     }
 
     @Override
-    public void update(Checkout obj) {
-
+    public void update(Checkout checkout) {
+        int key = checkout.getCheckOutId();
+        if (!db.containsKey(key))
+            throw new RuntimeException("Check out do not exist in data base.");
+        db.put(key, checkout);
     }
 
     @Override
-    public boolean delete(Checkout obj) {
-        return false;
+    public boolean delete(Checkout checkout) {
+        return db.remove(checkout.getCheckOutId(), checkout);
     }
 }

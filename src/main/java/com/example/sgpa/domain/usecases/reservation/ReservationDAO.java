@@ -12,7 +12,6 @@ import java.util.List;
 
 public interface ReservationDAO extends DAO<Reservation, Integer> {
     void createReservedItem(ReservedItem reservedItem);
-    List<PartItem> getReservedItems(Reservation reservation);
     List<Reservation> getReportByDate(Date start, Date end);
     List<Reservation> getReportByUser(User user, Date start, Date end);
     List<Reservation> getReportByPart(Part part, Date start, Date end);

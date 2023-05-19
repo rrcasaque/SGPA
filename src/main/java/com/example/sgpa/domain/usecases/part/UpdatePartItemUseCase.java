@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class UpdatePartItemUseCase {
-    private PartItemDAO partItemDAO;
+    private final PartItemDAO partItemDAO;
 
     public UpdatePartItemUseCase(PartItemDAO itemPartDAO) {
         this.partItemDAO = itemPartDAO;
