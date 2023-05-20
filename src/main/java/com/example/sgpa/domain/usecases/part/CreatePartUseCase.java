@@ -16,7 +16,7 @@ public class CreatePartUseCase {
     public Part createPart(String description, int maxDaysCheckedOutForStudent, int maxDaysCheckedOutForProfessor) {
         Optional<Part> optPart = partDAO.findByDescription(description);
         if (optPart.isEmpty()) {
-            Session.getLoggedTechnician();
+            //Session.getLoggedTechnician();
             Part newPart = new Part(description, maxDaysCheckedOutForStudent, maxDaysCheckedOutForProfessor);
             int id = partDAO.create(newPart);
             newPart.setId(id);

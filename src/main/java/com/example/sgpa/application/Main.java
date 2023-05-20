@@ -1,6 +1,7 @@
 package com.example.sgpa.application;
 
 import com.example.sgpa.application.repository.inmemory.*;
+import com.example.sgpa.domain.entities.part.Part;
 import com.example.sgpa.domain.usecases.auth.Auth;
 import com.example.sgpa.domain.usecases.checkout.CreateCheckOutUseCase;
 import com.example.sgpa.domain.usecases.checkout.ReturnPartItemUseCase;
@@ -29,13 +30,30 @@ public class Main {
         configureInjection();
         //fazer autenticação
         //criar peças
+        Part propeller = createPartUseCase.createPart("Hélice", 5, 30);
+        Part valve = createPartUseCase.createPart("Válvula", 10, 30);
+        Part brakePad = createPartUseCase.createPart("Pastilha de freio", 8, 30);
         //criar itens-peças
+        createPartItemUseCase.createPartItem("h01", propeller);
+        createPartItemUseCase.createPartItem("h02", propeller);
+        createPartItemUseCase.createPartItem("h03", propeller);
+
+        createPartItemUseCase.createPartItem("v01", propeller);
+        createPartItemUseCase.createPartItem("v02", propeller);
+        createPartItemUseCase.createPartItem("v03", propeller);
+
+        createPartItemUseCase.createPartItem("b01", propeller);
+        createPartItemUseCase.createPartItem("b02", propeller);
+        createPartItemUseCase.createPartItem("b03", propeller);
+
         //criar tecnico
         //criar professor
         //criar aluno
+
         //criar reservas
         //criar emprestimos
         //fazer devoluções
+
         //gerar relatórios
     }
     private static void configureInjection(){
