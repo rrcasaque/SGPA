@@ -5,6 +5,7 @@ import com.example.sgpa.domain.entities.user.Technician;
 import com.example.sgpa.domain.entities.user.User;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Event {
     private int id;
@@ -40,5 +41,16 @@ public class Event {
     }
     public void setId(int id) {
         this.id = id;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Event event = (Event) o;
+        return id == event.id;
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

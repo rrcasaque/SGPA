@@ -3,7 +3,7 @@ package com.example.sgpa.domain.usecases.checkout;
 import com.example.sgpa.domain.entities.Session.Session;
 import com.example.sgpa.domain.entities.checkout.CheckedOutItem;
 import com.example.sgpa.domain.entities.historical.Event;
-import com.example.sgpa.domain.entities.historical.EventDAO;
+import com.example.sgpa.domain.usecases.historical.EventDAO;
 import com.example.sgpa.domain.entities.historical.EventType;
 import com.example.sgpa.domain.entities.part.PartItem;
 import com.example.sgpa.domain.entities.part.StatusPart;
@@ -16,23 +16,23 @@ import com.example.sgpa.domain.usecases.utils.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-public class ReturnPartUseCase {
+public class ReturnPartItemUseCase {
     CheckedOutItemDAO checkedOutItemDAO;
     PartItemDAO itemPartDAO;
     EventDAO eventDAO;
     UserDAO userDAO;
 
-    public ReturnPartUseCase(CheckedOutItemDAO checkedOutItemDAO,
-                             PartItemDAO itemPartDAO,
-                             EventDAO eventDAO,
-                             UserDAO userDAO) {
+    public ReturnPartItemUseCase(CheckedOutItemDAO checkedOutItemDAO,
+                                 PartItemDAO itemPartDAO,
+                                 EventDAO eventDAO,
+                                 UserDAO userDAO) {
         this.checkedOutItemDAO = checkedOutItemDAO;
         this.itemPartDAO = itemPartDAO;
         this.eventDAO = eventDAO;
         this.userDAO = userDAO;
     }
 
-    public void returnItemPart(String patrimonialId, String institutionalId){
+    public void returnPartItem(String patrimonialId, String institutionalId){
         Optional<CheckedOutItem> CheckedOutItemOptional = checkedOutItemDAO.findNotReturned(patrimonialId);
         if(CheckedOutItemOptional.isEmpty())
             throw new EntityNotFoundException("There is no checked out item with the informed patrimonial identification");

@@ -2,7 +2,6 @@ package com.example.sgpa.domain.usecases.user;
 
 import com.example.sgpa.domain.entities.checkout.CheckedOutItem;
 import com.example.sgpa.domain.usecases.checkout.CheckedOutItemDAO;
-import com.example.sgpa.domain.usecases.part.CheckForITemPartAvailabilityUseCase;
 
 import java.util.List;
 

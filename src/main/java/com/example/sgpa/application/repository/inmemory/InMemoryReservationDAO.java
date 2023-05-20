@@ -8,11 +8,10 @@ import com.example.sgpa.domain.usecases.reservation.ReservationDAO;
 
 import java.util.*;
 
-public class inMemoryReservationDAO implements ReservationDAO {
+public class InMemoryReservationDAO implements ReservationDAO {
     private static final Map<Integer, Reservation> reservationDB = new HashMap<>();
     private static int nbr_reservations;
     private static final Set<ReservedItem> reservedItemDB = new LinkedHashSet<>();
-
     @Override
     public Integer create(Reservation reservation) {
         nbr_reservations++;
@@ -45,7 +44,7 @@ public class inMemoryReservationDAO implements ReservationDAO {
 
     @Override
     public void createReservedItem(ReservedItem reservedItem) {
-
+        reservedItemDB.add(reservedItem);
     }
 
     @Override
