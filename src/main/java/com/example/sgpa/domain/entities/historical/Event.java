@@ -9,11 +9,11 @@ import java.util.Objects;
 
 public class Event {
     private int id;
-    private EventType type;
+    private final EventType type;
     private final LocalDateTime timeStamp;
-    private User requester;
-    private Technician technician;
-    private PartItem itemPart;
+    private final User requester;
+    private final Technician technician;
+    private final PartItem itemPart;
     public Event(EventType type, User requester, Technician technician, PartItem itemPart) {
         this.type = type;
         this.requester = requester;

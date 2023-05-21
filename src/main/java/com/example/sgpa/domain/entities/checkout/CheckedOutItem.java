@@ -43,6 +43,9 @@ public class CheckedOutItem {
     public boolean isLate(){
         return LocalDate.now().isAfter(dueDate) && returnDate == null;
     }
+    public boolean isOpen(){
+        return returnDate == null;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

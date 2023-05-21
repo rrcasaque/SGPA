@@ -48,7 +48,7 @@ public class InMemoryCheckedOutItemDAO implements CheckedOutItemDAO {
     public Optional<CheckedOutItem> findNotReturned(String patrimonialId) {
         return db.values().stream()
                 .filter(checkedOutItem -> checkedOutItem.getItemPart().getPatrimonialId().equals(patrimonialId))
-                .filter(checkedOutItem -> checkedOutItem.isLate()).findFirst();
+                .filter(checkedOutItem -> checkedOutItem.isOpen()).findFirst();
     }
 
     @Override
