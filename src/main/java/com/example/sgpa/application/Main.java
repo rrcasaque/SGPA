@@ -85,8 +85,9 @@ public class Main {
         createPartUseCase = new CreatePartUseCase(inMemoryPartDAO);
         deletePartItemUserCase = new DeletePartItemUserCase(inMemoryPartItemDAO);
         updatePartItemUseCase = new UpdatePartItemUseCase(inMemoryPartItemDAO);
-        generateReportByPartUseCase = new GenerateReportByPartUseCase(inMemoryReservationDAO);
-        generateReportUseCase = new GenerateReportUseCase(inMemoryReservationDAO);
+        generateReportByPartUseCase = new GenerateReportByPartUseCase(inMemoryEventDAO,inMemoryPartDAO);
+        generateReportByUserUseCase = new GenerateReportByUserUseCase(inMemoryEventDAO,inMemoryUserDAO);
+        generateReportUseCase = new GenerateReportUseCase(inMemoryEventDAO);        
         createReservationUseCase = new CreateReservationUseCase(
                 inMemoryUserDAO,
                 inMemoryPartItemDAO,
