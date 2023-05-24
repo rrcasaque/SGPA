@@ -1,6 +1,6 @@
 package com.example.sgpa.domain.usecases.report;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.example.sgpa.domain.entities.reservation.Reservation;
@@ -13,7 +13,7 @@ public class GenerateReportUseCase {
 		this.reservationDAO = reservationDAO;
 	}
 	
-	public List<Reservation> generate(Date start, Date end) {
+	public List<Reservation> generate(LocalDateTime start, LocalDateTime end) {
 		List<Reservation> reservationList = reservationDAO.getReportByDate(start, end); 
 		if(reservationList.isEmpty())
 			throw new RuntimeException("data not found for the informed parameters");

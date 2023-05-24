@@ -1,6 +1,6 @@
 package com.example.sgpa.domain.usecases.report;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.example.sgpa.domain.entities.part.Part;
@@ -14,7 +14,7 @@ public class GenerateReportByPartUseCase {
 		this.reservationDAO = reservationDAO;
 	}
 	
-	public List<Reservation> generate(Part part, Date start, Date end) {		
+	public List<Reservation> generate(Part part, LocalDateTime start, LocalDateTime end) {		
 		List<Reservation> reservationList = reservationDAO.getReportByPart(part, start, end); 
 		if(reservationList.isEmpty())
 			throw new RuntimeException("data not found for the informed parameters");
