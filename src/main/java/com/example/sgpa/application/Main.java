@@ -1,6 +1,10 @@
 package com.example.sgpa.application;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 import com.example.sgpa.application.repository.inmemory.*;
+import com.example.sgpa.domain.entities.historical.Event;
 import com.example.sgpa.domain.entities.part.Part;
 import com.example.sgpa.domain.usecases.auth.Auth;
 import com.example.sgpa.domain.usecases.checkout.CreateCheckOutUseCase;
@@ -55,6 +59,12 @@ public class Main {
         //fazer devoluções
 
         //gerar relatórios
+        LocalDateTime startDate = LocalDateTime.of(2015, 1, 1, 0, 0);
+        LocalDateTime endDate = LocalDateTime.now();
+        
+        List<Event> partReport = generateReportByPartUseCase.generate(valve,startDate,endDate);
+        List<Event> userReport = generateReportByUserUseCase.generate(null, null, startDate, endDate);
+        List<Event> report = generateReportUseCase.generate(startDate, endDate);
     }
     private static void configureInjection(){
         InMemoryCheckedOutItemDAO inMemoryCheckedOutItemDAO = new InMemoryCheckedOutItemDAO();
