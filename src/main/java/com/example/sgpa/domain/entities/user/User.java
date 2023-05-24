@@ -5,18 +5,21 @@ public class User {
     private String name;
     private String email;
     private String phone;
-    public User() {
+    private UserType userType;
+
+	public User() {
     }
 
     public User(String institutionalId) {
         this.institutionalId = institutionalId;
     }
 
-    public User(String institutionalId, String name, String email, String phone) {
+    public User(String institutionalId, String name, String email, String phone, UserType userType) {
         this.institutionalId = institutionalId;
         this.name = name;
         this.email = email;
         this.phone = phone;
+        this.userType = userType;
     }
 
     public String getInstitutionalId() {
@@ -46,4 +49,12 @@ public class User {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+    
+    public UserType getUserType() {
+		return userType;
+	}
+
+	public void setUserType(UserType userType) {
+		this.userType = userType;
+	}
 }
