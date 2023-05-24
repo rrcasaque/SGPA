@@ -12,7 +12,7 @@ public class Professor extends User {
     }
 
     public Professor(String institutionalId, String name, String email, String phone, String room) {
-        super(institutionalId, name, email, phone);
+        super(institutionalId, name, email, phone, UserType.PROFESSOR);
         this.room = room;
     }
 

@@ -16,7 +16,7 @@ public class Technician extends User {
     }
 
     public Technician(String institutionalId, String name, String email, String phone, String login, String password) {
-        super(institutionalId, name, email, phone);
+        super(institutionalId, name, email, phone, UserType.TECHNICIAN);
         this.login = login;
         this.password = password;
     }
