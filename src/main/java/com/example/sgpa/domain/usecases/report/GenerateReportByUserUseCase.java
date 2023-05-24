@@ -18,7 +18,7 @@ public class GenerateReportByUserUseCase {
 	private EventDAO eventDAO;
 	private UserDAO userDAO;
 	
-	public GenerateReportByUserUseCase(UserDAO userDAO, User user, UserType userType, LocalDateTime start, LocalDateTime end, EventDAO eventDAO) {				
+	public GenerateReportByUserUseCase(EventDAO eventDAO, UserDAO userDAO) {				
 		this.userDAO = userDAO;
 		this.eventDAO = eventDAO;
 	}

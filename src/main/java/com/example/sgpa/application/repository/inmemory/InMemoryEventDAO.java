@@ -1,8 +1,11 @@
 package com.example.sgpa.application.repository.inmemory;
 
 import com.example.sgpa.domain.entities.historical.Event;
+import com.example.sgpa.domain.entities.part.Part;
+import com.example.sgpa.domain.entities.user.User;
 import com.example.sgpa.domain.usecases.historical.EventDAO;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,4 +39,19 @@ public class InMemoryEventDAO implements EventDAO {
     public boolean delete(Event event) {
         return events.remove(event.getId(), event);
     }
+	@Override
+	public List<Event> getReportByDate(LocalDateTime start, LocalDateTime end) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<Event> getReportByUser(User user, LocalDateTime start, LocalDateTime end) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<Event> getReportByPart(Part part, LocalDateTime start, LocalDateTime end) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
