@@ -1,4 +1,4 @@
-package com.example.sgpa;
+package com.example.sgpa.application.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
