@@ -1,4 +1,4 @@
-package com.example.sgpa;
+package com.example.sgpa.application.view;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
