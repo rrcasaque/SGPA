@@ -8,5 +8,5 @@ import com.example.sgpa.domain.usecases.utils.DAO;
 import java.util.Optional;
 
 public interface UserDAO extends DAO<User, String>{
-    Optional<User> findOneByIdAndType(UserType type, String institutionalId);
+    Optional<User> findOneByIdAndType(UserType type, int institutionalId);
 }

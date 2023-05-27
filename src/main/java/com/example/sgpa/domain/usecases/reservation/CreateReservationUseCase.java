@@ -40,7 +40,7 @@ public class CreateReservationUseCase {
         this.checkForUserPendingsIssuesUseCase = checkForUserPendingsIssuesUseCase;
         this.checkForPartItemAvailabilityUseCase = checkForPartItemAvailabilityUseCase;
     }
-    public Reservation createReservation(String userId, Set<PartItem> itemParts, LocalDateTime dateTimeScheduledForCheckout){
+    public Reservation createReservation(int userId, Set<PartItem> itemParts, LocalDateTime dateTimeScheduledForCheckout){
         Optional<User> user = userDAO.findOne(userId);
         if (user.isEmpty())
             throw new EntityNotFoundException("User not found");

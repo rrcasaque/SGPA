@@ -12,7 +12,7 @@ public class CheckForUserPendingsIssuesUseCase {
         this.checkedOutItemDAO =   checkedOutItemDAO;
     }
 
-    public void checkForUserPendingIssues(String userId) {
+    public void checkForUserPendingIssues(int userId) {
         List<CheckedOutItem> lateItemsOfUser = checkedOutItemDAO.findLateByUser(userId);
         if (!lateItemsOfUser.isEmpty()){
             StringBuilder message = new StringBuilder("User has the following overdue parts:\n");

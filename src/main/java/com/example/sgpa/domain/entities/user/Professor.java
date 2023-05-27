@@ -6,12 +6,12 @@ public class Professor extends User {
     public Professor(){
     }
 
-    public Professor(String institutionalId, String room) {
+    public Professor(int institutionalId, String room) {
         super(institutionalId);
         this.room = room;
     }
 
-    public Professor(String institutionalId, String name, String email, String phone, String room) {
+    public Professor(int institutionalId, String name, String email, String phone, String room) {
         super(institutionalId, name, email, phone, UserType.PROFESSOR);
         this.room = room;
     }

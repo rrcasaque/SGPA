@@ -12,7 +12,7 @@ public class VerifyUserPendingsUseCase {
         this.checkedOutItemDAO = checkedOutItemDAO;
     }
 
-    public List<CheckedOutItem> verifyUserPendings(String userId){
+    public List<CheckedOutItem> verifyUserPendings(int userId){
         List<CheckedOutItem> lateItems = checkedOutItemDAO.findLateByUser(userId);
         return lateItems;
     }

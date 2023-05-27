@@ -1,20 +1,21 @@
 package com.example.sgpa.domain.entities.user;
 
 public class User {
-    private String institutionalId;
+    private int institutionalId;
     private String name;
     private String email;
     private String phone;
     private UserType userType;
-
+    private int room;
+    private String login;
 	public User() {
     }
 
-    public User(String institutionalId) {
+    public User(int institutionalId) {
         this.institutionalId = institutionalId;
     }
 
-    public User(String institutionalId, String name, String email, String phone, UserType userType) {
+    public User(int institutionalId, String name, String email, String phone, UserType userType) {
         this.institutionalId = institutionalId;
         this.name = name;
         this.email = email;
@@ -22,7 +23,7 @@ public class User {
         this.userType = userType;
     }
 
-    public String getInstitutionalId() {
+    public int getInstitutionalId() {
         return institutionalId;
     }
 

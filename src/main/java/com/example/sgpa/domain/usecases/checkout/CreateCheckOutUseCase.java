@@ -41,7 +41,7 @@ public class CreateCheckOutUseCase {
         this.checkForUserPendingsIssuesUseCase = checkForUserPendingsIssuesUseCase;
         this.checkForPartItemAvailabilityUseCase = checkForPartItemAvailabilityUseCase;
     }
-    public Checkout createCheckout(String userId, Set<PartItem> itemParts){
+    public Checkout createCheckout(int userId, Set<PartItem> itemParts){
         Optional<User> user = userDAO.findOne(userId);
         if (user.isEmpty())
             throw new EntityNotFoundException("User not found");

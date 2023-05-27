@@ -15,7 +15,7 @@ public class Auth {
 		this.userDAO = userDAO;
 	}
 	
-	public boolean authenticate(String institutionalId, String password){
+	public boolean authenticate(int institutionalId, String password){
 		Optional<User> user = userDAO.findOneByIdAndType(UserType.TECHNICIAN,institutionalId);
 		if (user.isEmpty())
 			throw new RuntimeException("Technician user not found");

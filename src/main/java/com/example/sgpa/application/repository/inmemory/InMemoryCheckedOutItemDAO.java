@@ -52,9 +52,9 @@ public class InMemoryCheckedOutItemDAO implements CheckedOutItemDAO {
     }
 
     @Override
-    public List<CheckedOutItem> findLateByUser(String userId) {
+    public List<CheckedOutItem> findLateByUser(int userId) {
         return db.values().stream()
-                .filter(checkedOutItem -> checkedOutItem.getRelatedCheckout().getUser().getInstitutionalId().equals(userId))
+                .filter(checkedOutItem -> checkedOutItem.getRelatedCheckout().getUser().getInstitutionalId()==userId)
                 .filter(checkedOutItem -> checkedOutItem.isLate()).collect(Collectors.toList());
     }
 }
