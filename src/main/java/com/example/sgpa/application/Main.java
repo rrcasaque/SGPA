@@ -33,6 +33,7 @@ public class Main {
     public static void main(String[] args) {
         configureInjection();
         //fazer autenticação
+
         //criar peças
         Part propeller = createPartUseCase.createPart("Hélice", 5, 30);
         Part valve = createPartUseCase.createPart("Válvula", 10, 30);
@@ -42,13 +43,13 @@ public class Main {
         createPartItemUseCase.createPartItem("h02", propeller);
         createPartItemUseCase.createPartItem("h03", propeller);
 
-        createPartItemUseCase.createPartItem("v01", propeller);
-        createPartItemUseCase.createPartItem("v02", propeller);
-        createPartItemUseCase.createPartItem("v03", propeller);
+        createPartItemUseCase.createPartItem("v01", valve);
+        createPartItemUseCase.createPartItem("v02", valve);
+        createPartItemUseCase.createPartItem("v03", valve);
 
-        createPartItemUseCase.createPartItem("b01", propeller);
-        createPartItemUseCase.createPartItem("b02", propeller);
-        createPartItemUseCase.createPartItem("b03", propeller);
+        createPartItemUseCase.createPartItem("b01", brakePad);
+        createPartItemUseCase.createPartItem("b02", brakePad);
+        createPartItemUseCase.createPartItem("b03", brakePad);
 
         //criar tecnico
         //criar professor
