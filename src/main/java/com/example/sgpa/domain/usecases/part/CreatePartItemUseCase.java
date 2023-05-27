@@ -18,7 +18,7 @@ public class CreatePartItemUseCase {
     }
 
 
-    public PartItem createPartItem(String patrimonialId, Part part) {
+    public PartItem createPartItem(int patrimonialId, Part part) {
         Optional<Part> optPart = partDAO.findOne(part.getId());
         if (optPart.isEmpty()) {
             throw new EntityNotFoundException("Part not found");

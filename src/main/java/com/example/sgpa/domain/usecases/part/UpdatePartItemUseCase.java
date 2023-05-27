@@ -15,7 +15,7 @@ public class UpdatePartItemUseCase {
     }
 
     // faz sentido ter o local de armazenamento salvo?
-    public PartItem updatePartItem(String patrimonialId, String newObservation) {
+    public PartItem updatePartItem(int patrimonialId, String newObservation) {
         Optional<PartItem> optPartItem = partItemDAO.findOne(patrimonialId);
         if (optPartItem.isEmpty())
             throw new EntityNotFoundException("Part Item not found");

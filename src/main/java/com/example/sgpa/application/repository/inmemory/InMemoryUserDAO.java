@@ -14,12 +14,12 @@ public class InMemoryUserDAO implements UserDAO {
     }
 
     @Override
-    public String create(User obj) {
-        return null;
+    public Integer create(User obj) {
+        return 0;
     }
 
     @Override
-    public Optional<User> findOne(String type) {
+    public Optional<User> findOne(Integer type) {
         return Optional.empty();
     }
 

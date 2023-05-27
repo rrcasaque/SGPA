@@ -11,6 +11,6 @@ import java.util.Optional;
 import java.util.Set;
 
 public interface CheckedOutItemDAO extends DAO<CheckedOutItem, CheckedOutItemKey> {
-    Optional<CheckedOutItem> findNotReturned(String patrimonialId);
+    Optional<CheckedOutItem> findNotReturned(int patrimonialId);
     List<CheckedOutItem> findLateByUser(int userId);
 }

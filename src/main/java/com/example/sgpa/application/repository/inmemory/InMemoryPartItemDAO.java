@@ -25,19 +25,19 @@ public class InMemoryPartItemDAO implements PartItemDAO {
     }
 
     @Override
-    public boolean isPartItemAvailable(String patrimonialId) {
+    public boolean isPartItemAvailable(int patrimonialId) {
         if(!partItemsDB.containsKey(patrimonialId))
             throw new RuntimeException("Item not found in data base.");
         return partItemsDB.get(patrimonialId).getStatus() == StatusPart.AVAILABLE;
     }
 
     @Override
-    public String create(PartItem obj) {
+    public Integer create(PartItem obj) {
         return null;
     }
 
     @Override
-    public Optional<PartItem> findOne(String type) {
+    public Optional<PartItem> findOne(Integer type) {
         return Optional.empty();
     }
 

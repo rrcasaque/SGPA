@@ -32,7 +32,7 @@ public class ReturnPartItemUseCase {
         this.userDAO = userDAO;
     }
 
-    public void returnPartItem(String patrimonialId, String institutionalId){
+    public void returnPartItem(int patrimonialId, int institutionalId){
         Optional<CheckedOutItem> CheckedOutItemOptional = checkedOutItemDAO.findNotReturned(patrimonialId);
         if(CheckedOutItemOptional.isEmpty())
             throw new EntityNotFoundException("There is no checked out item with the informed patrimonial identification");
