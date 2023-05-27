@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutX="214.0" layoutY="136.0" prefHeight="187.0" prefWidth="173.0" AnchorPane.leftAnchor="214.0" AnchorPane.rightAnchor="213.0">
+         <children>
+            <Label text="Login" />
+            <TextField prefHeight="25.0" prefWidth="173.0" />
+            <Label text="Senha" />
+            <PasswordField />
+         </children>
+      </VBox>
+      <Label layoutX="262.0" layoutY="55.0" text="SGPA" AnchorPane.leftAnchor="262.0" AnchorPane.rightAnchor="262.0" AnchorPane.topAnchor="55.0">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
