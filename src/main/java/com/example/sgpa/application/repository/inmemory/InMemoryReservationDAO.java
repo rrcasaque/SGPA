@@ -1,9 +1,7 @@
 package com.example.sgpa.application.repository.inmemory;
 
-import com.example.sgpa.domain.entities.part.Part;
 import com.example.sgpa.domain.entities.reservation.Reservation;
 import com.example.sgpa.domain.entities.reservation.ReservedItem;
-import com.example.sgpa.domain.entities.user.User;
 import com.example.sgpa.domain.usecases.reservation.ReservationDAO;
 
 import java.util.*;
@@ -47,18 +45,4 @@ public class InMemoryReservationDAO implements ReservationDAO {
         reservedItemDB.add(reservedItem);
     }
 
-    @Override
-    public List<Reservation> getReportByDate(Date start, Date end) {
-        return null;
-    }
-
-    @Override
-    public List<Reservation> getReportByUser(User user, Date start, Date end) {
-        return null;
-    }
-
-    @Override
-    public List<Reservation> getReportByPart(Part part, Date start, Date end) {
-        return null;
-    }
 }

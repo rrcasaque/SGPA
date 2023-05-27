@@ -1,21 +1,21 @@
 package com.example.sgpa.domain.usecases.utils.validation;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
-import com.example.sgpa.domain.entities.reservation.Reservation;
-import com.example.sgpa.domain.usecases.reservation.ReservationDAO;
+import com.example.sgpa.domain.entities.historical.Event;
+import com.example.sgpa.domain.usecases.historical.EventDAO;
 
 public class CheckRegisteredReservationUseCase {
-	private ReservationDAO reservationDAO;
+	private EventDAO eventDAO;
 
-	public CheckRegisteredReservationUseCase(ReservationDAO reservationDAO) {		
-		this.reservationDAO = reservationDAO;
+	public CheckRegisteredReservationUseCase(EventDAO eventDAO) {		
+		this.eventDAO = eventDAO;
 	}
 	
-	public void check(Date start, Date end){
-		List<Reservation> reservationList = reservationDAO.getReportByDate(start,end);
-		if(reservationList.isEmpty())
+	public void check(LocalDateTime start, LocalDateTime end){
+		List<Event> eventList = eventDAO.getReportByDate(start,end);
+		if(eventList.isEmpty())
 			throw new RuntimeException("moves not found!");		
 	}
 }
