@@ -1,5 +1,6 @@
 package com.example.sgpa.application.view;
 
+import com.example.sgpa.application.repository.sqlite.DataBaseBuilder;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,6 +14,8 @@ public class WindowLoader extends Application {
     private static Object controller;
     @Override
     public void start(Stage stage) throws IOException {
+        DataBaseBuilder DBBuilder = new DataBaseBuilder();
+        DBBuilder.buildDataBaseIfMissing();
         scene = new Scene(loadFxml("LoginUI.fxml"));
         stage.setTitle("SGPA");
         stage.setScene(scene);
