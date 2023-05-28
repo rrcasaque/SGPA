@@ -17,7 +17,8 @@ public class Auth {
 		if (user.isEmpty())
 			throw new Exception("Login and/or password incorrect.");
 		Session.makeInstance(user.get());
-		System.out.println(Session.getLoggedTechnician().getName()+"has logged right now!");
+		System.out.println(Session.getLoggedTechnician().getName()+" has logged right now!");
+		System.out.println(Session.getLoggedTechnician().toString());
 		return true;		
 	}
 }
