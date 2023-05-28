@@ -11,7 +11,7 @@ import java.util.Set;
 
 public class Checkout {
     private int checkOutId;
-    private Technician technician;
+    private User technician;
     private User user;
     private final Set<CheckedOutItem> checkedOutItems = new HashSet<>();
     private Reservation associatedReservation;
@@ -28,7 +28,7 @@ public class Checkout {
         reservation.getItems().forEach(itemPart -> checkedOutItems.add(new CheckedOutItem(itemPart, this)));
     }
 
-    public Checkout(Set<PartItem> parts, User user, Technician technician){
+    public Checkout(Set<PartItem> parts, User user, User technician){
         this.user = user;
         this.technician = technician;
         parts.forEach(itemPart -> checkedOutItems.add(new CheckedOutItem(itemPart, this)));
@@ -50,7 +50,7 @@ public class Checkout {
         this.checkOutId = checkOutId;
     }
 
-    public Technician getTechnician() {
+    public User getTechnician() {
         return technician;
     }
 

@@ -14,10 +14,10 @@ public class Reservation {
     private int reservationId;
     private LocalDateTime dateTimeScheduledForCheckout;
     private User requester;
-    private Technician technician;
+    private User technician;
     private final Set<PartItem> items = new HashSet<>();
     public Reservation(LocalDateTime dateTimeScheduledForCheckout,
-                       User requester, Technician technician) {
+                       User requester, User technician) {
         this.dateTimeScheduledForCheckout = dateTimeScheduledForCheckout;
         this.requester = requester;
         this.technician = technician;
@@ -46,7 +46,7 @@ public class Reservation {
     public User getRequester() {
         return requester;
     }
-    public Technician getTechnician() {
+    public User getTechnician() {
         return technician;
     }
     public Set<PartItem> getItems() {

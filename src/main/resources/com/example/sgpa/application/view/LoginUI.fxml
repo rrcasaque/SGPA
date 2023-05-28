@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sgpa.application.controller.LoginUIController">
    <children>
       <VBox layoutX="214.0" layoutY="86.0" prefHeight="228.0" prefWidth="173.0" AnchorPane.leftAnchor="214.0" AnchorPane.rightAnchor="213.0">
          <children>
@@ -26,14 +25,14 @@
                   <Insets top="20.0" />
                </VBox.margin>
             </Label>
-            <TextField prefHeight="25.0" prefWidth="173.0" />
+            <TextField fx:id="txtLogin" prefHeight="25.0" prefWidth="173.0" />
             <Label text="Senha">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </Label>
-            <PasswordField />
-            <Button mnemonicParsing="false" text="Entrar">
+            <PasswordField fx:id="pswdInput" />
+            <Button fx:id="btnEnter" mnemonicParsing="false" onAction="#authenticate" text="Entrar">
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin>

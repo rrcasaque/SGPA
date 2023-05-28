@@ -14,6 +14,11 @@ public class InMemoryUserDAO implements UserDAO {
     }
 
     @Override
+    public Optional<User> findOneByLoginAndPassword(String login, String password) {
+        return Optional.empty();
+    }
+
+    @Override
     public Integer create(User obj) {
         return 0;
     }

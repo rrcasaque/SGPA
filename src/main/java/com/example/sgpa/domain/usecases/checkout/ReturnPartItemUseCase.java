@@ -45,7 +45,7 @@ public class ReturnPartItemUseCase {
         itemPart.setStatus(StatusPart.AVAILABLE);
         checkedOutItemDAO.update(checkedOutItem);
         itemPartDAO.update(itemPart);
-        Technician loggedTechnician = Session.getLoggedTechnician();
+        User loggedTechnician = Session.getLoggedTechnician();
         eventDAO.create(new Event(EventType.RETURN, user.get(), loggedTechnician, itemPart));
     }
 }

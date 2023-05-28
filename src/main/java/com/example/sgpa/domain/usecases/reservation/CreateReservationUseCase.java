@@ -46,7 +46,7 @@ public class CreateReservationUseCase {
             throw new EntityNotFoundException("User not found");
         checkForUserPendingsIssuesUseCase.checkForUserPendingIssues(userId);
         checkForPartItemAvailabilityUseCase.checkForAvailabilityOfTheParts(itemParts);
-        Technician loggedTechnician = Session.getLoggedTechnician();
+        User loggedTechnician = Session.getLoggedTechnician();
         Reservation reservation = new Reservation(dateTimeScheduledForCheckout, user.get(), loggedTechnician);
         int id = reservationDAO.create(reservation);
         reservation.setReservationId(id);

@@ -22,7 +22,7 @@ public class CreateUserUseCase {
 		return optUser.get();
 	}
 	
-	public User createUser(int institutionalId, String name, String email, String phone, UserType userType, String room) {
+	public User createUser(int institutionalId, String name, String email, String phone, UserType userType, int room) {
 		Optional<User> optUser = userDAO.findOneByIdAndType(userType, institutionalId);
 		if (optUser.isEmpty()) {
 			Professor newProfessor = new Professor(institutionalId, name, email, phone, room);

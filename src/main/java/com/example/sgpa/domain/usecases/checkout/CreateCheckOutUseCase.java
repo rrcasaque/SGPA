@@ -47,7 +47,7 @@ public class CreateCheckOutUseCase {
             throw new EntityNotFoundException("User not found");
         checkForUserPendingsIssuesUseCase.checkForUserPendingIssues(userId);
         checkForPartItemAvailabilityUseCase.checkForAvailabilityOfTheParts(itemParts);
-        Technician loggedTechnician = Session.getLoggedTechnician();
+        User loggedTechnician = Session.getLoggedTechnician();
         Checkout checkout = new Checkout(itemParts, user.get(), loggedTechnician);
         int id = checkOutDAO.create(checkout);
         checkout.setCheckOutId(id);

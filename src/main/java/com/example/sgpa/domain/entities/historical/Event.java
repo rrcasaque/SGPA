@@ -12,9 +12,9 @@ public class Event {
     private final EventType type;
     private final LocalDateTime timeStamp;
     private final User requester;
-    private final Technician technician;
+    private final User technician;
     private final PartItem itemPart;
-    public Event(EventType type, User requester, Technician technician, PartItem itemPart) {
+    public Event(EventType type, User requester, User technician, PartItem itemPart) {
         this.type = type;
         this.requester = requester;
         this.technician = technician;
@@ -33,7 +33,7 @@ public class Event {
     public User getRequester() {
         return requester;
     }
-    public Technician getTechnician() {
+    public User getTechnician() {
         return technician;
     }
     public PartItem getItemPart() {
