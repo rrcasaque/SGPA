@@ -28,7 +28,7 @@ public class LoginUIController {
         Auth auth = new Auth(new SqliteUserDAO());
         try {
             auth.authenticate(txtLogin.getText(), pswdInput.getText());
-            WindowLoader.setRoot("MainUi.fxml");
+            WindowLoader.setRoot("MainUI.fxml");
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Login error.");
