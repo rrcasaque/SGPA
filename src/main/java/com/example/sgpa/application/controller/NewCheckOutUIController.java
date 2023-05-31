@@ -16,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.NoSuchElementException;
 
 public class NewCheckOutUIController {
+    private User selectedUser;
     @FXML
     private Button bntFindUser;
     @FXML
@@ -69,8 +70,8 @@ public class NewCheckOutUIController {
     public void findUser(ActionEvent actionEvent) {
         UserDAO userDAO = new SqliteUserDAO();
         try{
-            User user = userDAO.findOne(Integer.valueOf(txtUserId.getText())).orElseThrow();
-            lblSelectedUser.setText(user.getName());
+            selectedUser = userDAO.findOne(Integer.valueOf(txtUserId.getText())).orElseThrow();
+            lblSelectedUser.setText("Usuário: "+ selectedUser.getName() + " Tipo: " + selectedUser.getUserType().toString());
         }catch(NoSuchElementException e){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("User not found.");
