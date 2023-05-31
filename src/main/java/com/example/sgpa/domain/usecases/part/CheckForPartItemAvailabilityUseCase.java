@@ -23,7 +23,7 @@ public class CheckForPartItemAvailabilityUseCase {
                     .append("PatrimonialId: ")
                     .append(itemPart.getPatrimonialId())
                     .append(". Part description: ")
-                    .append(itemPart.getPart().getDescription())
+                    .append(itemPart.getPart().getType())
                     .append(". Status: ")
                     .append(itemPart.getStatus().toString())
                     .append("\n"));

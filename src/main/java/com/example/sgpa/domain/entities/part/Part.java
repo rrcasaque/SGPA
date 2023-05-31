@@ -4,21 +4,21 @@ import java.util.Objects;
 
 public class Part {
     private int id;
-    private String description;
+    private String type;
     private int maxDaysCheckedOutForStudent;
     private int maxDaysCheckedOutForProfessor;
 
     public Part() {
     }
 
-    public Part(String description, int maxDaysCheckedOutForStudent, int maxDaysCheckedOutForProfessor) {
-        this.description = description;
+    public Part(String type, int maxDaysCheckedOutForStudent, int maxDaysCheckedOutForProfessor) {
+        this.type = type;
         this.maxDaysCheckedOutForStudent = maxDaysCheckedOutForStudent;
         this.maxDaysCheckedOutForProfessor = maxDaysCheckedOutForProfessor;
     }
 
-    public Part(int id, String description, int maxDaysCheckedOutForStudent, int maxDaysCheckedOutForProfessor) {
-        this(description, maxDaysCheckedOutForStudent, maxDaysCheckedOutForProfessor);
+    public Part(int id, String type, int maxDaysCheckedOutForStudent, int maxDaysCheckedOutForProfessor) {
+        this(type, maxDaysCheckedOutForStudent, maxDaysCheckedOutForProfessor);
         this.id = id;
     }
 
@@ -30,12 +30,12 @@ public class Part {
         this.id = id;
     }
 
-    public String getDescription() {
-        return description;
+    public String getType() {
+        return type;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getMaxDaysCheckedOutForStudent() {

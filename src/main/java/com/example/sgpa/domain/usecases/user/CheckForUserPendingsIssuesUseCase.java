@@ -20,7 +20,7 @@ public class CheckForUserPendingsIssuesUseCase {
                     .append("PatrimonialId: ")
                     .append(checkedOutItem.getItemPart().getPatrimonialId())
                     .append(". Part description: ")
-                    .append(checkedOutItem.getItemPart().getPart().getDescription())
+                    .append(checkedOutItem.getItemPart().getPart().getType())
                     .append(". Due Date: ")
                     .append(checkedOutItem.getDueDate().toString())
                     .append("\n"));

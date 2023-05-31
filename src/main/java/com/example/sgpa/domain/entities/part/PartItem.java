@@ -8,6 +8,10 @@ public class PartItem {
     private String observation;
     private Part part;
 
+    public String getType(){
+        return part.getType();
+    }
+
     public PartItem() {
     }
 

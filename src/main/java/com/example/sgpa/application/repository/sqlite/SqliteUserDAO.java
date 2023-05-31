@@ -40,7 +40,6 @@ public class SqliteUserDAO implements UserDAO {
         }
         return Optional.empty();
     }
-
     @Override
     public Optional<User> findOneByLoginAndPassword(String login, String password) {
         String sql = "select * from user where login = ? and password = ?";
@@ -62,27 +61,46 @@ public class SqliteUserDAO implements UserDAO {
         }
         return Optional.empty();
     }
-
     @Override
     public Integer create(User obj) {
         return null;
     }
-
     @Override
-    public Optional<User> findOne(Integer type) {
+    public Optional<User> findOne(Integer institutionalId) {
+        String sql = "select * from user where institutional_id = ?";
+        try(PreparedStatement ps = ConnectionFactory.getPreparedStatement(sql)){
+            ps.setInt(1, institutionalId);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                int institutional_id = rs.getInt("institutional_id");
+                String name = rs.getString("name");
+                String email = rs.getString("email");
+                String phone = rs.getString("phone");
+                UserType user_type = UserType.strToEnum(rs.getString("user_type"));
+                User user = new User(institutional_id, name, email, phone, user_type);
+                if (user_type == UserType.TECHNICIAN){
+                    String login = rs.getString("login");
+                    user.setLogin(login);
+                } else if (user_type == UserType.PROFESSOR) {
+                    int room = rs.getInt("room");
+                    user.setRoom(room);
+                }
+                return Optional.of(user);
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
         return Optional.empty();
     }
-
     @Override
     public List<User> findAll() {
         return null;
     }
-
     @Override
     public void update(User obj) {
 
     }
-
     @Override
     public boolean delete(User obj) {
         return false;
