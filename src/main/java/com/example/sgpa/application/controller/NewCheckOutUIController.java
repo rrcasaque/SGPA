@@ -2,6 +2,7 @@ package com.example.sgpa.application.controller;
 
 import com.example.sgpa.application.repository.sqlite.SqlitePartItemDAO;
 import com.example.sgpa.application.repository.sqlite.SqliteUserDAO;
+import com.example.sgpa.application.view.WindowLoader;
 import com.example.sgpa.domain.entities.part.Part;
 import com.example.sgpa.domain.entities.part.PartItem;
 import com.example.sgpa.domain.entities.part.StatusPart;
@@ -16,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
@@ -123,5 +125,10 @@ public class NewCheckOutUIController {
     }
 
     public void backToPreviousScene(ActionEvent actionEvent) {
+        try {
+            WindowLoader.setRoot("MainUI.fxml");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
