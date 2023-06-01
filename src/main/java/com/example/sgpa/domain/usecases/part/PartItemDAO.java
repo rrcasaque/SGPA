@@ -10,4 +10,5 @@ public interface PartItemDAO extends DAO<PartItem, Integer> {
    Set<PartItem> findCheckedOutsItemParts();
    Set<PartItem> findCheckedOutsItemPartsByUser(String userId);
    boolean isPartItemAvailable(int patrimonialId);
+   Set<PartItem> findByType(String type);
 }

@@ -1,5 +1,6 @@
 package com.example.sgpa.application.controller;
 
+import com.example.sgpa.application.repository.sqlite.SqlitePartItemDAO;
 import com.example.sgpa.application.repository.sqlite.SqliteUserDAO;
 import com.example.sgpa.domain.entities.part.Part;
 import com.example.sgpa.domain.entities.part.PartItem;
@@ -14,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 public class NewCheckOutUIController {
     private User selectedUser;
@@ -72,7 +74,7 @@ public class NewCheckOutUIController {
         try{
             selectedUser = userDAO.findOne(Integer.valueOf(txtUserId.getText())).orElseThrow();
             lblSelectedUser.setText("Usuário: "+ selectedUser.getName() + " Tipo: " + selectedUser.getUserType().toString());
-        }catch(NoSuchElementException e){
+        }catch(Exception e){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("User not found.");
             alert.setHeaderText("User not found. Try other id or cancel the checkout");
@@ -83,6 +85,18 @@ public class NewCheckOutUIController {
     }
 
     public void findParts(ActionEvent actionEvent) {
+        SqlitePartItemDAO sqlitePartItemDAO = new SqlitePartItemDAO();
+        try{
+            searchResult.clear();
+            Set<PartItem> found = sqlitePartItemDAO.findByType(txtFindPart.getText());
+            searchResult.addAll(found);
+        }catch(Exception e){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Parts not found.");
+            alert.setHeaderText("Error");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
     }
 
     public void addPart(ActionEvent actionEvent) {

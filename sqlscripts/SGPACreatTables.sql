@@ -25,6 +25,7 @@ CREATE TABLE part_item(
 	FOREIGN KEY (part_id) REFERENCES part(id)
 );
 
+
 CREATE TABLE reservation(
 	reservation_id INTEGER PRIMARY KEY AUTOINCREMENT,
     date_time_scheduled_for_checkout TEXT,
@@ -75,3 +76,17 @@ CREATE TABLE event(
 	 FOREIGN KEY(technician_id) REFERENCES user(institutional_id)
 );
 
+insert into user(name, email, phone, user_type, login, password) 
+values ("Mário", "mario@email.com","16887766776", "Técnico", "mprado", "m1234");
+
+INSERT INTO part(description, max_days_for_student, max_days_for_professor) 
+VALUES ('valvula', 5, 15), ('helice', 15, 25), ('pastilha', 7, 7);
+	
+INSERT INTO part_item(status, part_id)
+VALUES ('Disponível', 1), ('Disponível', 1), ('Emprestada', 1), ('Reservada', 1),
+	   ('Disponível', 2), ('Disponível', 2), ('Emprestada', 2), ('Emprestada', 2),
+	   ('Reservada', 3), ('Reservada', 3), ('Reservada', 3), ('Disponível', 3);
+	
+SELECT * 
+FROM part_item pi JOIN part p ON pi.part_id = p.id
+WHERE p.description LIKE '%lv%';

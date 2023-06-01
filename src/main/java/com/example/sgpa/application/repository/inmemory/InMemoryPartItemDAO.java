@@ -32,6 +32,11 @@ public class InMemoryPartItemDAO implements PartItemDAO {
     }
 
     @Override
+    public Set<PartItem> findByType(String type) {
+        return null;
+    }
+
+    @Override
     public Integer create(PartItem obj) {
         return null;
     }
