@@ -9,6 +9,7 @@ public class DataBaseBuilder {
     public void buildDataBaseIfMissing(){
         if (Files.notExists(Paths.get("sgpa.db"))){
             buildTables();
+            populateTables();
         }else {
             System.out.println("SGPA data base already exists!");
         }
@@ -25,6 +26,18 @@ public class DataBaseBuilder {
             statement.addBatch(buildEventTable());
             statement.executeBatch();
             System.out.println("SGPA data base built successfully!\nYou can consult the generated tables at DB Browser app.");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void populateTables() {
+        try (Statement statement = ConnectionFactory.getStatement()){
+            statement.addBatch(populateUserTable());
+            statement.addBatch(populatePartTable());
+            statement.addBatch(populatePartItemTable());
+            statement.executeBatch();
+            System.out.println("SGPA data base populate successfully!\nYou can consult the generated tuples at DB Browser app.");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -133,6 +146,29 @@ public class DataBaseBuilder {
         "        login TEXT,\n"+
         "        password TEXT\n"+
         ");\n";
+        System.out.println(sql);
+        return sql;
+    }
+
+    private String populatePartTable(){
+        String sql = "INSERT INTO part(description, max_days_for_student, max_days_for_professor)\n" +
+                "VALUES ('valvula', 5, 15), ('helice', 15, 25), ('pastilha', 7, 7);";
+        System.out.println(sql);
+        return sql;
+    }
+
+    private String populatePartItemTable(){
+        String sql = "INSERT INTO part_item(status, part_id)\n" +
+                "VALUES ('Disponível', 1), ('Disponível', 1), ('Emprestada', 1), ('Reservada', 1),\n" +
+                "\t   ('Disponível', 2), ('Disponível', 2), ('Emprestada', 2), ('Emprestada', 2),\n" +
+                "\t   ('Reservada', 3), ('Reservada', 3), ('Reservada', 3), ('Disponível', 3);";
+        System.out.println(sql);
+        return sql;
+    }
+
+    private String populateUserTable(){
+       String sql = "insert into user(name, email, phone, user_type, login, password)\n" +
+               "values ('Mário', 'mario@email.com','16887766776', 'Técnico', 'mprado', 'm1234');";
         System.out.println(sql);
         return sql;
     }
