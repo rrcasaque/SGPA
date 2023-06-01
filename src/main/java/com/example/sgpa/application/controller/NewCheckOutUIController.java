@@ -4,11 +4,13 @@ import com.example.sgpa.application.repository.sqlite.SqlitePartItemDAO;
 import com.example.sgpa.application.repository.sqlite.SqliteUserDAO;
 import com.example.sgpa.domain.entities.part.Part;
 import com.example.sgpa.domain.entities.part.PartItem;
+import com.example.sgpa.domain.entities.part.StatusPart;
 import com.example.sgpa.domain.entities.user.User;
 import com.example.sgpa.domain.usecases.user.UserDAO;
 import com.example.sgpa.domain.usecases.utils.EntityNotFoundException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -85,10 +87,15 @@ public class NewCheckOutUIController {
     }
 
     public void findParts(ActionEvent actionEvent) {
+        searchResult.clear();
         SqlitePartItemDAO sqlitePartItemDAO = new SqlitePartItemDAO();
         try{
-            searchResult.clear();
             Set<PartItem> found = sqlitePartItemDAO.findByType(txtFindPart.getText());
+            if (found.isEmpty()){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("Parts not found");
+                alert.showAndWait();
+            }
             searchResult.addAll(found);
         }catch(Exception e){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -100,9 +107,16 @@ public class NewCheckOutUIController {
     }
 
     public void addPart(ActionEvent actionEvent) {
+        PartItem selected = tvFoundParts.getSelectionModel().getSelectedItem();
+        if(selected != null && !selectedParts.contains(selected) && selected.getStatus() == StatusPart.AVAILABLE){
+            selectedParts.add(selected);
+        }
     }
-
     public void removePart(ActionEvent actionEvent) {
+        PartItem selected = tvSelectedParts.getSelectionModel().getSelectedItem();
+        if(selected != null){
+            selectedParts.remove(selected);
+        }
     }
 
     public void createCheckOut(ActionEvent actionEvent) {
