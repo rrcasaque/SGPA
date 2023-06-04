@@ -26,7 +26,7 @@
           <Menu mnemonicParsing="false" text="Empréstimos">
             <items>
               <MenuItem fx:id="menuItemNewCheckOut" mnemonicParsing="false" onAction="#goToCheckOutScene" text="Registrar empréstimo" />
-                  <MenuItem mnemonicParsing="false" text="Registrar devolução" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToReturnScene" text="Registrar devolução" />
                   <MenuItem mnemonicParsing="false" text="Listar" />
             </items>
           </Menu>

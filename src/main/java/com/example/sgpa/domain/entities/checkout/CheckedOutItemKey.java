@@ -5,12 +5,19 @@ import com.example.sgpa.domain.entities.part.PartItem;
 import java.util.Objects;
 
 public class CheckedOutItemKey {
-    private Checkout Checkout;
-    private PartItem itemPart;
+    private int checkoutId;
+    private int partItemId;
+    public CheckedOutItemKey(int  checkoutId, int partItemId) {
+        this.checkoutId = checkoutId;
+        this.partItemId = partItemId;
+    }
 
-    public CheckedOutItemKey(com.example.sgpa.domain.entities.checkout.Checkout checkout, PartItem itemPart) {
-        Checkout = checkout;
-        this.itemPart = itemPart;
+    public int getCheckoutId() {
+        return checkoutId;
+    }
+
+    public int getPartItemId() {
+        return partItemId;
     }
 
     @Override
@@ -18,11 +25,10 @@ public class CheckedOutItemKey {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CheckedOutItemKey that = (CheckedOutItemKey) o;
-        return Objects.equals(Checkout, that.Checkout) && Objects.equals(itemPart, that.itemPart);
+        return checkoutId == that.checkoutId && partItemId == that.partItemId;
     }
-
     @Override
     public int hashCode() {
-        return Objects.hash(Checkout, itemPart);
+        return Objects.hash(checkoutId, partItemId);
     }
 }

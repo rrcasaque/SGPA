@@ -122,6 +122,7 @@ public class NewCheckOutUIController {
         PartItem selected = tvFoundParts.getSelectionModel().getSelectedItem();
         if(selected != null && !selectedParts.contains(selected) && selected.getStatus() == StatusPart.AVAILABLE){
             selectedParts.add(selected);
+            searchResult.remove(selected);
         }
     }
     public void removePart(ActionEvent actionEvent) {
@@ -131,17 +132,25 @@ public class NewCheckOutUIController {
         }
     }
     public void createCheckOut(ActionEvent actionEvent) {
-        try{
-            createCheckOutUseCase.createCheckout(selectedUser.getInstitutionalId(), new HashSet<>(tvSelectedParts.getItems()));
-        }catch (RuntimeException e){
-//            System.out.println(e.getMessage());
-//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//            alert.setTitle("User has pending issues.");
-//            alert.setContentText(e.getMessage());
-//            alert.showAndWait();
-            e.printStackTrace();
+        Set<PartItem> partItemSet = new HashSet<>(tvSelectedParts.getItems());
+        if (selectedUser != null && !partItemSet.isEmpty() ) {
+            createCheckOutUseCase.createCheckout(selectedUser.getInstitutionalId(), partItemSet);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Empréstimo concluído com sucesso.");
+            alert.showAndWait();
+            clearFields();
         }
     }
+
+    private void clearFields() {
+        searchResult.clear();
+        selectedParts.clear();
+        txtFindPart.clear();
+        txtUserId.clear();
+        lblSelectedUser.setText("");
+        selectedUser = null;
+    }
+
     public void backToPreviousScene(ActionEvent actionEvent) {
         try {
             WindowLoader.setRoot("MainUI.fxml");

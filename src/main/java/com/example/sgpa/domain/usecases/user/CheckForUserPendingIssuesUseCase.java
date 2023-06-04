@@ -18,9 +18,9 @@ public class CheckForUserPendingIssuesUseCase {
             StringBuilder message = new StringBuilder("User has the following overdue parts:\n");
             lateItemsOfUser.forEach(checkedOutItem -> message
                     .append("PatrimonialId: ")
-                    .append(checkedOutItem.getItemPart().getPatrimonialId())
+                    .append(checkedOutItem.getPartItem().getPatrimonialId())
                     .append(". Part description: ")
-                    .append(checkedOutItem.getItemPart().getPart().getType())
+                    .append(checkedOutItem.getPartItem().getPart().getType())
                     .append(". Due Date: ")
                     .append(checkedOutItem.getDueDate().toString())
                     .append("\n"));

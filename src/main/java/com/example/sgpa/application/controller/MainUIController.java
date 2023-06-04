@@ -17,4 +17,7 @@ public class MainUIController {
         WindowLoader.setRoot("NewCheckOutUI.fxml");
     }
 
+    public void goToReturnScene(ActionEvent actionEvent) throws IOException {
+        WindowLoader.setRoot("ReturnUI.fxml");
+    }
 }

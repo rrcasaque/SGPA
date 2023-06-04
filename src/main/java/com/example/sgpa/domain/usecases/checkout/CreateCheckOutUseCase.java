@@ -42,6 +42,8 @@ public class CreateCheckOutUseCase {
         this.checkForPartItemAvailabilityUseCase = checkForPartItemAvailabilityUseCase;
     }
     public Checkout createCheckout(int userId, Set<PartItem> partItems){
+        if (userId == 0 || partItems.isEmpty())
+            throw new IllegalArgumentException("User and check out items must be not null.");
         User user = userDAO.findOne(userId).orElseThrow(()-> new EntityNotFoundException("User not found"));
         checkForUserPendingIssuesUseCase.checkForUserPendingIssues(userId);
         checkForPartItemAvailabilityUseCase.checkForAvailabilityOfTheParts(partItems);

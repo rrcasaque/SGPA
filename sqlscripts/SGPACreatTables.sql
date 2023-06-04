@@ -9,7 +9,6 @@ CREATE TABLE user (
 	password TEXT
 )
 
-
 CREATE TABLE part(
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
     description  TEXT,
@@ -24,7 +23,6 @@ CREATE TABLE part_item(
     part_id INTEGER,
 	FOREIGN KEY (part_id) REFERENCES part(id)
 );
-
 
 CREATE TABLE reservation(
 	reservation_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -63,7 +61,6 @@ CREATE TABLE checkout_item(
 	PRIMARY KEY (checkout_id, part_item_id)
 );
 
-
 CREATE TABLE event(
 	 id INTEGER PRIMARY KEY AUTOINCREMENT,
 	 event_type TEXT,
@@ -79,6 +76,12 @@ CREATE TABLE event(
 insert into user(name, email, phone, user_type, login, password) 
 values ("Mário", "mario@email.com","16887766776", "Técnico", "mprado", "m1234");
 
+insert into user(name, email, phone, user_type, login, password) 
+values ("Paula", "paula@email.com","16887766776", "Professor", "paula", "paula");
+
+insert into user(name, email, phone, user_type, login, password) 
+values ("Carmen", "carmen@email.com","16887766776", "Estudante", "carmen", "carmen");
+
 INSERT INTO part(description, max_days_for_student, max_days_for_professor) 
 VALUES ('valvula', 5, 15), ('helice', 15, 25), ('pastilha', 7, 7);
 	
@@ -87,6 +90,4 @@ VALUES ('Disponível', 1), ('Disponível', 1), ('Emprestada', 1), ('Reservada', 
 	   ('Disponível', 2), ('Disponível', 2), ('Emprestada', 2), ('Emprestada', 2),
 	   ('Reservada', 3), ('Reservada', 3), ('Reservada', 3), ('Disponível', 3);
 	
-SELECT * 
-FROM part_item pi JOIN part p ON pi.part_id = p.id
-WHERE p.description LIKE '%lv%';
+
