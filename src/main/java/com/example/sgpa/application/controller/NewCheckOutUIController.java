@@ -1,24 +1,27 @@
 package com.example.sgpa.application.controller;
 
-import com.example.sgpa.application.repository.sqlite.SqlitePartItemDAO;
-import com.example.sgpa.application.repository.sqlite.SqliteUserDAO;
+import com.example.sgpa.application.repository.sqlite.*;
 import com.example.sgpa.application.view.WindowLoader;
-import com.example.sgpa.domain.entities.part.Part;
 import com.example.sgpa.domain.entities.part.PartItem;
 import com.example.sgpa.domain.entities.part.StatusPart;
 import com.example.sgpa.domain.entities.user.User;
+import com.example.sgpa.domain.usecases.checkout.CheckOutDAO;
+import com.example.sgpa.domain.usecases.checkout.CheckedOutItemDAO;
+import com.example.sgpa.domain.usecases.checkout.CreateCheckOutUseCase;
+import com.example.sgpa.domain.usecases.historical.EventDAO;
+import com.example.sgpa.domain.usecases.part.CheckForPartItemAvailabilityUseCase;
+import com.example.sgpa.domain.usecases.part.PartItemDAO;
+import com.example.sgpa.domain.usecases.user.CheckForUserPendingIssuesUseCase;
 import com.example.sgpa.domain.usecases.user.UserDAO;
-import com.example.sgpa.domain.usecases.utils.EntityNotFoundException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
-import java.util.NoSuchElementException;
+import java.util.HashSet;
 import java.util.Set;
 
 public class NewCheckOutUIController {
@@ -57,6 +60,16 @@ public class NewCheckOutUIController {
     private TextField txtUserId;
     private final ObservableList<PartItem> searchResult = FXCollections.observableArrayList();
     private final ObservableList<PartItem> selectedParts = FXCollections.observableArrayList();
+    private final UserDAO userDAO = new SqliteUserDAO();
+    private final PartItemDAO partItemDAO =  new SqlitePartItemDAO();
+    private final CheckOutDAO checkOutDAO  = new SqliteCheckOutDAO();
+    private final CheckedOutItemDAO checkedOutItemDAO = new SqliteCheckedOutItemDAO();
+    private final EventDAO eventDAO = new SqliteEventDAO();
+    private final CheckForUserPendingIssuesUseCase checkUserUseCAse =  new CheckForUserPendingIssuesUseCase(checkedOutItemDAO);
+    private final CheckForPartItemAvailabilityUseCase checkPartItemsUseCase = new CheckForPartItemAvailabilityUseCase(partItemDAO);
+
+    private final CreateCheckOutUseCase createCheckOutUseCase = new CreateCheckOutUseCase(
+            userDAO, partItemDAO, checkOutDAO, checkedOutItemDAO, eventDAO, checkUserUseCAse, checkPartItemsUseCase);
     @FXML
     private void initialize() {
         bindTableViewToItemsLists();
@@ -74,7 +87,6 @@ public class NewCheckOutUIController {
         tvSelectedParts.setItems(selectedParts);
     }
     public void findUser(ActionEvent actionEvent) {
-        UserDAO userDAO = new SqliteUserDAO();
         try{
             selectedUser = userDAO.findOne(Integer.valueOf(txtUserId.getText())).orElseThrow();
             lblSelectedUser.setText("Usuário: "+ selectedUser.getName() + " Tipo: " + selectedUser.getUserType().toString());
@@ -87,7 +99,6 @@ public class NewCheckOutUIController {
         }
 
     }
-
     public void findParts(ActionEvent actionEvent) {
         searchResult.clear();
         SqlitePartItemDAO sqlitePartItemDAO = new SqlitePartItemDAO();
@@ -107,7 +118,6 @@ public class NewCheckOutUIController {
             alert.showAndWait();
         }
     }
-
     public void addPart(ActionEvent actionEvent) {
         PartItem selected = tvFoundParts.getSelectionModel().getSelectedItem();
         if(selected != null && !selectedParts.contains(selected) && selected.getStatus() == StatusPart.AVAILABLE){
@@ -120,10 +130,18 @@ public class NewCheckOutUIController {
             selectedParts.remove(selected);
         }
     }
-
     public void createCheckOut(ActionEvent actionEvent) {
+        try{
+            createCheckOutUseCase.createCheckout(selectedUser.getInstitutionalId(), new HashSet<>(tvSelectedParts.getItems()));
+        }catch (RuntimeException e){
+//            System.out.println(e.getMessage());
+//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//            alert.setTitle("User has pending issues.");
+//            alert.setContentText(e.getMessage());
+//            alert.showAndWait();
+            e.printStackTrace();
+        }
     }
-
     public void backToPreviousScene(ActionEvent actionEvent) {
         try {
             WindowLoader.setRoot("MainUI.fxml");

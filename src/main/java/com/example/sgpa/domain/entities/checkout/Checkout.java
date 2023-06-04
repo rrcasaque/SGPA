@@ -6,6 +6,7 @@ import com.example.sgpa.domain.entities.user.Technician;
 import com.example.sgpa.domain.entities.user.User;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -20,60 +21,64 @@ public class Checkout {
         this.user = user;
         this.technician = technician;
     }
-
+    public Checkout(int checkOutId, User user, User technician){
+        this.user = user;
+        this.technician = technician;
+        this.checkOutId  = checkOutId;
+    }
+    public Checkout(int checkOutId, User user, User technician, Reservation associatedReservation){
+        this.user = user;
+        this.technician = technician;
+        this.checkOutId  = checkOutId;
+        this.associatedReservation =associatedReservation;
+    }
     public Checkout(Reservation reservation){
         this.user = reservation.getRequester();
         this.technician = reservation.getTechnician();
         this.associatedReservation = reservation;
         reservation.getItems().forEach(itemPart -> checkedOutItems.add(new CheckedOutItem(itemPart, this)));
     }
-
     public Checkout(Set<PartItem> parts, User user, User technician){
         this.user = user;
         this.technician = technician;
         parts.forEach(itemPart -> checkedOutItems.add(new CheckedOutItem(itemPart, this)));
     }
-
     public Set<CheckedOutItem> getCheckedOutItems() {
         return checkedOutItems;
     }
-
     public Reservation getAssociatedReservation() {
         return associatedReservation;
     }
-
     public int getCheckOutId() {
         return checkOutId;
     }
-
     public void setCheckOutId(int checkOutId) {
         this.checkOutId = checkOutId;
     }
-
     public User getTechnician() {
         return technician;
     }
-
     public void setTechnician(Technician technician) {
         this.technician = technician;
     }
-
     public User getUser() {
         return user;
     }
-
     public void setUser(User user) {
         this.user = user;
     }
-
+    public void addCheckedOutItem(CheckedOutItem checkedOutItem){
+        checkedOutItems.add(checkedOutItem);
+    }
+    public void addCheckedOutItems(List<CheckedOutItem> checkedOutItems) {
+        this.checkedOutItems.addAll(checkedOutItems);
+    }
     public void addCheckedOutItem(PartItem item){
         checkedOutItems.add(new CheckedOutItem(item, this));
     }
-
     public void addCheckedOutItems(Set<PartItem> items){
         items.forEach(itemPart-> checkedOutItems.add(new CheckedOutItem(itemPart, this)));
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -81,7 +86,6 @@ public class Checkout {
         Checkout checkout = (Checkout) o;
         return checkOutId == checkout.checkOutId;
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(checkOutId);

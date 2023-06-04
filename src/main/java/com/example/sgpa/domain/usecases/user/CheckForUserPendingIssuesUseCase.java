@@ -5,10 +5,10 @@ import com.example.sgpa.domain.usecases.checkout.CheckedOutItemDAO;
 
 import java.util.List;
 
-public class CheckForUserPendingsIssuesUseCase {
+public class CheckForUserPendingIssuesUseCase {
     private CheckedOutItemDAO checkedOutItemDAO;
 
-    public CheckForUserPendingsIssuesUseCase(CheckedOutItemDAO checkedOutItemDAO){
+    public CheckForUserPendingIssuesUseCase(CheckedOutItemDAO checkedOutItemDAO){
         this.checkedOutItemDAO =   checkedOutItemDAO;
     }
 

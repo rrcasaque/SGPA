@@ -14,7 +14,7 @@ import com.example.sgpa.domain.usecases.report.GenerateReportByPartUseCase;
 import com.example.sgpa.domain.usecases.report.GenerateReportByUserUseCase;
 import com.example.sgpa.domain.usecases.report.GenerateReportUseCase;
 import com.example.sgpa.domain.usecases.reservation.CreateReservationUseCase;
-import com.example.sgpa.domain.usecases.user.CheckForUserPendingsIssuesUseCase;
+import com.example.sgpa.domain.usecases.user.CheckForUserPendingIssuesUseCase;
 
 public class Main {
     public static Auth authUseCase;
@@ -29,7 +29,7 @@ public class Main {
     public static GenerateReportByUserUseCase generateReportByUserUseCase;
     public static GenerateReportUseCase generateReportUseCase;
     public static CreateReservationUseCase createReservationUseCase;
-    public static CheckForUserPendingsIssuesUseCase checkForUserPendingsIssuesUseCase;
+    public static CheckForUserPendingIssuesUseCase checkForUserPendingIssuesUseCase;
     public static void main(String[] args) {
         configureInjection();
         //fazer autenticação
@@ -77,7 +77,7 @@ public class Main {
         InMemoryUserDAO inMemoryUserDAO = new InMemoryUserDAO();
 
         authUseCase = new Auth(inMemoryUserDAO);
-        checkForUserPendingsIssuesUseCase = new CheckForUserPendingsIssuesUseCase(inMemoryCheckedOutItemDAO);
+        checkForUserPendingIssuesUseCase = new CheckForUserPendingIssuesUseCase(inMemoryCheckedOutItemDAO);
         checkForPartItemAvailabilityUseCase = new CheckForPartItemAvailabilityUseCase(inMemoryPartItemDAO);
         createCheckOutUseCase = new CreateCheckOutUseCase(
                 inMemoryUserDAO,
@@ -85,7 +85,7 @@ public class Main {
                 inMemoryCheckOutDAO,
                 inMemoryCheckedOutItemDAO,
                 inMemoryEventDAO,
-                checkForUserPendingsIssuesUseCase,
+                checkForUserPendingIssuesUseCase,
                 checkForPartItemAvailabilityUseCase);
         returnPartItemUseCase = new ReturnPartItemUseCase(
                 inMemoryCheckedOutItemDAO,
@@ -104,7 +104,7 @@ public class Main {
                 inMemoryPartItemDAO,
                 inMemoryReservationDAO,
                 inMemoryEventDAO,
-                checkForUserPendingsIssuesUseCase,
+                checkForUserPendingIssuesUseCase,
                 checkForPartItemAvailabilityUseCase);
     }
 }

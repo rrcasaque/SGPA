@@ -57,4 +57,9 @@ public class InMemoryCheckedOutItemDAO implements CheckedOutItemDAO {
                 .filter(checkedOutItem -> checkedOutItem.getRelatedCheckout().getUser().getInstitutionalId()==userId)
                 .filter(checkedOutItem -> checkedOutItem.isLate()).collect(Collectors.toList());
     }
+
+    @Override
+    public List<CheckedOutItem> findByCheckOutId(int userId) {
+        return null;
+    }
 }
