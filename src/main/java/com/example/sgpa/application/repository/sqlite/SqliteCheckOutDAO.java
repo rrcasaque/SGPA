@@ -9,6 +9,7 @@ import com.example.sgpa.domain.usecases.user.UserDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,10 +17,11 @@ public class SqliteCheckOutDAO implements CheckOutDAO {
     CheckedOutItemDAO checkedOutItemDAO = new SqliteCheckedOutItemDAO();
     @Override
     public Integer create(Checkout checkout) {
-        String sql = "INSERT INTO checkout(technician_id, user_id) VALUES(?,?);";
+        String sql = "INSERT INTO checkout(technician_id, user_id, checkout_date) VALUES(?,?,?);";
         try(PreparedStatement ps = ConnectionFactory.getPreparedStatement(sql)){
             ps.setInt(1, Session.getLoggedTechnician().getInstitutionalId());
             ps.setInt(2,checkout.getUser().getInstitutionalId());
+            ps.setString(3,checkout.getCheckOutDateTime().toString());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             return  rs.getInt(1);
@@ -67,11 +69,12 @@ public class SqliteCheckOutDAO implements CheckOutDAO {
                 int user_id = rs.getInt("user_id");
                 User user = userDAO.findOne(user_id).orElseThrow();
                 int technician_id= rs.getInt("technician_id");
+                LocalDateTime checkoutDateTime =LocalDateTime.parse(rs.getString("checkout_date"));
                 User technician = userDAO.findOne(technician_id).orElseThrow();
 //                int reservation_id = rs.getInt("reservation_id");
 //                reservation = reservationDAO.findOne(reservation_id).orElse(null);
 //                checkOut = new Checkout(checkOutId,user,technician,reservation);
-                checkOut = new Checkout(checkOutId,user,technician,null);
+                checkOut = new Checkout(checkOutId,user,technician,null,checkoutDateTime);
                 return Optional.of(checkOut);
             }
         }

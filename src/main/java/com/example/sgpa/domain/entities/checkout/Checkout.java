@@ -28,11 +28,12 @@ public class Checkout {
         this.technician = technician;
         this.checkOutId  = checkOutId;
     }
-    public Checkout(int checkOutId, User user, User technician, Reservation associatedReservation){
+    public Checkout(int checkOutId, User user, User technician, Reservation associatedReservation, LocalDateTime checkOutDateTime){
         this.user = user;
         this.technician = technician;
         this.checkOutId  = checkOutId;
         this.associatedReservation =associatedReservation;
+        this.checkOutDateTime = checkOutDateTime;
     }
     public Checkout(Reservation reservation){
         this.user = reservation.getRequester();
@@ -43,6 +44,7 @@ public class Checkout {
     public Checkout(Set<PartItem> parts, User user, User technician){
         this.user = user;
         this.technician = technician;
+        this.checkOutDateTime = LocalDateTime.now();
         parts.forEach(itemPart -> checkedOutItems.add(new CheckedOutItem(itemPart, this)));
     }
     public Set<CheckedOutItem> getCheckedOutItems() {
