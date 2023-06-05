@@ -1,9 +1,9 @@
 CREATE TABLE user (
 	institutional_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT,
+    name TEXT NOT NULL,
     email TEXT,
     phone TEXT,
-    user_type TEXT,
+    user_type TEXT NOT NULL,
 	room INTEGER,
 	login TEXT,
 	password TEXT
@@ -11,31 +11,31 @@ CREATE TABLE user (
 
 CREATE TABLE part(
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
-    description  TEXT,
-    max_days_for_student INTEGER,
-    max_days_for_professor INTEGER
+    part_type  TEXT NOT NULL,
+    max_days_for_student INTEGER NOT NULL,
+    max_days_for_professor INTEGER NOT NULL
 );
 
 CREATE TABLE part_item(
 	patrimonial_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    status TEXT,
+    status TEXT NOT NULL,
     observation TEXT,
-    part_id INTEGER,
+    part_id INTEGER NOT NULL,
 	FOREIGN KEY (part_id) REFERENCES part(id)
 );
 
 CREATE TABLE reservation(
 	reservation_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    date_time_scheduled_for_checkout TEXT,
-    user_id INTEGER,
-    technician_id INTEGER,
+    date_time_scheduled_for_checkout TEXT NOT NULL,
+    user_id INTEGER NOT NULL,
+    technician_id INTEGER NOT NULL,
 	FOREIGN KEY (user_id) REFERENCES user(institutional_id),
 	FOREIGN KEY (technician_id) REFERENCES user(institutional_id)	 
 );
 
 CREATE TABLE reservation_item(
-	reservation_id INTEGER, 
-	part_item_id INTEGER,
+	reservation_id INTEGER NOT NULL, 
+	part_item_id INTEGER NOT NULL,
 	FOREIGN KEY (reservation_id) REFERENCES reservation(reservation_id),
 	FOREIGN KEY (part_item_id) REFERENCES part_item(patrimonial_id),
 	PRIMARY KEY (reservation_id, part_item_id)
@@ -43,8 +43,9 @@ CREATE TABLE reservation_item(
 
 CREATE TABLE checkout(
 	checkout_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    technician_id INTEGER,
-    user_id INTEGER,
+    technician_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+	checkout_date TEXT NOT NULL,
     reservation_id INTEGER,
 	FOREIGN KEY (technician_id) REFERENCES user(institutional_id),
 	FOREIGN KEY (user_id) REFERENCES user(institutional_id),
@@ -52,9 +53,9 @@ CREATE TABLE checkout(
 );
 
 CREATE TABLE checkout_item(
-    checkout_id INTEGER,
-    part_item_id INTEGER,
-    due_date TEXT,
+    checkout_id INTEGER NOT NULL,
+    part_item_id INTEGER NOT NULL,
+    due_date TEXT NOT NULL,
     return_date TEXT,
 	FOREIGN KEY (checkout_id) REFERENCES checkout(checkout_id),
 	FOREIGN KEY (part_item_id) REFERENCES part_item(patrimonial_id),
@@ -63,24 +64,21 @@ CREATE TABLE checkout_item(
 
 CREATE TABLE event(
 	 id INTEGER PRIMARY KEY AUTOINCREMENT,
-	 event_type TEXT,
-	 time_stamp TEXT,
-	 part_item_id INTEGER,
-     user_id INTEGER,
-     technician_id INTEGER,
+	 event_type TEXT NOT NULL,
+	 time_stamp TEXT NOT NULL,
+	 part_item_id INTEGER NOT NULL,
+     user_id INTEGER NOT NULL,
+     technician_id INTEGER NOT NULL,
 	 FOREIGN KEY(part_item_id) REFERENCES part_item(patrimonial_id),
 	 FOREIGN KEY(user_id) REFERENCES user(institutional_id),
 	 FOREIGN KEY(technician_id) REFERENCES user(institutional_id)
 );
 
 insert into user(name, email, phone, user_type, login, password) 
-values ("Mário", "mario@email.com","16887766776", "Técnico", "mprado", "m1234");
+values ('Mário', 'mario@email.com','16887766776', 'Técnico', 'mprado', 'm1234'),
+	   ('Paula', 'paula@email.com','16887766776', 'Professor', NULL , NULL),
+	   ('Carmen', 'carmen@email.com','16887766776', 'Estudante', NULL, NULL);
 
-insert into user(name, email, phone, user_type, login, password) 
-values ("Paula", "paula@email.com","16887766776", "Professor", "paula", "paula");
-
-insert into user(name, email, phone, user_type, login, password) 
-values ("Carmen", "carmen@email.com","16887766776", "Estudante", "carmen", "carmen");
 
 INSERT INTO part(description, max_days_for_student, max_days_for_professor) 
 VALUES ('valvula', 5, 15), ('helice', 15, 25), ('pastilha', 7, 7);

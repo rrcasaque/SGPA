@@ -50,6 +50,11 @@ public class CheckedOutItem {
     public LocalDateTime getReturnDate() {
         return returnDate;
     }
+    public String getType(){return partItem.getType();}
+    public Integer getPatrimonialId(){return partItem.getPatrimonialId();}
+    public String getStatus(){
+        return partItem.getStatus().toString();
+    }
     public void setReturnDate(LocalDateTime returnDate) {
         this.returnDate = returnDate;
     }

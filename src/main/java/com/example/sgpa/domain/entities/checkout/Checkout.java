@@ -5,6 +5,7 @@ import com.example.sgpa.domain.entities.reservation.Reservation;
 import com.example.sgpa.domain.entities.user.Technician;
 import com.example.sgpa.domain.entities.user.User;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -14,6 +15,7 @@ public class Checkout {
     private int checkOutId;
     private User technician;
     private User user;
+    private LocalDateTime checkOutDateTime;
     private final Set<CheckedOutItem> checkedOutItems = new HashSet<>();
     private Reservation associatedReservation;
     public Checkout(){}
@@ -64,8 +66,15 @@ public class Checkout {
     public User getUser() {
         return user;
     }
+    public Integer getUserId(){return user.getInstitutionalId();}
     public void setUser(User user) {
         this.user = user;
+    }
+    public LocalDateTime getCheckOutDateTime() {
+        return checkOutDateTime;
+    }
+    public String getCheckOutDate() {
+        return checkOutDateTime.toString().split("T")[0];
     }
     public void addCheckedOutItem(CheckedOutItem checkedOutItem){
         checkedOutItems.add(checkedOutItem);

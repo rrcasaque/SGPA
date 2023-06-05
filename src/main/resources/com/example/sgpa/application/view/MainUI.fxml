@@ -27,7 +27,7 @@
             <items>
               <MenuItem fx:id="menuItemNewCheckOut" mnemonicParsing="false" onAction="#goToCheckOutScene" text="Registrar empréstimo" />
                   <MenuItem mnemonicParsing="false" onAction="#goToReturnScene" text="Registrar devolução" />
-                  <MenuItem mnemonicParsing="false" text="Listar" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToCheckOutListViewScene" text="Listar" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Reservas">

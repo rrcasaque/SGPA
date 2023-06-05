@@ -33,7 +33,7 @@ public class SqlitePartItemDAO implements PartItemDAO {
         Set<PartItem> foundParts = new HashSet<>();
         String sql = "SELECT * \n" +
                      "FROM part_item pi JOIN part p ON pi.part_id = p.id\n" +
-                     "WHERE p.description LIKE '%"+type+"%'";
+                     "WHERE p.part_type LIKE '%"+type+"%'";
         try(PreparedStatement ps = ConnectionFactory.getPreparedStatement(sql)){
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
@@ -41,10 +41,10 @@ public class SqlitePartItemDAO implements PartItemDAO {
                 StatusPart status = StatusPart.strToEnum(rs.getString("status"));
                 String observation = rs.getString("observation");
                 int part_id = rs.getInt("part_id");
-                String description = rs.getString("description");
+                String part_type = rs.getString("part_type");
                 int max_days_for_student = rs.getInt("max_days_for_student");
                 int max_days_for_professor = rs.getInt("max_days_for_professor");
-                Part part = new Part(part_id, description, max_days_for_student, max_days_for_professor);
+                Part part = new Part(part_id, part_type, max_days_for_student, max_days_for_professor);
                 PartItem partItem = new PartItem(patrimonial_id,status,observation, part);
                 foundParts.add(partItem);
             }
@@ -70,10 +70,10 @@ public class SqlitePartItemDAO implements PartItemDAO {
                 StatusPart status = StatusPart.strToEnum(rs.getString("status"));
                 String observation = rs.getString("observation");
                 int part_id = rs.getInt("part_id");
-                String description = rs.getString("description");
+                String part_type = rs.getString("part_type");
                 int max_days_for_student = rs.getInt("max_days_for_student");
                 int max_days_for_professor = rs.getInt("max_days_for_professor");
-                Part part = new Part(part_id, description, max_days_for_student, max_days_for_professor);
+                Part part = new Part(part_id, part_type, max_days_for_student, max_days_for_professor);
                 return Optional.of(new PartItem(patrimonialId,status,observation, part));
             }
         }

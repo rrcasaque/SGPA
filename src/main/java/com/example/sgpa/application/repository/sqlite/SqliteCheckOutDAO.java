@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class SqliteCheckOutDAO implements CheckOutDAO {
+    CheckedOutItemDAO checkedOutItemDAO = new SqliteCheckedOutItemDAO();
     @Override
     public Integer create(Checkout checkout) {
         String sql = "INSERT INTO checkout(technician_id, user_id) VALUES(?,?);";
@@ -31,7 +32,6 @@ public class SqliteCheckOutDAO implements CheckOutDAO {
     public Optional<Checkout> findOne(Integer checkOutId) {
         Checkout checkout = getEmptyCheckout(checkOutId).orElse(null);
         if (checkout == null) return Optional.empty();
-        CheckedOutItemDAO checkedOutItemDAO = new SqliteCheckedOutItemDAO();
         List<CheckedOutItem> relatedCheckedOutItems = checkedOutItemDAO.findByCheckOutId(checkOutId);
         relatedCheckedOutItems.forEach(item -> item.setRelatedCheckout(checkout));
         checkout.addCheckedOutItems(relatedCheckedOutItems);
@@ -40,6 +40,7 @@ public class SqliteCheckOutDAO implements CheckOutDAO {
 
     @Override
     public List<Checkout> findAll() {
+
         return null;
     }
 
