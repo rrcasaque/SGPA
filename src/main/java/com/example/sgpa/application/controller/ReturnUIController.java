@@ -12,6 +12,7 @@ import com.example.sgpa.domain.usecases.user.CheckForUserPendingIssuesUseCase;
 import com.example.sgpa.domain.usecases.user.UserDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -31,6 +32,8 @@ public class ReturnUIController {
     private final PartItemDAO partItemDAO =  new SqlitePartItemDAO();
     private final CheckedOutItemDAO checkedOutItemDAO = new SqliteCheckedOutItemDAO();
     private final EventDAO eventDAO = new SqliteEventDAO();
+    ReturnPartItemUseCase returnPartItemUseCase = new ReturnPartItemUseCase(checkedOutItemDAO,partItemDAO, eventDAO, userDAO);
+
     @FXML
     void backToPreviousScene(ActionEvent event) throws IOException {
         WindowLoader.setRoot("MainUI.fxml");
@@ -38,8 +41,15 @@ public class ReturnUIController {
     @FXML
     void conclude(ActionEvent event) {
         if (!txtPatrimonialId.getText().isEmpty()){
-            ReturnPartItemUseCase returnPartItemUseCase = new ReturnPartItemUseCase(checkedOutItemDAO,partItemDAO, eventDAO, userDAO);
-            returnPartItemUseCase.returnPartItem(Integer.parseInt(txtPatrimonialId.getText()));
+            try {
+                returnPartItemUseCase.returnPartItem(Integer.parseInt(txtPatrimonialId.getText()));
+                lblReturnedPartItem.setText("Peça de patrimônio nº "+txtPatrimonialId.getText()+" devolvida com sucesso!");
+                txtPatrimonialId.clear();
+            }catch(Exception e){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
+            }
         }
     }
 }

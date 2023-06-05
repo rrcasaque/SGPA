@@ -55,7 +55,7 @@ public class CheckOutViewUIController {
     }
     private void loadCheckOutsList() {
         checkOutList.clear();
-//        checkOutList.addAll(checkOutDAO.findAll());
+        checkOutList.addAll(checkOutDAO.findAll());
     }
     private void bindTableColumnsToProperties(){
         tcUserId.setCellValueFactory(new PropertyValueFactory<>("userId"));
@@ -76,7 +76,10 @@ public class CheckOutViewUIController {
     }
     @FXML
     void seeCheckOutItems(ActionEvent event) {
-
+        Checkout checkout = tvCheckouts.getSelectionModel().getSelectedItem();
+        if (checkout != null){
+            checkedOutItemsList.clear();
+            checkedOutItemsList.addAll(checkout.getCheckedOutItems());
+        }
     }
-
 }

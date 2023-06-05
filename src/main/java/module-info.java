@@ -6,6 +6,7 @@ module SGPA{
     opens com.example.sgpa.application.view to javafx.fxml;
     opens com.example.sgpa.application.controller to javafx.fxml;
     opens com.example.sgpa.domain.entities.part to javafx.base;
+    opens com.example.sgpa.domain.entities.checkout to javafx.base;
     exports com.example.sgpa.application.view;
     exports com.example.sgpa.application.controller;
 }

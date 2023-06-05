@@ -10,11 +10,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class SqliteCheckOutDAO implements CheckOutDAO {
     CheckedOutItemDAO checkedOutItemDAO = new SqliteCheckedOutItemDAO();
+    UserDAO userDAO = new SqliteUserDAO();
     @Override
     public Integer create(Checkout checkout) {
         String sql = "INSERT INTO checkout(technician_id, user_id, checkout_date) VALUES(?,?,?);";
@@ -42,8 +44,24 @@ public class SqliteCheckOutDAO implements CheckOutDAO {
 
     @Override
     public List<Checkout> findAll() {
-
-        return null;
+        List<Checkout> checkOuts = new ArrayList<>();
+        String sql = "select * from checkout";
+        try(PreparedStatement ps = ConnectionFactory.getPreparedStatement(sql)){
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                int checkOutId = rs.getInt("checkout_id");
+                Checkout checkout = getEmptyCheckout(checkOutId).orElseThrow();
+                List<CheckedOutItem> relatedCheckedOutItems = checkedOutItemDAO.findByCheckOutId(checkOutId);
+                relatedCheckedOutItems.forEach(item -> item.setRelatedCheckout(checkout));
+                checkout.addCheckedOutItems(relatedCheckedOutItems);
+                checkOuts.add(checkout);
+            }
+            return checkOuts;
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return checkOuts;
     }
 
     @Override
@@ -69,11 +87,11 @@ public class SqliteCheckOutDAO implements CheckOutDAO {
                 int user_id = rs.getInt("user_id");
                 User user = userDAO.findOne(user_id).orElseThrow();
                 int technician_id= rs.getInt("technician_id");
-                LocalDateTime checkoutDateTime =LocalDateTime.parse(rs.getString("checkout_date"));
                 User technician = userDAO.findOne(technician_id).orElseThrow();
 //                int reservation_id = rs.getInt("reservation_id");
 //                reservation = reservationDAO.findOne(reservation_id).orElse(null);
 //                checkOut = new Checkout(checkOutId,user,technician,reservation);
+                LocalDateTime checkoutDateTime = LocalDateTime.parse(rs.getString("checkout_date"));
                 checkOut = new Checkout(checkOutId,user,technician,null,checkoutDateTime);
                 return Optional.of(checkOut);
             }
