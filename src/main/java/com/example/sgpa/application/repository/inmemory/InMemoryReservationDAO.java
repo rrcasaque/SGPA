@@ -40,9 +40,5 @@ public class InMemoryReservationDAO implements ReservationDAO {
         return reservationDB.remove(reservation.getReservationId(), reservation);
     }
 
-    @Override
-    public void createReservedItem(ReservedItem reservedItem) {
-        reservedItemDB.add(reservedItem);
-    }
 
 }

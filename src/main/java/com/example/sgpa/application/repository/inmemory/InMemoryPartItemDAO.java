@@ -37,6 +37,11 @@ public class InMemoryPartItemDAO implements PartItemDAO {
     }
 
     @Override
+    public List<PartItem> findByReservationId(Integer reservationId) {
+        return null;
+    }
+
+    @Override
     public Integer create(PartItem obj) {
         return null;
     }

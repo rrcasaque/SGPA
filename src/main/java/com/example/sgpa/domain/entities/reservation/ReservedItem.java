@@ -13,6 +13,21 @@ public class ReservedItem {
         this.relatedReservation = relatedReservation;
     }
 
+    public ReservedItem(PartItem itemPart) {
+        this.itemPart = itemPart;
+    }
+
+    public PartItem getItemPart() {
+        return itemPart;
+    }
+
+    public Reservation getRelatedReservation() {
+        return relatedReservation;
+    }
+    public void setRelatedReservation(Reservation relatedReservation) {
+        this.relatedReservation = relatedReservation;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

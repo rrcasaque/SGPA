@@ -15,6 +15,7 @@ import com.example.sgpa.domain.usecases.user.CheckForUserPendingIssuesUseCase;
 import com.example.sgpa.domain.usecases.user.UserDAO;
 import com.example.sgpa.domain.usecases.utils.EntityNotFoundException;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Set;
@@ -23,7 +24,9 @@ public class CreateReservationUseCase {
     private final PartItemDAO itemPartDAO;
     private final UserDAO userDAO;
     private final ReservationDAO reservationDAO;
+    private final ReservedItemDAO reservedItemDAO;
     private final EventDAO eventDAO;
+
     private final CheckForUserPendingIssuesUseCase checkForUserPendingIssuesUseCase;
     private final CheckForPartItemAvailabilityUseCase checkForPartItemAvailabilityUseCase;
     public CreateReservationUseCase(UserDAO userDAO,
@@ -31,28 +34,33 @@ public class CreateReservationUseCase {
                           ReservationDAO reservationDAO,
                           EventDAO eventDAO,
                           CheckForUserPendingIssuesUseCase checkForUserPendingIssuesUseCase,
-                          CheckForPartItemAvailabilityUseCase checkForPartItemAvailabilityUseCase){
+                          CheckForPartItemAvailabilityUseCase checkForPartItemAvailabilityUseCase,
+                                    ReservedItemDAO reservedItemDAO){
         this.userDAO = userDAO;
         this.itemPartDAO =itemPartDAO;
         this.reservationDAO = reservationDAO;
         this.eventDAO = eventDAO;
         this.checkForUserPendingIssuesUseCase = checkForUserPendingIssuesUseCase;
         this.checkForPartItemAvailabilityUseCase = checkForPartItemAvailabilityUseCase;
+        this.reservedItemDAO = reservedItemDAO;
     }
-    public Reservation createReservation(int userId, Set<PartItem> itemParts, LocalDateTime dateTimeScheduledForCheckout){
-        Optional<User> user = userDAO.findOne(userId);
-        if (user.isEmpty())
-            throw new EntityNotFoundException("User not found");
+    public Reservation createReservation(int userId, Set<PartItem> partItems, LocalDate dateScheduledForCheckout){
+        if (userId == 0 || partItems.isEmpty() || dateScheduledForCheckout == null)
+            throw new IllegalArgumentException("User, parts and check out date must be informed.");
+        if (dateScheduledForCheckout.isBefore(LocalDate.now()))
+            throw new IllegalArgumentException("Invalid check out date.");
+        User user = userDAO.findOne(userId).orElseThrow(()-> new EntityNotFoundException("User not found"));
         checkForUserPendingIssuesUseCase.checkForUserPendingIssues(userId);
-        checkForPartItemAvailabilityUseCase.checkForAvailabilityOfTheParts(itemParts);
+        checkForPartItemAvailabilityUseCase.checkForAvailabilityOfTheParts(partItems);
         User loggedTechnician = Session.getLoggedTechnician();
-        Reservation reservation = new Reservation(dateTimeScheduledForCheckout, user.get(), loggedTechnician);
+
+        Reservation reservation = new Reservation(dateScheduledForCheckout, user, loggedTechnician);
         int id = reservationDAO.create(reservation);
         reservation.setReservationId(id);
-        itemParts.forEach(itemPart -> itemPart.setStatus(StatusPart.RESERVED));
-        itemParts.forEach(itemPartDAO::update);
-        itemParts.forEach(itemPart -> reservationDAO.createReservedItem(new ReservedItem(itemPart, reservation)));
-        itemParts.forEach(itemPart -> eventDAO.create(new Event(EventType.RESERVATION, user.get(), loggedTechnician, itemPart)));
+        partItems.forEach(partItem -> partItem.setStatus(StatusPart.RESERVED));
+        partItems.forEach(itemPartDAO::update);
+        partItems.forEach(partItem -> reservedItemDAO.create(new ReservedItem(partItem, reservation)));
+        partItems.forEach(partItem -> eventDAO.create(new Event(EventType.RESERVATION, user, loggedTechnician, partItem)));
         return reservation;
     }
 }

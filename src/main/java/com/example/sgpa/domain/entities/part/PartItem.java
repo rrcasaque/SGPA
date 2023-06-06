@@ -72,4 +72,8 @@ public class PartItem {
     public int hashCode() {
         return Objects.hash(patrimonialId);
     }
+
+    public boolean isAvailable() {
+        return status == StatusPart.AVAILABLE;
+    }
 }

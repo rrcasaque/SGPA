@@ -99,12 +99,12 @@ public class Main {
         generateReportByPartUseCase = new GenerateReportByPartUseCase(inMemoryEventDAO,inMemoryPartDAO);
         generateReportByUserUseCase = new GenerateReportByUserUseCase(inMemoryEventDAO,inMemoryUserDAO);
         generateReportUseCase = new GenerateReportUseCase(inMemoryEventDAO);        
-        createReservationUseCase = new CreateReservationUseCase(
-                inMemoryUserDAO,
-                inMemoryPartItemDAO,
-                inMemoryReservationDAO,
-                inMemoryEventDAO,
-                checkForUserPendingIssuesUseCase,
-                checkForPartItemAvailabilityUseCase);
+//        createReservationUseCase = new CreateReservationUseCase(
+//                inMemoryUserDAO,
+//                inMemoryPartItemDAO,
+//                inMemoryReservationDAO,
+//                inMemoryEventDAO,
+//                checkForUserPendingIssuesUseCase,
+//                checkForPartItemAvailabilityUseCase);
     }
 }

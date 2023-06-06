@@ -6,10 +6,7 @@ import com.example.sgpa.domain.usecases.part.PartItemDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 public class SqlitePartItemDAO implements PartItemDAO {
     @Override
@@ -53,6 +50,25 @@ public class SqlitePartItemDAO implements PartItemDAO {
             e.printStackTrace();
         }
         return foundParts;
+    }
+
+    public List<PartItem> findByReservationId(Integer reservationId) {
+        List<PartItem> parts = new ArrayList<>();
+        String sql = "SELECT * from reservation_item" +
+                "where reservation_id = ?;";
+        try(PreparedStatement ps = ConnectionFactory.getPreparedStatement(sql)){
+            ps.setInt(1, reservationId);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                int part_item_id = rs.getInt("part_item_id");
+                PartItem partItem = findOne(part_item_id).orElseThrow();
+                parts.add(partItem);
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return parts;
     }
     @Override
     public Integer create(PartItem obj) {

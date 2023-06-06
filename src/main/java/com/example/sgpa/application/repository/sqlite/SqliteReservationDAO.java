@@ -1,25 +1,69 @@
 package com.example.sgpa.application.repository.sqlite;
 
+import com.example.sgpa.domain.entities.Session.Session;
+import com.example.sgpa.domain.entities.part.PartItem;
 import com.example.sgpa.domain.entities.reservation.Reservation;
-import com.example.sgpa.domain.entities.reservation.ReservedItem;
+import com.example.sgpa.domain.entities.user.User;
+import com.example.sgpa.domain.usecases.part.PartItemDAO;
 import com.example.sgpa.domain.usecases.reservation.ReservationDAO;
+import com.example.sgpa.domain.usecases.user.UserDAO;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public class SqliteReservationDAO implements ReservationDAO {
+    PartItemDAO partItemDAO = new SqlitePartItemDAO();
+    UserDAO userDAO = new SqliteUserDAO();
     @Override
-    public void createReservedItem(ReservedItem reservedItem) {
-
+    public Integer create(Reservation reservation) {
+        String sql = "INSERT INTO reservation(date_time_scheduled_for_checkout, user_id, technician_id) VALUES(?,?,?);";
+        try(PreparedStatement ps = ConnectionFactory.getPreparedStatement(sql)){
+            ps.setString(1, reservation.getDateScheduledForCheckout().toString());
+            ps.setInt(2,reservation.getRequester().getInstitutionalId());
+            ps.setInt(3,Session.getLoggedTechnician().getInstitutionalId());
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            return  rs.getInt(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     @Override
-    public Integer create(Reservation obj) {
-        return null;
+    public Optional<Reservation> findOne(Integer reservationId) {
+        Reservation reservation = getEmptyReservation(reservationId).orElse(null);
+        if (reservation == null) return Optional.empty();
+        Set<PartItem> partItems = new HashSet<>(partItemDAO.findByReservationId(reservationId));
+        reservation.addItems(partItems);
+        return Optional.of(reservation);
     }
 
-    @Override
-    public Optional<Reservation> findOne(Integer type) {
+    private Optional<Reservation> getEmptyReservation(Integer reservationId) {
+        Reservation reservation;
+        String sql = "select * from reservation where reservation_id = ?;";
+        try(PreparedStatement ps = ConnectionFactory.getPreparedStatement(sql)){
+            ps.setInt(1, reservationId);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                int user_id = rs.getInt("user_id");
+                User user = userDAO.findOne(user_id).orElseThrow();
+                int technician_id= rs.getInt("technician_id");
+                User technician = userDAO.findOne(technician_id).orElseThrow();
+                LocalDate checkoutDate = LocalDate.parse(rs.getString("date_time_scheduled_for_checkout"));
+                reservation = new Reservation(reservationId, checkoutDate, user,  technician);
+                return Optional.of(reservation);
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
         return Optional.empty();
     }
 

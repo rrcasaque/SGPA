@@ -5,5 +5,4 @@ import com.example.sgpa.domain.entities.reservation.ReservedItem;
 import com.example.sgpa.domain.usecases.utils.DAO;
 
 public interface ReservationDAO extends DAO<Reservation, Integer> {
-    void createReservedItem(ReservedItem reservedItem);    
 }
