@@ -76,4 +76,7 @@ public class PartItem {
     public boolean isAvailable() {
         return status == StatusPart.AVAILABLE;
     }
+    public boolean isNotAvailable() {
+        return status != StatusPart.AVAILABLE;
+    }
 }

@@ -34,7 +34,7 @@
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#goToNewReservationScene" text="Criar reserva" />
                   <MenuItem mnemonicParsing="false" text="Cancelar reserva" />
-                  <MenuItem mnemonicParsing="false" text="Listar" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToReservationsListViewScene" text="Listar" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Relatórios">

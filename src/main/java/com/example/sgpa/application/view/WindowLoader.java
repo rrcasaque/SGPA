@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+
 public class WindowLoader extends Application {
     private static Scene scene;
     private static Object controller;

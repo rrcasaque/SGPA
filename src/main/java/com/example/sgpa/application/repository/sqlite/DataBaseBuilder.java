@@ -77,6 +77,7 @@ public class DataBaseBuilder {
         "        date_time_scheduled_for_checkout TEXT NOT NULL,\n"+
         "        user_id INTEGER NOT NULL,\n"+
         "        technician_id INTEGER NOT NULL,\n"+
+        "        status TEXT NOT NULL,\n"+
         "        FOREIGN KEY (user_id) REFERENCES user(institutional_id),\n"+
         "        FOREIGN KEY (technician_id) REFERENCES user(institutional_id)\n"+
         ");";

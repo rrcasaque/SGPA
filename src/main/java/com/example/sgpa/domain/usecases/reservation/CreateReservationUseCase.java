@@ -2,6 +2,7 @@ package com.example.sgpa.domain.usecases.reservation;
 
 import com.example.sgpa.domain.entities.Session.Session;
 import com.example.sgpa.domain.entities.historical.Event;
+import com.example.sgpa.domain.entities.reservation.ReservationStatus;
 import com.example.sgpa.domain.usecases.historical.EventDAO;
 import com.example.sgpa.domain.entities.historical.EventType;
 import com.example.sgpa.domain.entities.part.PartItem;
@@ -16,8 +17,6 @@ import com.example.sgpa.domain.usecases.user.UserDAO;
 import com.example.sgpa.domain.usecases.utils.EntityNotFoundException;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Optional;
 import java.util.Set;
 
 public class CreateReservationUseCase {
@@ -44,7 +43,7 @@ public class CreateReservationUseCase {
         this.checkForPartItemAvailabilityUseCase = checkForPartItemAvailabilityUseCase;
         this.reservedItemDAO = reservedItemDAO;
     }
-    public Reservation createReservation(int userId, Set<PartItem> partItems, LocalDate dateScheduledForCheckout){
+    public void createReservation(int userId, Set<PartItem> partItems, LocalDate dateScheduledForCheckout) throws Exception {
         if (userId == 0 || partItems.isEmpty() || dateScheduledForCheckout == null)
             throw new IllegalArgumentException("User, parts and check out date must be informed.");
         if (dateScheduledForCheckout.isBefore(LocalDate.now()))
@@ -53,14 +52,12 @@ public class CreateReservationUseCase {
         checkForUserPendingIssuesUseCase.checkForUserPendingIssues(userId);
         checkForPartItemAvailabilityUseCase.checkForAvailabilityOfTheParts(partItems);
         User loggedTechnician = Session.getLoggedTechnician();
-
-        Reservation reservation = new Reservation(dateScheduledForCheckout, user, loggedTechnician);
+        Reservation reservation = new Reservation(dateScheduledForCheckout, user, loggedTechnician, ReservationStatus.WAITING_CHECKOUT);
         int id = reservationDAO.create(reservation);
         reservation.setReservationId(id);
         partItems.forEach(partItem -> partItem.setStatus(StatusPart.RESERVED));
         partItems.forEach(itemPartDAO::update);
         partItems.forEach(partItem -> reservedItemDAO.create(new ReservedItem(partItem, reservation)));
         partItems.forEach(partItem -> eventDAO.create(new Event(EventType.RESERVATION, user, loggedTechnician, partItem)));
-        return reservation;
     }
 }

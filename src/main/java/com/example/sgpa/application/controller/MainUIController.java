@@ -22,9 +22,16 @@ public class MainUIController {
     public void goToCheckOutListViewScene(ActionEvent actionEvent) throws IOException {
         WindowLoader.setRoot("CheckOutViewUI.fxml");
     }
-
+    @FXML
     public void goToNewReservationScene(ActionEvent actionEvent) throws IOException {
         WindowLoader.setRoot("NewReservationUI.fxml");
-
+    }
+    @FXML
+    public void ggoToReservationsListViewScene(ActionEvent actionEvent) throws IOException {
+        WindowLoader.setRoot("NewReservationUI.fxml");
+    }
+    @FXML
+    public void goToReservationsListViewScene(ActionEvent actionEvent) throws IOException {
+        WindowLoader.setRoot("ReservationViewUI.fxml");
     }
 }

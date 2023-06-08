@@ -29,6 +29,7 @@ CREATE TABLE reservation(
     date_time_scheduled_for_checkout TEXT NOT NULL,
     user_id INTEGER NOT NULL,
     technician_id INTEGER NOT NULL,
+	status TEXT NOT NULL,
 	FOREIGN KEY (user_id) REFERENCES user(institutional_id),
 	FOREIGN KEY (technician_id) REFERENCES user(institutional_id)	 
 );

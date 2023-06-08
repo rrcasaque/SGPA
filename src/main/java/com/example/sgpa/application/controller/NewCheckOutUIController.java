@@ -89,15 +89,13 @@ public class NewCheckOutUIController {
     public void findUser(ActionEvent actionEvent) {
         try{
             selectedUser = userDAO.findOne(Integer.valueOf(txtUserId.getText())).orElseThrow();
-            lblSelectedUser.setText("Usuário: "+ selectedUser.getName() + " Tipo: " + selectedUser.getUserType().toString());
+            lblSelectedUser.setText("Usuário: "+ selectedUser.getName() + "            Tipo: " + selectedUser.getUserType().toString());
         }catch(Exception e){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("User not found.");
-            alert.setHeaderText("User not found. Try other id or cancel the checkout");
+            alert.setTitle("Error loading user.");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
-
     }
     public void findParts(ActionEvent actionEvent) {
         searchResult.clear();
@@ -112,8 +110,7 @@ public class NewCheckOutUIController {
             searchResult.addAll(found);
         }catch(Exception e){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Parts not found.");
-            alert.setHeaderText("Error");
+            alert.setTitle("Error loading parts.");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
@@ -133,12 +130,18 @@ public class NewCheckOutUIController {
     }
     public void createCheckOut(ActionEvent actionEvent) {
         Set<PartItem> partItemSet = new HashSet<>(tvSelectedParts.getItems());
-        if (selectedUser != null && !partItemSet.isEmpty() ) {
+        try{
+            if (selectedUser == null || partItemSet.isEmpty() )
+                throw  new RuntimeException("User and/or items must be not null or empty.");
             createCheckOutUseCase.createCheckout(selectedUser.getInstitutionalId(), partItemSet);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Empréstimo concluído com sucesso.");
+            alert.setContentText("Empréstimo registrado com sucesso.");
             alert.showAndWait();
             clearFields();
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
         }
     }
 

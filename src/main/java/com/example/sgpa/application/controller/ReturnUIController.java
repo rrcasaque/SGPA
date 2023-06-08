@@ -43,7 +43,9 @@ public class ReturnUIController {
         if (!txtPatrimonialId.getText().isEmpty()){
             try {
                 returnPartItemUseCase.returnPartItem(Integer.parseInt(txtPatrimonialId.getText()));
-                lblReturnedPartItem.setText("Peça de patrimônio nº "+txtPatrimonialId.getText()+" devolvida com sucesso!");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("Peça de patrimônio nº "+txtPatrimonialId.getText()+" devolvida com sucesso!");
+                alert.showAndWait();
                 txtPatrimonialId.clear();
             }catch(Exception e){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);

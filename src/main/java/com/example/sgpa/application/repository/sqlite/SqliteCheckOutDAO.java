@@ -16,14 +16,14 @@ import java.util.Optional;
 
 public class SqliteCheckOutDAO implements CheckOutDAO {
     CheckedOutItemDAO checkedOutItemDAO = new SqliteCheckedOutItemDAO();
-    UserDAO userDAO = new SqliteUserDAO();
     @Override
     public Integer create(Checkout checkout) {
-        String sql = "INSERT INTO checkout(technician_id, user_id, checkout_date) VALUES(?,?,?);";
+        String sql = "INSERT INTO checkout(technician_id, user_id, checkout_date, reservation_id) VALUES(?,?,?,?);";
         try(PreparedStatement ps = ConnectionFactory.getPreparedStatement(sql)){
             ps.setInt(1, Session.getLoggedTechnician().getInstitutionalId());
             ps.setInt(2,checkout.getUser().getInstitutionalId());
             ps.setString(3,checkout.getCheckOutDateTime().toString());
+            ps.setInt(4, checkout.getAssociatedReservationId());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             return  rs.getInt(1);
@@ -77,8 +77,6 @@ public class SqliteCheckOutDAO implements CheckOutDAO {
     public Optional<Checkout> getEmptyCheckout(int checkOutId){
         Checkout checkOut;
         UserDAO userDAO = new SqliteUserDAO();
-//        ReservationDAO reservationDAO = new SqliteReservationDAO();
-//        Reservation reservation;
         String sql = "select * from checkout where checkout_id = ?;";
         try(PreparedStatement ps = ConnectionFactory.getPreparedStatement(sql)){
             ps.setInt(1, checkOutId);
@@ -88,11 +86,9 @@ public class SqliteCheckOutDAO implements CheckOutDAO {
                 User user = userDAO.findOne(user_id).orElseThrow();
                 int technician_id= rs.getInt("technician_id");
                 User technician = userDAO.findOne(technician_id).orElseThrow();
-//                int reservation_id = rs.getInt("reservation_id");
-//                reservation = reservationDAO.findOne(reservation_id).orElse(null);
-//                checkOut = new Checkout(checkOutId,user,technician,reservation);
                 LocalDateTime checkoutDateTime = LocalDateTime.parse(rs.getString("checkout_date"));
-                checkOut = new Checkout(checkOutId,user,technician,null,checkoutDateTime);
+                int associatedReservationId = rs.getInt("reservation_id");
+                checkOut = new Checkout(checkOutId,user,technician,associatedReservationId,checkoutDateTime);
                 return Optional.of(checkOut);
             }
         }

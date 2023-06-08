@@ -1,5 +1,9 @@
 package com.example.sgpa.domain.usecases.part;
 import com.example.sgpa.domain.entities.part.PartItem;
+import com.example.sgpa.domain.entities.reservation.Reservation;
+import com.example.sgpa.domain.entities.user.User;
+
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -8,9 +12,9 @@ public class CheckForPartItemAvailabilityUseCase {
     public CheckForPartItemAvailabilityUseCase(PartItemDAO itemPartDAO) {
         this.itemPartDAO = itemPartDAO;
     }
-    public void checkForAvailabilityOfTheParts(Set<PartItem> partItems) {
+    public void checkForAvailabilityOfTheParts(Set<PartItem> partItems) throws Exception {
         if (partItems != null && !partItems.isEmpty()) {
-            Set<PartItem> blockedItemParts = partItems.stream().filter(PartItem::isAvailable).collect(Collectors.toSet());
+            Set<PartItem> blockedItemParts = partItems.stream().filter(PartItem::isNotAvailable).collect(Collectors.toSet());
             if (!blockedItemParts.isEmpty()) {
                 StringBuilder message = new StringBuilder("The following parts are not Available for check out or reservation:\n");
                 blockedItemParts.forEach(itemPart -> message
@@ -21,7 +25,7 @@ public class CheckForPartItemAvailabilityUseCase {
                         .append(". Status: ")
                         .append(itemPart.getStatus().toString())
                         .append("\n"));
-                throw new RuntimeException(message.toString());
+                throw new Exception(message.toString());
             }
         }
     }

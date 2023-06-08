@@ -17,7 +17,7 @@ public class Checkout {
     private User user;
     private LocalDateTime checkOutDateTime;
     private final Set<CheckedOutItem> checkedOutItems = new HashSet<>();
-    private Reservation associatedReservation;
+    private int associatedReservationId;
     public Checkout(){}
     public Checkout(User user, Technician technician){
         this.user = user;
@@ -28,17 +28,18 @@ public class Checkout {
         this.technician = technician;
         this.checkOutId  = checkOutId;
     }
-    public Checkout(int checkOutId, User user, User technician, Reservation associatedReservation, LocalDateTime checkOutDateTime){
+    public Checkout(int checkOutId, User user, User technician, int associatedReservationId, LocalDateTime checkOutDateTime){
         this.user = user;
         this.technician = technician;
         this.checkOutId  = checkOutId;
-        this.associatedReservation =associatedReservation;
+        this.associatedReservationId = associatedReservationId;
         this.checkOutDateTime = checkOutDateTime;
     }
     public Checkout(Reservation reservation){
         this.user = reservation.getRequester();
         this.technician = reservation.getTechnician();
-        this.associatedReservation = reservation;
+        this.associatedReservationId = reservation.getReservationId();
+        this.checkOutDateTime = LocalDateTime.now();
         reservation.getItems().forEach(itemPart -> checkedOutItems.add(new CheckedOutItem(itemPart, this)));
     }
     public Checkout(Set<PartItem> parts, User user, User technician){
@@ -50,8 +51,8 @@ public class Checkout {
     public Set<CheckedOutItem> getCheckedOutItems() {
         return checkedOutItems;
     }
-    public Reservation getAssociatedReservation() {
-        return associatedReservation;
+    public Integer getAssociatedReservationId() {
+        return associatedReservationId;
     }
     public int getCheckOutId() {
         return checkOutId;

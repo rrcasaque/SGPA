@@ -16,16 +16,18 @@ public class Reservation {
     private LocalDate dateScheduledForCheckout;
     private User requester;
     private User technician;
+    private ReservationStatus status;
     private final Set<PartItem> items = new HashSet<>();
     public Reservation(LocalDate dateScheduledForCheckout,
-                       User requester, User technician) {
+                       User requester, User technician, ReservationStatus status) {
         this.dateScheduledForCheckout = dateScheduledForCheckout;
         this.requester = requester;
         this.technician = technician;
+        this.status=status;
     }
     public Reservation(int id, LocalDate dateScheduledForCheckout,
-                       User requester, User technician) {
-        this(dateScheduledForCheckout, requester,  technician);
+                       User requester, User technician, ReservationStatus status) {
+        this(dateScheduledForCheckout, requester,  technician, status);
         this.reservationId = id;
     }
     public void setDateScheduledForCheckout(LocalDate dateScheduledForCheckout) {
@@ -53,11 +55,22 @@ public class Reservation {
     public Set<PartItem> getItems() {
         return items;
     }
+    public ReservationStatus getStatus() {return status;}
+    public void setStatus(ReservationStatus status) {this.status = status;}
     public void addItem(PartItem item){
         items.add(item);
     }
-    public void addItems(Set<PartItem> items){
+    public void addItems(List<PartItem> items){
         this.items.addAll(items);
+    }
+    public Integer getUserId(){
+        return requester.getInstitutionalId();
+    }
+    public String getScheduledCheckOutDate(){
+        return dateScheduledForCheckout.toString();
+    }
+    public boolean isExpired(){
+        return dateScheduledForCheckout.isBefore(LocalDate.now());
     }
     public void removeItem(PartItem item){
         items.remove(item);
@@ -75,5 +88,9 @@ public class Reservation {
     @Override
     public int hashCode() {
         return Objects.hash(reservationId);
+    }
+
+    public boolean isClosed() {
+        return status != ReservationStatus.WAITING_CHECKOUT;
     }
 }

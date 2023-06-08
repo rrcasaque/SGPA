@@ -54,7 +54,7 @@ public class SqlitePartItemDAO implements PartItemDAO {
 
     public List<PartItem> findByReservationId(Integer reservationId) {
         List<PartItem> parts = new ArrayList<>();
-        String sql = "SELECT * from reservation_item" +
+        String sql = "SELECT * from reservation_item " +
                 "where reservation_id = ?;";
         try(PreparedStatement ps = ConnectionFactory.getPreparedStatement(sql)){
             ps.setInt(1, reservationId);
