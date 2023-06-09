@@ -39,9 +39,9 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Relatórios">
               <items>
-                <MenuItem mnemonicParsing="false" text="Histórico por peça" />
-                  <MenuItem mnemonicParsing="false" text="Histórico por usuário" />
-                  <MenuItem mnemonicParsing="false" text="Algum outo que n lembro" />
+                <MenuItem mnemonicParsing="false" text="Histórico por peça" onAction="#goToReportByPartScene"/>
+                  <MenuItem mnemonicParsing="false" text="Histórico por usuário" onAction="#goToReportByUserScene" />
+                  <MenuItem mnemonicParsing="false" text="Geral"  onAction="#goToGeneralReportScene"/>
               </items>
             </Menu>
         </menus>

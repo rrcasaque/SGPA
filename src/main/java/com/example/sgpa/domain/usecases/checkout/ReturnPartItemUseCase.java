@@ -31,6 +31,7 @@ public class ReturnPartItemUseCase {
         CheckedOutItem checkedOutItem = checkedOutItemDAO.findOpenByPartItemId(patrimonialId)
                 .orElseThrow(()->new EntityNotFoundException("There is no checked out item with the informed patrimonial identification"));
         checkedOutItem.setReturnDate(LocalDateTime.now());
+        checkedOutItem.setReceiver(Session.getLoggedTechnician());
         checkedOutItem.getPartItem().setStatus(StatusPart.AVAILABLE);
         checkedOutItemDAO.update(checkedOutItem);
         itemPartDAO.update(checkedOutItem.getPartItem());

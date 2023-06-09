@@ -34,4 +34,22 @@ public class MainUIController {
     public void goToReservationsListViewScene(ActionEvent actionEvent) throws IOException {
         WindowLoader.setRoot("ReservationViewUI.fxml");
     }
+    @FXML
+    public void goToReportByPartScene(ActionEvent actionEvent) throws IOException {
+        WindowLoader.setRoot("ReportUI.fxml");
+        ReportUIController controller = (ReportUIController) WindowLoader.getController();
+        controller.configMode(ReportUIMode.BY_PART);
+    }
+    @FXML
+    public void goToReportByUserScene(ActionEvent actionEvent) throws IOException {
+        WindowLoader.setRoot("ReportUI.fxml");
+        ReportUIController controller = (ReportUIController) WindowLoader.getController();
+        controller.configMode(ReportUIMode.BY_USER);
+    }
+    @FXML
+    public void goToGeneralReportScene(ActionEvent actionEvent) throws IOException {
+        WindowLoader.setRoot("ReportUI.fxml");
+        ReportUIController controller = (ReportUIController) WindowLoader.getController();
+        controller.configMode(ReportUIMode.GENERAL);
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.sgpa.domain.entities.checkout;
 
 import com.example.sgpa.domain.entities.part.PartItem;
+import com.example.sgpa.domain.entities.user.User;
 import com.example.sgpa.domain.entities.user.UserType;
 
 import java.time.LocalDate;
@@ -12,6 +13,7 @@ public class CheckedOutItem {
     private final PartItem partItem;
     private LocalDate dueDate;
     private LocalDateTime returnDate;
+    private User receiver;
     public CheckedOutItem(PartItem item, LocalDate dueDate){
         this.partItem = item;
         this.dueDate = dueDate;
@@ -61,6 +63,8 @@ public class CheckedOutItem {
     public void setRelatedCheckout(Checkout relatedCheckout) {
         this.relatedCheckout = relatedCheckout;
     }
+    public User getReceiver() {return receiver;}
+    public void setReceiver(User receiver) {this.receiver = receiver;}
     public boolean isLate(){
         return LocalDate.now().isAfter(dueDate) && returnDate == null;
     }

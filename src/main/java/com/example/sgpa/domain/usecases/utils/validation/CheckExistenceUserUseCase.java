@@ -13,9 +13,7 @@ public class CheckExistenceUserUseCase {
 		this.userDAO = userDAO;
 	}
 
-	public void check(User user, UserType usertype) {
-		Optional<User> requester = userDAO.findOneByIdAndType(usertype, user.getInstitutionalId());
-		if(requester.isEmpty())
-			throw new RuntimeException("user not found!");		
+	public void check(int userId) {
+		User requester = userDAO.findOne(userId).orElseThrow(()->new RuntimeException("user not found!"));
 	}
 }

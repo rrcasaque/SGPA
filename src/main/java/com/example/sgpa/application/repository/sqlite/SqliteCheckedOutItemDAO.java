@@ -6,6 +6,8 @@ import com.example.sgpa.domain.entities.part.PartItem;
 import com.example.sgpa.domain.usecases.checkout.CheckOutDAO;
 import com.example.sgpa.domain.usecases.checkout.CheckedOutItemDAO;
 import com.example.sgpa.domain.usecases.part.PartItemDAO;
+import com.example.sgpa.domain.usecases.user.UserDAO;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -61,10 +63,10 @@ public class SqliteCheckedOutItemDAO implements CheckedOutItemDAO {
         }
         return lateParts;
     }
-
     @Override
     public List<CheckedOutItem> findByCheckOutId(int checkOutId) {
         PartItemDAO partItemDAO = new SqlitePartItemDAO();
+        UserDAO userDAO = new SqliteUserDAO();
         List<CheckedOutItem> parts = new ArrayList<>();
         String sql = "SELECT * from checkout_item" +
                 " where checkout_id = ?;";
@@ -77,15 +79,50 @@ public class SqliteCheckedOutItemDAO implements CheckedOutItemDAO {
                 LocalDate due_date = LocalDate.parse(rs.getString("due_date"));
                 CheckedOutItem checkedOutItem = new CheckedOutItem(partItem,due_date,null);
                 String return_date = rs.getString("return_date");
-                if (return_date != null)
-                checkedOutItem.setReturnDate(LocalDateTime.parse(return_date));
+                if (return_date != null) checkedOutItem.setReturnDate(LocalDateTime.parse(return_date));
+                int receiver_id = rs.getInt("receiver_id");
+                if (receiver_id != 0) checkedOutItem.setReceiver(userDAO.findOne(receiver_id).orElseThrow());
                 parts.add(checkedOutItem);
             }
         }
-        catch (SQLException e){
+        catch (Exception e){
             e.printStackTrace();
         }
         return parts;
+    }
+
+    @Override
+    public List<CheckedOutItem> getReportByPart(int patrimonialId, LocalDateTime start, LocalDateTime end) {
+        PartItemDAO partItemDAO = new SqlitePartItemDAO();
+        UserDAO userDAO = new SqliteUserDAO();
+        List<CheckedOutItem> checkedOutItems = new ArrayList<>();
+        String sql = "SELECT * \n" +
+                "FROM (checkout_item ci JOIN checkout ci.checkout_id ON c.checkout_id ) \n" +
+                "WHERE ci. datetime(c.checkout_date) BETWEEN datetime(?) AND datetime(?);";
+        try(PreparedStatement ps = ConnectionFactory.getPreparedStatement(sql)){
+            ps.setString(1, start.toString());
+            ps.setString(2, end.toString());
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                int part_item_id = rs.getInt("part_item_id");
+                PartItem partItem = partItemDAO.findOne(part_item_id).orElseThrow();
+                LocalDate due_date = LocalDate.parse(rs.getString("due_date"));
+                CheckedOutItem checkedOutItem = new CheckedOutItem(partItem,due_date,null);
+                String return_date = rs.getString("return_date");
+                if (return_date != null) checkedOutItem.setReturnDate(LocalDateTime.parse(return_date));
+                int receiver_id = rs.getInt("receiver_id");
+                if (receiver_id != 0) checkedOutItem.setReceiver(userDAO.findOne(receiver_id).orElseThrow());
+                checkedOutItems.add(checkedOutItem);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return checkedOutItems;
+    }
+
+    @Override
+    public List<CheckedOutItem> getReportByUser(int userId, LocalDateTime start, LocalDateTime end) {
+        return null;
     }
 
     @Override
@@ -93,7 +130,7 @@ public class SqliteCheckedOutItemDAO implements CheckedOutItemDAO {
         CheckedOutItemKey checkedOutItemKey;
         String sql = "INSERT INTO checkout_item(checkout_id, part_item_id, due_date) VALUES(?,?,?);";
         try(PreparedStatement ps = ConnectionFactory.getPreparedStatement(sql)){
-            int patItemId =checkedOutItem.getPartItem().getPatrimonialId();
+            int patItemId = checkedOutItem.getPartItem().getPatrimonialId();
             int checkoutId = checkedOutItem.getRelatedCheckout().getCheckOutId();
             ps.setInt(1,checkoutId);
             ps.setInt(2,patItemId);
@@ -109,6 +146,7 @@ public class SqliteCheckedOutItemDAO implements CheckedOutItemDAO {
     public Optional<CheckedOutItem> findOne(CheckedOutItemKey key) {
         CheckOutDAO checkOutDAO = new SqliteCheckOutDAO();
         PartItemDAO partItemDAO = new SqlitePartItemDAO();
+        UserDAO userDAO = new SqliteUserDAO();
         String sql ="select * from checkout_item where checkout_id = ? and part_item_id= ?;";
         try(PreparedStatement ps = ConnectionFactory.getPreparedStatement(sql)) {
             ps.setInt(1, key.getCheckoutId());
@@ -121,6 +159,8 @@ public class SqliteCheckedOutItemDAO implements CheckedOutItemDAO {
                 CheckedOutItem checkedOutItem = new CheckedOutItem(partItem, checkout, dueDate);
                 String return_date = rs.getString("return_date");
                 if (return_date != null) checkedOutItem.setReturnDate(LocalDateTime.parse(return_date));
+                int receiver_id = rs.getInt("receiver_id");
+                if (receiver_id != 0) checkedOutItem.setReceiver(userDAO.findOne(receiver_id).orElseThrow());
                 return Optional.of(checkedOutItem);
             }
         } catch (SQLException e) {
@@ -128,27 +168,46 @@ public class SqliteCheckedOutItemDAO implements CheckedOutItemDAO {
         }
         return Optional.empty();
     }
-
     @Override
     public List<CheckedOutItem> findAll() {
-        return null;
+        PartItemDAO partItemDAO = new SqlitePartItemDAO();
+        UserDAO userDAO = new SqliteUserDAO();
+        List<CheckedOutItem> parts = new ArrayList<>();
+        String sql = "SELECT * from checkout_item;";
+        try(PreparedStatement ps = ConnectionFactory.getPreparedStatement(sql)){
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                int part_item_id = rs.getInt("part_item_id");
+                PartItem partItem = partItemDAO.findOne(part_item_id).orElseThrow();
+                LocalDate due_date = LocalDate.parse(rs.getString("due_date"));
+                CheckedOutItem checkedOutItem = new CheckedOutItem(partItem,due_date,null);
+                String return_date = rs.getString("return_date");
+                if (return_date != null) checkedOutItem.setReturnDate(LocalDateTime.parse(return_date));
+                int receiver_id = rs.getInt("receiver_id");
+                if (receiver_id != 0) checkedOutItem.setReceiver(userDAO.findOne(receiver_id).orElseThrow());
+                parts.add(checkedOutItem);
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return parts;
     }
-
     @Override
     public void update(CheckedOutItem checkedOutItem) {
         String sql ="UPDATE checkout_item \n" +
-                "SET  return_date = ?\n" +
+                "SET  return_date = ?, receiver_id = ?\n" +
                 "WHERE checkout_id = ? AND part_item_id = ?";
         try(PreparedStatement ps = ConnectionFactory.getPreparedStatement(sql)){
             ps.setString(1, checkedOutItem.getReturnDate().toString());
-            ps.setInt(2, checkedOutItem.getRelatedCheckout().getCheckOutId());
-            ps.setInt(3, checkedOutItem.getPartItem().getPatrimonialId());
+            ps.setInt(2, checkedOutItem.getReceiver().getInstitutionalId());
+            ps.setInt(3, checkedOutItem.getRelatedCheckout().getCheckOutId());
+            ps.setInt(4, checkedOutItem.getPartItem().getPatrimonialId());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
     @Override
     public boolean delete(CheckedOutItem obj) {
         return false;

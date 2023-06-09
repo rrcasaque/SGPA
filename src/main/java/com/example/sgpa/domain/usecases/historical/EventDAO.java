@@ -10,6 +10,6 @@ import com.example.sgpa.domain.usecases.utils.DAO;
 
 public interface EventDAO extends DAO<Event, Integer> {
 	List<Event> getReportByDate(LocalDateTime start, LocalDateTime end);
-    List<Event> getReportByUser(User user, LocalDateTime start, LocalDateTime end);
-    List<Event> getReportByPart(Part part, LocalDateTime start, LocalDateTime end);
+    List<Event> getReportByUser(int userId, LocalDateTime start, LocalDateTime end);
+    List<Event> getReportByPart(int patrimonialId, LocalDateTime start, LocalDateTime end);
 }

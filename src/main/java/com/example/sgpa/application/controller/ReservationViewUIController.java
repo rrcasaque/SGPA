@@ -96,6 +96,9 @@ public class ReservationViewUIController {
             alert.setTitle("SGPA informa");
             alert.setContentText("Empréstimo registrado com sucesso.");
             alert.showAndWait();
+            loadReservationsList();
+            reservedItemsList.clear();
+
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Error generating checkout.");

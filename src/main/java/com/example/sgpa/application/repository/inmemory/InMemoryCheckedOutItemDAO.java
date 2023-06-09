@@ -4,6 +4,7 @@ import com.example.sgpa.domain.entities.checkout.CheckedOutItem;
 import com.example.sgpa.domain.entities.checkout.CheckedOutItemKey;
 import com.example.sgpa.domain.usecases.checkout.CheckedOutItemDAO;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -59,6 +60,16 @@ public class InMemoryCheckedOutItemDAO implements CheckedOutItemDAO {
 
     @Override
     public List<CheckedOutItem> findByCheckOutId(int userId) {
+        return null;
+    }
+
+    @Override
+    public List<CheckedOutItem> getReportByPart(int patrimonialId, LocalDateTime start, LocalDateTime end) {
+        return null;
+    }
+
+    @Override
+    public List<CheckedOutItem> getReportByUser(int userId, LocalDateTime start, LocalDateTime end) {
         return null;
     }
 }

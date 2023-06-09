@@ -91,6 +91,7 @@ public class DataBaseBuilder {
         "        part_item_id INTEGER,\n"+
         "        due_date TEXT NOT NULL,\n"+
         "        return_date TEXT,\n"+
+        "        receiver_id INTEGER,\n "+
         "        FOREIGN KEY (checkout_id) REFERENCES checkout(checkout_id),\n"+
         "        FOREIGN KEY (part_item_id) REFERENCES part_item(patrimonial_id),\n"+
         "        PRIMARY KEY (checkout_id, part_item_id)\n"+

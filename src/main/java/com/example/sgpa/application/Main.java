@@ -63,8 +63,8 @@ public class Main {
         LocalDateTime startDate = LocalDateTime.of(2015, 1, 1, 0, 0);
         LocalDateTime endDate = LocalDateTime.now();
         
-        List<Event> partReport = generateReportByPartUseCase.generate(valve,startDate,endDate);
-        List<Event> userReport = generateReportByUserUseCase.generate(null, null, startDate, endDate);
+//        List<Event> partReport = generateReportByPartUseCase.generate(valve,startDate,endDate);
+//        List<Event> userReport = generateReportByUserUseCase.generate(null, null, startDate, endDate);
         List<Event> report = generateReportUseCase.generate(startDate, endDate);
     }
     private static void configureInjection(){
@@ -96,8 +96,8 @@ public class Main {
         createPartUseCase = new CreatePartUseCase(inMemoryPartDAO);
         deletePartItemUserCase = new DeletePartItemUserCase(inMemoryPartItemDAO);
         updatePartItemUseCase = new UpdatePartItemUseCase(inMemoryPartItemDAO);
-        generateReportByPartUseCase = new GenerateReportByPartUseCase(inMemoryEventDAO,inMemoryPartDAO);
-        generateReportByUserUseCase = new GenerateReportByUserUseCase(inMemoryEventDAO,inMemoryUserDAO);
+//        generateReportByPartUseCase = new GenerateReportByPartUseCase(inMemoryEventDAO,inMemoryPartDAO);
+//        generateReportByUserUseCase = new GenerateReportByUserUseCase(inMemoryEventDAO,inMemoryUserDAO);
         generateReportUseCase = new GenerateReportUseCase(inMemoryEventDAO);        
 //        createReservationUseCase = new CreateReservationUseCase(
 //                inMemoryUserDAO,
