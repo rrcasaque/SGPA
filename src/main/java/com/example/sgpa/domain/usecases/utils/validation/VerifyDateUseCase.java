@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class VerifyDateUseCase {
 	
-	public static void verify(LocalDateTime start, LocalDateTime end) throws Exception{
+	public static void verify(LocalDateTime start, LocalDateTime end) throws IllegalArgumentException{
 		if(start == null || end == null)
 			throw new IllegalArgumentException("Initial and final date must be informed");
 		if(start.isAfter(LocalDateTime.now()))

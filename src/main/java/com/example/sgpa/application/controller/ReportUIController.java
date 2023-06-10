@@ -7,6 +7,7 @@ import com.example.sgpa.application.view.WindowLoader;
 import com.example.sgpa.domain.entities.historical.Event;
 import com.example.sgpa.domain.usecases.historical.EventDAO;
 import com.example.sgpa.domain.usecases.part.PartItemDAO;
+import com.example.sgpa.domain.usecases.report.ExportReportUseCase;
 import com.example.sgpa.domain.usecases.report.GenerateReportByPartUseCase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -100,6 +101,15 @@ public class ReportUIController {
     }
     @FXML
     void exportPDF(ActionEvent event) {
+        ExportReportUseCase exportReportUseCase = new ExportReportUseCase();
+        List<Event> events = tvEvents.getItems();
+        if (!events.isEmpty()) {
+            exportReportUseCase.export(events);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("SGPA informa");
+            alert.setContentText("Relatório salvo com sucesso!");
+            alert.showAndWait();
+        }
     }
     @FXML
     void generateReport(ActionEvent event) {
