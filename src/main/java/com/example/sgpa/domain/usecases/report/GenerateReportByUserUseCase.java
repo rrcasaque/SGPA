@@ -24,8 +24,7 @@ public class GenerateReportByUserUseCase {
 		try {						
 			CheckExistenceUserUseCase checkExistenceUserUseCase = new CheckExistenceUserUseCase(this.userDAO);
 			checkExistenceUserUseCase.check(userId);
-			VerifyDateUseCase.verify(DateType.START, start);
-			VerifyDateUseCase.verify(DateType.END, end);
+			VerifyDateUseCase.verify(start,end);
 			
 			List<Event> eventList = this.eventDAO.getReportByUser(userId, start, end);
 						 

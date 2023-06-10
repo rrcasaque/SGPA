@@ -17,9 +17,7 @@ public class GenerateReportUseCase {
 	
 	public List<Event> generate(LocalDateTime start, LocalDateTime end) {
 		try {
-			VerifyDateUseCase.verify(DateType.START, start);
-			VerifyDateUseCase.verify(DateType.END, end);
-			
+			VerifyDateUseCase.verify(start, end);
 			List<Event> eventList = eventDAO.getReportByDate(start, end);
 			
 			if(eventList.isEmpty())

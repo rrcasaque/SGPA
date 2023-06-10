@@ -40,6 +40,8 @@ public class CheckOutViewUIController {
     private TableColumn<CheckedOutItem, String> tcStatus;
     @FXML
     private TableColumn<CheckedOutItem, String> tcType;
+    @FXML
+    private TableColumn<CheckedOutItem, String> tcDueDate;
     private final ObservableList<Checkout> checkOutList = FXCollections.observableArrayList();
     private final ObservableList<CheckedOutItem> checkedOutItemsList = FXCollections.observableArrayList();
     private final UserDAO userDAO = new SqliteUserDAO();
@@ -65,6 +67,7 @@ public class CheckOutViewUIController {
         tcPatrimonialId.setCellValueFactory(new PropertyValueFactory<>("patrimonialId"));
         tcType.setCellValueFactory(new PropertyValueFactory<>("type"));
         tcStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+        tcDueDate.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
     }
     private void bindTableViewsToItemsLists(){
         tvParts.setItems(checkedOutItemsList);

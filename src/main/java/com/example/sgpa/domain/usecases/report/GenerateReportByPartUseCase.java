@@ -19,14 +19,15 @@ public class GenerateReportByPartUseCase {
 		this.eventDAO = eventDAO;
 		this.partItemDAO = partItemDAO;
 	}
-	public List<Event> generate(int patrimonialId, LocalDateTime start, LocalDateTime end) throws  Exception{
+	public List<Event> generate(int patrimonialId, LocalDateTime start, LocalDateTime end) throws Exception {
+		if(patrimonialId == 0)
+			throw new RuntimeException("Patrimonial id, initial and final date must be informed.");
 		CheckExistencePartUseCase checkExistencePartUseCase = new CheckExistencePartUseCase(partItemDAO);
 		checkExistencePartUseCase.check(patrimonialId);
-		VerifyDateUseCase.verify(DateType.START, start);
-		VerifyDateUseCase.verify(DateType.END, end);
+		VerifyDateUseCase.verify(start, end);
 		List<Event> eventList = eventDAO.getReportByPart(patrimonialId, start, end);
 		if(eventList.isEmpty())
-			throw new RuntimeException("data not found for the informed parameters");
+			throw new RuntimeException("Data not found for the informed parameters");
 		return eventList;
 	}
 }

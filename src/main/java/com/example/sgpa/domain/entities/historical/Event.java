@@ -21,11 +21,21 @@ public class Event {
         this.itemPart = itemPart;
         this.timeStamp = LocalDateTime.now();
     }
+    public Event(EventType type, User requester, User technician, PartItem itemPart, LocalDateTime timeStamp) {
+        this.eventType = type;
+        this.requester = requester;
+        this.technician = technician;
+        this.itemPart = itemPart;
+        this.timeStamp = timeStamp;
+    }
     public EventType getEventType() {
         return eventType;
     }
     public LocalDateTime getTimeStamp() {
         return timeStamp;
+    }
+    public String getStringTimeStamp() {
+        return timeStamp.toString();
     }
     public int getId() {
         return id;

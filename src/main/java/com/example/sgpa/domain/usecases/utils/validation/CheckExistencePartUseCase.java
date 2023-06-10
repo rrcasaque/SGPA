@@ -15,8 +15,6 @@ public class CheckExistencePartUseCase {
 	}
 	
 	public void check(int patrimonialId) {
-		Optional<PartItem> foundPart = partItemDAO.findOne(patrimonialId);
-		if(foundPart.isEmpty())
-			throw new RuntimeException("Part not found!");
+		PartItem foundPart = partItemDAO.findOne(patrimonialId).orElseThrow(() -> new RuntimeException("Part not found!"));
 	}
 }

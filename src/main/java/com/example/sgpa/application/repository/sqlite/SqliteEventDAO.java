@@ -23,9 +23,13 @@ public class SqliteEventDAO implements EventDAO {
         PartItemDAO partItemDAO = new SqlitePartItemDAO();
         UserDAO userDAO = new SqliteUserDAO();
         List<Event> events = new ArrayList<>();
-        String sql = "SELECT * FROM event WHERE part_item_id = ?;";
+        String sql = "SELECT * FROM event " +
+                     "WHERE part_item_id = ? " +
+                     "and datetime(time_stamp) between datetime(?) and datetime(?);";
         try(PreparedStatement ps = ConnectionFactory.getPreparedStatement(sql)){
             ps.setInt(1, patrimonialId);
+            ps.setString(2, start.toString());
+            ps.setString(3, end.toString());
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 int part_item_id = rs.getInt("part_item_id");
@@ -36,7 +40,7 @@ public class SqliteEventDAO implements EventDAO {
                 User technician = userDAO.findOne(technician_id).orElseThrow();
                 LocalDateTime time_stamp = LocalDateTime.parse(rs.getString("time_stamp"));
                 EventType event_type = EventType.strToEnum(rs.getString("event_type"));
-                Event event = new Event(event_type, requester, technician, partItem);
+                Event event = new Event(event_type, requester, technician, partItem, time_stamp);
                 events.add(event);
             }
         } catch (SQLException e) {

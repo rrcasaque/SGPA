@@ -87,7 +87,7 @@ public class ReportUIController {
         tcPatrimonialId.setCellValueFactory(new PropertyValueFactory<>("patrimonialId"));
         tcPartType.setCellValueFactory(new PropertyValueFactory<>("partType"));
         tcEventType.setCellValueFactory(new PropertyValueFactory<>("eventType"));
-        tcTimeStamp.setCellValueFactory(new PropertyValueFactory<>("timeStamp"));
+        tcTimeStamp.setCellValueFactory(new PropertyValueFactory<>("stringTimeStamp"));
         tcUser.setCellValueFactory(new PropertyValueFactory<>("requesterName"));
         tcTechnician.setCellValueFactory(new PropertyValueFactory<>("technicianName"));
     }
@@ -100,11 +100,9 @@ public class ReportUIController {
     }
     @FXML
     void exportPDF(ActionEvent event) {
-
     }
     @FXML
     void generateReport(ActionEvent event) {
-
         switch (mode){
             case BY_PART -> {generateReportByPart();}
             case BY_USER -> {System.out.println("método by user não implementado");}
@@ -115,6 +113,8 @@ public class ReportUIController {
 
     private void generateReportByPart(){
         try {
+            if(isMissingParameters())
+                throw new IllegalArgumentException("There are missing filters.");
             int patrimonialId = Integer.parseInt(txtUserOrPartId.getText());
             int hourStart = cbHoraIni.getSelectionModel().getSelectedItem();
             int minuteStart = cbMinIni.getSelectionModel().getSelectedItem();
@@ -133,6 +133,16 @@ public class ReportUIController {
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
+    }
+
+    private boolean isMissingParameters() {
+        return txtUserOrPartId.getText().isEmpty()
+                || cbHoraIni.getSelectionModel().isEmpty()
+                || cbMinIni.getSelectionModel().isEmpty()
+                || cbHoraFim.getSelectionModel().isEmpty()
+                || cbMinFim.getSelectionModel().isEmpty()
+                || dpStart.getValue() == null
+                || dpEnd.getValue() == null;
     }
 
     public void configMode(ReportUIMode mode){
