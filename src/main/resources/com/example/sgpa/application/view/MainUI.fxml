@@ -20,7 +20,7 @@
             <items>
               <MenuItem mnemonicParsing="false" onAction="#goToNewPartScene" text="Cadastar peça" />
                   <MenuItem mnemonicParsing="false" text="Cadastrar item peça" />
-                  <MenuItem mnemonicParsing="false" text="Listar" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToListPartScene" text="Listar" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Empréstimos">
