@@ -9,7 +9,11 @@ import java.io.IOException;
 
 public class MainUIController {
     @FXML
-    private MenuItem menuItemNewCheckOut;
+    private MenuItem menuItemNewCheckOut;    
+    @FXML
+    void goToNewUserScene(ActionEvent event) throws IOException {
+        WindowLoader.setRoot("NewUserUI.fxml");
+    }
     @FXML
     void goToCheckOutScene(ActionEvent event) throws IOException {
         WindowLoader.setRoot("NewCheckOutUI.fxml");

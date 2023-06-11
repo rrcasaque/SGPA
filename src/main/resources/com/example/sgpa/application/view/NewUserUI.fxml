@@ -6,15 +6,15 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="399.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sgpa.application.controller.NewReservationUIController">
+<AnchorPane prefHeight="400.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sgpa.application.controller.NewUserUIController">
    <children>
       <TextField fx:id="txtUserId" layoutX="48.0" layoutY="63.0" prefHeight="25.0" prefWidth="239.0" promptText="Digite o prontuário do usuário" />
       <Label layoutX="48.0" layoutY="44.0" text="prontuário do usuário" />
       <Label fx:id="lblSelectedUser" layoutX="48.0" layoutY="67.0" text="Usuário selecionado: " visible="false" />
       <Label layoutX="392.0" layoutY="44.0" text="nome do usuário" />
       <TextField fx:id="txtFindPart" layoutX="392.0" layoutY="63.0" prefHeight="25.0" prefWidth="239.0" promptText="Digite o nome do usuário" />
-      <Button fx:id="btnCancel" layoutX="361.0" layoutY="350.0" mnemonicParsing="false" onAction="#cancelReservation" text="Voltar" />
-      <Button fx:id="btnConcludeReservation" layoutX="281.0" layoutY="350.0" mnemonicParsing="false" onAction="#concludeReservation" text="Cadastrar" />
+      <Button fx:id="btnCancel" layoutX="361.0" layoutY="350.0" mnemonicParsing="false" onAction="#cancelRegister" text="Voltar" />
+      <Button fx:id="btnConcludeReservation" layoutX="281.0" layoutY="350.0" mnemonicParsing="false" onAction="#registerUser" text="Cadastrar" />
       <Label layoutX="49.0" layoutY="101.0" text="email do usuário" />
       <TextField fx:id="txtFindPart1" layoutX="49.0" layoutY="120.0" prefHeight="25.0" prefWidth="239.0" promptText="Digite o email do usuário" />
       <Label layoutX="393.0" layoutY="101.0" text="telefone do usuário" />
@@ -31,3 +31,4 @@
       <RadioButton layoutX="560.0" layoutY="242.0" mnemonicParsing="false" text="Professor" />
    </children>
 </AnchorPane>
+ 
