@@ -18,7 +18,7 @@ public class WindowLoader extends Application {
         DataBaseBuilder DBBuilder = new DataBaseBuilder();
         DBBuilder.buildDataBaseIfMissing();
         scene = new Scene(loadFxml("LoginUI.fxml"));
-        stage.setMinWidth(680);
+        stage.setMinWidth(690);
         stage.setTitle("SGPA");
         stage.setScene(scene);
         stage.show();

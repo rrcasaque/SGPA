@@ -53,19 +53,19 @@ public class ExportReportUseCase {
         int hour = timestamp.getHour();
         int min = timestamp.getMinute();
 
-        String footerSrt = "\n\n\n\n\nRelatório gerado pelo técnico: "
+        String footerSrt = "\n\n\n\n\nRelatório gerado pelo técnico "
                 + Session.getLoggedTechnician().getName()
                 +" às "+hour+"h"+min+"min do dia "+day+"/"+month+"/"+year+".";
 
         StringBuilder reportStr = new StringBuilder();
         for (Event event : events) {
-            reportStr.append(eventToLineReport(event)).append("\n\n");
+            reportStr.append(eventToLineReport(event)).append("\n");
         }
 
         BaseFont courier = BaseFont.createFont(BaseFont.COURIER, BaseFont.CP1252, BaseFont.EMBEDDED);
         Font mono = new Font(courier);
         mono.setSize(9f);
-
-        return new Paragraph(headerStr+reportStr+footerSrt,mono);
+        Paragraph result = new Paragraph(headerStr+reportStr+footerSrt,mono);
+        return result;
     }
 }

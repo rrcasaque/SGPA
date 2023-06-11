@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sgpa.application.controller.ReservationViewUIController">
+<AnchorPane prefHeight="400.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sgpa.application.controller.ReservationViewUIController">
    <children>
       <TableView fx:id="tvReservations" layoutX="44.0" layoutY="82.0" prefHeight="200.0" prefWidth="347.0" AnchorPane.leftAnchor="44.0" AnchorPane.topAnchor="82.0">
         <columns>
@@ -17,7 +17,7 @@
         </columns>
       </TableView>
       <Label layoutX="195.0" layoutY="57.0" text="Reservas" AnchorPane.leftAnchor="195.0" AnchorPane.topAnchor="57.0" />
-      <Button fx:id="btnSee" layoutX="244.0" layoutY="290.0" mnemonicParsing="false" onAction="#seeReservedItems" text="Ver peças" AnchorPane.leftAnchor="244.0" AnchorPane.topAnchor="290.0" />
+      <Button fx:id="btnSee" layoutX="323.0" layoutY="290.0" mnemonicParsing="false" onAction="#seeReservedItems" text="Ver peças" AnchorPane.leftAnchor="323.0" AnchorPane.topAnchor="290.0" />
       <TableView fx:id="tvParts" layoutX="408.0" layoutY="82.0" prefHeight="200.0" prefWidth="231.0" AnchorPane.leftAnchor="408.0" AnchorPane.topAnchor="82.0">
         <columns>
           <TableColumn fx:id="tcPatrimonialId" prefWidth="75.0" text="Patrimônio" />

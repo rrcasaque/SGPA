@@ -10,33 +10,33 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="577.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sgpa.application.controller.ReportUIController">
-    <Button fx:id="btnBack" layoutX="499.0" layoutY="360.0" mnemonicParsing="false" onAction="#backToPreviousScene" text="Voltar" />
-    <TextField fx:id="txtUserOrPartId" layoutX="394.0" layoutY="44.0" prefHeight="25.0" prefWidth="153.0" promptText="Digite o n° de patrimônio" />
-    <TableView fx:id="tvEvents" layoutX="31.0" layoutY="174.0" prefHeight="181.0" prefWidth="516.0">
+<AnchorPane prefHeight="400.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sgpa.application.controller.ReportUIController">
+    <Button fx:id="btnBack" layoutX="580.0" layoutY="353.0" mnemonicParsing="false" onAction="#backToPreviousScene" text="Voltar" />
+    <TextField fx:id="txtUserOrPartId" layoutX="477.0" layoutY="44.0" prefHeight="25.0" prefWidth="153.0" promptText="Digite o n° de patrimônio" />
+    <TableView fx:id="tvEvents" layoutX="51.0" layoutY="167.0" prefHeight="181.0" prefWidth="577.0">
         <columns>
             <TableColumn fx:id="tcPatrimonialId" prefWidth="75.0" text="Patrimônio" />
             <TableColumn fx:id="tcPartType" prefWidth="57.0" text="Tipo" />
-            <TableColumn fx:id="tcEventType" prefWidth="93.0" text="Transação" />
-            <TableColumn fx:id="tcTimeStamp" prefWidth="121.0" text="Data e Hora" />
-            <TableColumn fx:id="tcUser" prefWidth="85.0" text="Solicitante" />
-            <TableColumn fx:id="tcTechnician" prefWidth="84.0" text="Técnico" />
+            <TableColumn fx:id="tcEventType" prefWidth="87.0" text="Transação" />
+            <TableColumn fx:id="tcTimeStamp" prefWidth="195.0" text="Data e Hora" />
+            <TableColumn fx:id="tcUser" prefWidth="81.0" text="Solicitante" />
+            <TableColumn fx:id="tcTechnician" prefWidth="81.0" text="Técnico" />
         </columns>
     </TableView>
-    <Label fx:id="lbUserOrPartId" layoutX="394.0" layoutY="29.0" text="N° de patrimônio da peça" />
-    <Label layoutX="31.0" layoutY="29.0" text="Início" />
-    <Label layoutX="211.0" layoutY="29.0" text="Fim" />
-    <Button fx:id="btnExportPDF" layoutX="32.0" layoutY="360.0" mnemonicParsing="false" onAction="#exportPDF" text="Exportar PDF" />
-    <Button fx:id="btnGenerateReport" layoutX="33.0" layoutY="135.0" mnemonicParsing="false" onAction="#generateReport" text="Gerar histórico" />
-    <DatePicker fx:id="dpStart" layoutX="31.0" layoutY="44.0" prefHeight="25.0" prefWidth="153.0" />
-    <DatePicker fx:id="dpEnd" layoutX="211.0" layoutY="44.0" prefHeight="25.0" prefWidth="153.0" />
-    <CheckBox fx:id="chbLateOnly" layoutX="395.0" layoutY="81.0" mnemonicParsing="false" text="Apenas itens atrasados" />
-    <Label layoutX="92.0" layoutY="81.0" text="h" />
-    <Label layoutX="165.0" layoutY="81.0" text="min" />
-    <Label layoutX="273.0" layoutY="81.0" text="h" />
-    <Label layoutX="346.0" layoutY="81.0" text="min" />
-    <ComboBox fx:id="cbHoraIni" layoutX="31.0" layoutY="77.0" prefHeight="25.0" prefWidth="60.0" />
-    <ComboBox fx:id="cbMinIni" layoutX="104.0" layoutY="77.0" prefHeight="25.0" prefWidth="60.0" />
-    <ComboBox fx:id="cbMinFim" layoutX="285.0" layoutY="77.0" prefHeight="25.0" prefWidth="60.0" />
-    <ComboBox fx:id="cbHoraFim" layoutX="212.0" layoutY="77.0" prefHeight="25.0" prefWidth="60.0" />
+    <Label fx:id="lbUserOrPartId" layoutX="477.0" layoutY="29.0" text="N° de patrimônio da peça" />
+    <Label layoutX="53.0" layoutY="27.0" text="Início" />
+    <Label layoutX="244.0" layoutY="27.0" text="Fim" />
+    <Button fx:id="btnExportPDF" layoutX="52.0" layoutY="353.0" mnemonicParsing="false" onAction="#exportPDF" text="Exportar PDF" />
+    <Button fx:id="btnGenerateReport" layoutX="52.0" layoutY="131.0" mnemonicParsing="false" onAction="#generateReport" text="Gerar histórico" />
+    <DatePicker fx:id="dpStart" layoutX="52.0" layoutY="42.0" prefHeight="25.0" prefWidth="171.0" />
+    <DatePicker fx:id="dpEnd" layoutX="244.0" layoutY="42.0" prefHeight="25.0" prefWidth="171.0" />
+    <CheckBox fx:id="chbLateOnly" layoutX="478.0" layoutY="82.0" mnemonicParsing="false" text="Apenas itens atrasados" />
+    <Label layoutX="114.0" layoutY="79.0" text="h" />
+    <Label layoutX="201.0" layoutY="79.0" text="min" />
+    <Label layoutX="308.0" layoutY="79.0" text="h" />
+    <Label layoutX="394.0" layoutY="79.0" text="min" />
+    <ComboBox fx:id="cbHoraIni" layoutX="52.0" layoutY="75.0" prefHeight="25.0" prefWidth="60.0" />
+    <ComboBox fx:id="cbMinIni" layoutX="138.0" layoutY="75.0" prefHeight="25.0" prefWidth="60.0" />
+    <ComboBox fx:id="cbMinFim" layoutX="331.0" layoutY="75.0" prefHeight="25.0" prefWidth="60.0" />
+    <ComboBox fx:id="cbHoraFim" layoutX="245.0" layoutY="75.0" prefHeight="25.0" prefWidth="60.0" />
 </AnchorPane>
