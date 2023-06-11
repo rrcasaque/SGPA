@@ -11,13 +11,7 @@ import javafx.scene.control.TextField;
 
 public class NewPartUIController {
     @FXML
-    private TextField txtUserId;
-
-    @FXML
     private Label lblSelectedUser;
-
-    @FXML
-    private TextField txtFindPart;
 
     @FXML
     private Button btnCancel;
@@ -29,10 +23,10 @@ public class NewPartUIController {
     private TextField txtFindPart1;
 
     @FXML
-    private TextField txtFindPart111;
+    private TextField txtFindPart112;
 
     @FXML
-    private TextField txtFindPart112;
+    private TextField txtFindPart11;
 
     @FXML
     private void cancelRegisterPart() throws IOException {
