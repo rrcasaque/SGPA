@@ -11,6 +11,10 @@ public class MainUIController {
     @FXML
     private MenuItem menuItemNewCheckOut;    
     @FXML
+    void goToEditUserScene(ActionEvent event) throws IOException {
+        WindowLoader.setRoot("EditUserUI.fxml");
+    }
+    @FXML
     void goToNewUserScene(ActionEvent event) throws IOException {
         WindowLoader.setRoot("NewUserUI.fxml");
     }
