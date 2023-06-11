@@ -104,6 +104,27 @@ public class SqliteReservationDAO implements ReservationDAO {
             e.printStackTrace();
         }
     }
+    public List<Reservation> findExpired() {
+        List<Reservation> reservations = new ArrayList<>();
+        String sql = "select * from reservation " +
+                     "where status = 'Aguardando retirada' " +
+                          "and date(date_time_scheduled_for_checkout) < date('now', 'localtime')";
+        try(PreparedStatement ps = ConnectionFactory.getPreparedStatement(sql)){
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                int reservationId = rs.getInt("reservation_id");
+                Reservation reservation = getEmptyReservation(reservationId).orElseThrow();
+                List<PartItem> reservedItems = partItemDAO.findByReservationId(reservationId);
+                reservation.addItems(reservedItems);
+                reservations.add(reservation);
+            }
+            return reservations;
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return reservations;
+    }
 
     @Override
     public boolean delete(Reservation obj) {

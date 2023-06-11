@@ -92,7 +92,7 @@ public class NewCheckOutUIController {
             lblSelectedUser.setText("Usuário: "+ selectedUser.getName() + "            Tipo: " + selectedUser.getUserType().toString());
         }catch(Exception e){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Error loading user.");
+            alert.setHeaderText("Error loading user.");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
@@ -104,13 +104,14 @@ public class NewCheckOutUIController {
             Set<PartItem> found = sqlitePartItemDAO.findByType(txtFindPart.getText());
             if (found.isEmpty()){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("SGPA informa");
                 alert.setContentText("Parts not found");
                 alert.showAndWait();
             }
             searchResult.addAll(found);
         }catch(Exception e){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Error loading parts.");
+            alert.setHeaderText("Error loading parts.");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
@@ -135,11 +136,13 @@ public class NewCheckOutUIController {
                 throw  new RuntimeException("User and/or items must be not null or empty.");
             createCheckOutUseCase.createCheckout(selectedUser.getInstitutionalId(), partItemSet);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("SGPA informa");
             alert.setContentText("Empréstimo registrado com sucesso.");
             alert.showAndWait();
             clearFields();
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("SGPA informa");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }

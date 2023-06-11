@@ -44,11 +44,13 @@ public class ReturnUIController {
             try {
                 returnPartItemUseCase.returnPartItem(Integer.parseInt(txtPatrimonialId.getText()));
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("SGPA informa");
                 alert.setContentText("Peça de patrimônio nº "+txtPatrimonialId.getText()+" devolvida com sucesso!");
                 alert.showAndWait();
                 txtPatrimonialId.clear();
             }catch(Exception e){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("SGPA informa");
                 alert.setContentText(e.getMessage());
                 alert.showAndWait();
             }

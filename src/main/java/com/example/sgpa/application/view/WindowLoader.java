@@ -1,6 +1,7 @@
 package com.example.sgpa.application.view;
 
 import com.example.sgpa.application.repository.sqlite.DataBaseBuilder;
+import com.example.sgpa.domain.usecases.reservation.UpdateExpiredReservationsUseCase;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,12 +12,14 @@ import java.io.IOException;
 
 
 public class WindowLoader extends Application {
+    UpdateExpiredReservationsUseCase updateExpired = new UpdateExpiredReservationsUseCase();
     private static Scene scene;
     private static Object controller;
     @Override
     public void start(Stage stage) throws IOException {
         DataBaseBuilder DBBuilder = new DataBaseBuilder();
         DBBuilder.buildDataBaseIfMissing();
+        updateExpired.update();
         scene = new Scene(loadFxml("LoginUI.fxml"));
         stage.setMinWidth(690);
         stage.setTitle("SGPA");

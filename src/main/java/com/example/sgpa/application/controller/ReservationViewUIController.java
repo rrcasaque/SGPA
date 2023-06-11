@@ -93,7 +93,7 @@ public class ReservationViewUIController {
                 throw new RuntimeException("No reservation Selected");
             createCheckOutUseCase.createCheckout(selectedReservation);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("SGPA informa");
+            alert.setHeaderText("SGPA informa");
             alert.setContentText("Empréstimo registrado com sucesso.");
             alert.showAndWait();
             loadReservationsList();
@@ -102,6 +102,7 @@ public class ReservationViewUIController {
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Error generating checkout.");
+            alert.setHeaderText("SGPA informa");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }

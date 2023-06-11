@@ -120,6 +120,7 @@ public class NewReservationUIController {
         }catch(Exception e){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Error loading user.");
+            alert.setHeaderText("SGPA informa");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
@@ -132,6 +133,7 @@ public class NewReservationUIController {
             Set<PartItem> found = sqlitePartItemDAO.findByType(txtFindPart.getText());
             if (found.isEmpty()){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("SGPA informa");
                 alert.setContentText("Parts not found");
                 alert.showAndWait();
             }
@@ -139,6 +141,7 @@ public class NewReservationUIController {
         }catch(Exception e){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Error loading parts.");
+            alert.setHeaderText("SGPA informa");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
@@ -162,11 +165,13 @@ public class NewReservationUIController {
                 throw new RuntimeException("User, checkout date and reserved items must be informed.");
             createReservationUseCase.createReservation(selectedUser.getInstitutionalId(), partItemSet, scheduledCheckoutDate);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("SGPA informa");
             alert.setContentText("Reserva registrada com sucesso.");
             alert.showAndWait();
             clearFields();
         }catch(Exception e){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("SGPA informa");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }

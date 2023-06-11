@@ -35,7 +35,7 @@ public class ExportReportUseCase {
                 + formatter.format(event.getEventType().toString(),14)
                 + formatter.format(event.getRequesterName(),16)
                 + formatter.format(event.getTechnicianName(),13)
-                + formatter.format(event.getStringTimeStamp(),15);
+                + formatter.format(event.getStringTimeStamp(),16);
     }
 
     private Paragraph eventListToParagraph(List<Event> events) throws DocumentException, IOException {
@@ -44,7 +44,7 @@ public class ExportReportUseCase {
                 +formatter.format("Transação",14)
                 +formatter.format("Solicitante",16)
                 +formatter.format("Operador",13)
-                +formatter.format("Data e Hora",15)+"\n\n";
+                +formatter.format("Data e Hora",16)+"\n\n";
 
         LocalDateTime timestamp  = LocalDateTime.now();
         int day = timestamp.getDayOfMonth();

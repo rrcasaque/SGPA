@@ -31,7 +31,7 @@ public class LoginUIController {
             WindowLoader.setRoot("MainUI.fxml");
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Login error.");
+            alert.setHeaderText("SGPA informa");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }

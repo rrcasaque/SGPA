@@ -19,7 +19,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ReportUIController {
@@ -96,11 +95,11 @@ public class ReportUIController {
         tvEvents.setItems(searchResult);
     }
     @FXML
-    void backToPreviousScene(ActionEvent event) throws IOException {
+    void backToPreviousScene() throws IOException {
         WindowLoader.setRoot("MainUI.fxml");
     }
     @FXML
-    void exportPDF(ActionEvent event) {
+    void exportPDF() {
         ExportReportUseCase exportReportUseCase = new ExportReportUseCase();
         List<Event> events = tvEvents.getItems();
         if (!events.isEmpty()) {
@@ -114,9 +113,9 @@ public class ReportUIController {
     @FXML
     void generateReport(ActionEvent event) {
         switch (mode){
-            case BY_PART -> {generateReportByPart();}
-            case BY_USER -> {System.out.println("método by user não implementado");}
-            case GENERAL -> {System.out.println("método general não implementado");}
+            case BY_PART -> generateReportByPart();
+            case BY_USER -> System.out.println("método by user não implementado");
+            case GENERAL -> System.out.println("método general não implementado");
             default -> throw new IllegalArgumentException("Undefined report mode.");
         }
     }
@@ -126,10 +125,10 @@ public class ReportUIController {
             if(isMissingParameters())
                 throw new IllegalArgumentException("There are missing filters.");
             int patrimonialId = Integer.parseInt(txtUserOrPartId.getText());
-            int hourStart = cbHoraIni.getSelectionModel().getSelectedItem();
-            int minuteStart = cbMinIni.getSelectionModel().getSelectedItem();
-            int hourEnd = cbHoraFim.getSelectionModel().getSelectedItem();
-            int minuteEnd = cbMinFim.getSelectionModel().getSelectedItem();
+            int hourStart = cbHoraIni.getSelectionModel().isEmpty() ? 0 : cbHoraIni.getSelectionModel().getSelectedItem();
+            int minuteStart = cbMinIni.getSelectionModel().isEmpty() ? 0 : cbMinIni.getSelectionModel().getSelectedItem();
+            int hourEnd = cbHoraFim.getSelectionModel().isEmpty() ? 23 : cbHoraFim.getSelectionModel().getSelectedItem();
+            int minuteEnd = cbMinFim.getSelectionModel().isEmpty() ? 59 : cbMinFim.getSelectionModel().getSelectedItem();
             LocalDateTime start = dpStart.getValue().atTime(hourStart, minuteStart);
             LocalDateTime end = dpEnd.getValue().atTime(hourEnd, minuteEnd);
             EventDAO eventDAO = new SqliteEventDAO();
@@ -139,7 +138,7 @@ public class ReportUIController {
             searchResult.addAll(generateReportByPartUseCase.generate(patrimonialId, start, end));
         }catch(Exception e){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("SGPA INFORMA");
+            alert.setHeaderText("SGPA informa");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
@@ -147,12 +146,12 @@ public class ReportUIController {
 
     private boolean isMissingParameters() {
         return txtUserOrPartId.getText().isEmpty()
-                || cbHoraIni.getSelectionModel().isEmpty()
-                || cbMinIni.getSelectionModel().isEmpty()
-                || cbHoraFim.getSelectionModel().isEmpty()
-                || cbMinFim.getSelectionModel().isEmpty()
                 || dpStart.getValue() == null
-                || dpEnd.getValue() == null;
+                || dpEnd.getValue() == null
+                || (cbHoraIni.getSelectionModel().isEmpty() && !cbMinIni.getSelectionModel().isEmpty())
+                || (!cbHoraIni.getSelectionModel().isEmpty() && cbMinIni.getSelectionModel().isEmpty())
+                || (cbHoraFim.getSelectionModel().isEmpty() && !cbMinFim.getSelectionModel().isEmpty())
+                || (!cbHoraFim.getSelectionModel().isEmpty() && cbMinFim.getSelectionModel().isEmpty());
     }
 
     public void configMode(ReportUIMode mode){
