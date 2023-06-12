@@ -19,7 +19,7 @@
           <Menu mnemonicParsing="false" text="Peças">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#goToNewPartScene" text="Cadastar peça" />
-                  <MenuItem mnemonicParsing="false" text="Cadastrar item peça" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToNewPartItemScene" text="Cadastrar item peça" />
                   <MenuItem mnemonicParsing="false" onAction="#goToListPartScene" text="Listar" />
             </items>
           </Menu>

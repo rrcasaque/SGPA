@@ -9,6 +9,10 @@ import java.io.IOException;
 
 public class MainUIController {
     @FXML
+    void goToNewPartItemScene(ActionEvent event) throws IOException {
+        WindowLoader.setRoot("NewPartItemUI.fxml");
+    }
+    @FXML
     void goToListPartScene(ActionEvent event) throws IOException {
         WindowLoader.setRoot("ListPartUI.fxml");
     }
