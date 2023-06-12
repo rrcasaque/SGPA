@@ -91,6 +91,8 @@ public class ReservationViewUIController {
         try {
             if (selectedReservation == null || selectedReservation.isExpired())
                 throw new RuntimeException("No reservation Selected");
+            if (selectedReservation.isExpired())
+                throw new RuntimeException("It is not allowed generating a checkout from an expired reservation.");
             createCheckOutUseCase.createCheckout(selectedReservation);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText("SGPA informa");
