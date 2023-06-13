@@ -3,12 +3,16 @@ package com.example.sgpa.application.controller;
 
 import com.example.sgpa.application.repository.sqlite.SqliteEventDAO;
 import com.example.sgpa.application.repository.sqlite.SqlitePartItemDAO;
+import com.example.sgpa.application.repository.sqlite.SqliteUserDAO;
 import com.example.sgpa.application.view.WindowLoader;
 import com.example.sgpa.domain.entities.historical.Event;
 import com.example.sgpa.domain.usecases.historical.EventDAO;
 import com.example.sgpa.domain.usecases.part.PartItemDAO;
 import com.example.sgpa.domain.usecases.report.ExportReportUseCase;
 import com.example.sgpa.domain.usecases.report.GenerateReportByPartUseCase;
+import com.example.sgpa.domain.usecases.report.GenerateReportByUserUseCase;
+import com.example.sgpa.domain.usecases.user.UserDAO;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -114,7 +118,7 @@ public class ReportUIController {
     void generateReport(ActionEvent event) {
         switch (mode){
             case BY_PART -> generateReportByPart();
-            case BY_USER -> System.out.println("método by user não implementado");
+            case BY_USER -> generateReportByUser();
             case GENERAL -> System.out.println("método general não implementado");
             default -> throw new IllegalArgumentException("Undefined report mode.");
         }
@@ -136,6 +140,30 @@ public class ReportUIController {
             GenerateReportByPartUseCase generateReportByPartUseCase = new GenerateReportByPartUseCase(eventDAO, partItemDAO);
             searchResult.clear();
             searchResult.addAll(generateReportByPartUseCase.generate(patrimonialId, start, end));
+        }catch(Exception e){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("SGPA informa");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
+    }
+
+    private void generateReportByUser(){
+        try {
+            if(isMissingParameters())
+                throw new IllegalArgumentException("There are missing filters.");
+            int userId = Integer.parseInt(txtUserOrPartId.getText());
+            int hourStart = cbHoraIni.getSelectionModel().isEmpty() ? 0 : cbHoraIni.getSelectionModel().getSelectedItem();
+            int minuteStart = cbMinIni.getSelectionModel().isEmpty() ? 0 : cbMinIni.getSelectionModel().getSelectedItem();
+            int hourEnd = cbHoraFim.getSelectionModel().isEmpty() ? 23 : cbHoraFim.getSelectionModel().getSelectedItem();
+            int minuteEnd = cbMinFim.getSelectionModel().isEmpty() ? 59 : cbMinFim.getSelectionModel().getSelectedItem();
+            LocalDateTime start = dpStart.getValue().atTime(hourStart, minuteStart);
+            LocalDateTime end = dpEnd.getValue().atTime(hourEnd, minuteEnd);
+            UserDAO userDAO = new SqliteUserDAO();
+            EventDAO eventDAO = new SqliteEventDAO();            
+            GenerateReportByUserUseCase generateReportByUserUseCase = new GenerateReportByUserUseCase(eventDAO,userDAO);            
+            searchResult.clear();            
+            searchResult.addAll(generateReportByUserUseCase.generate(userId, start, end));
         }catch(Exception e){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText("SGPA informa");
