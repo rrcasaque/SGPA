@@ -11,6 +11,7 @@ import com.example.sgpa.domain.usecases.part.PartItemDAO;
 import com.example.sgpa.domain.usecases.report.ExportReportUseCase;
 import com.example.sgpa.domain.usecases.report.GenerateReportByPartUseCase;
 import com.example.sgpa.domain.usecases.report.GenerateReportByUserUseCase;
+import com.example.sgpa.domain.usecases.report.GenerateReportUseCase;
 import com.example.sgpa.domain.usecases.user.UserDAO;
 
 import javafx.collections.FXCollections;
@@ -119,7 +120,7 @@ public class ReportUIController {
         switch (mode){
             case BY_PART -> generateReportByPart();
             case BY_USER -> generateReportByUser();
-            case GENERAL -> System.out.println("método general não implementado");
+            case GENERAL -> generateReport();
             default -> throw new IllegalArgumentException("Undefined report mode.");
         }
     }
@@ -164,6 +165,29 @@ public class ReportUIController {
             GenerateReportByUserUseCase generateReportByUserUseCase = new GenerateReportByUserUseCase(eventDAO,userDAO);            
             searchResult.clear();            
             searchResult.addAll(generateReportByUserUseCase.generate(userId, start, end));
+        }catch(Exception e){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("SGPA informa");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
+    }
+
+    private void generateReport(){
+        try {
+            txtUserOrPartId.setText("null");            
+            if(isMissingParameters())
+                throw new IllegalArgumentException("There are missing filters.");            
+            int hourStart = cbHoraIni.getSelectionModel().isEmpty() ? 0 : cbHoraIni.getSelectionModel().getSelectedItem();
+            int minuteStart = cbMinIni.getSelectionModel().isEmpty() ? 0 : cbMinIni.getSelectionModel().getSelectedItem();
+            int hourEnd = cbHoraFim.getSelectionModel().isEmpty() ? 23 : cbHoraFim.getSelectionModel().getSelectedItem();
+            int minuteEnd = cbMinFim.getSelectionModel().isEmpty() ? 59 : cbMinFim.getSelectionModel().getSelectedItem();
+            LocalDateTime start = dpStart.getValue().atTime(hourStart, minuteStart);
+            LocalDateTime end = dpEnd.getValue().atTime(hourEnd, minuteEnd);            
+            EventDAO eventDAO = new SqliteEventDAO();            
+            GenerateReportUseCase generateReportUseCase = new GenerateReportUseCase(eventDAO);            
+            searchResult.clear();                        
+            searchResult.addAll(generateReportUseCase.generate(start, end));                                    
         }catch(Exception e){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText("SGPA informa");
