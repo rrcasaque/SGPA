@@ -14,15 +14,13 @@ public class CreatePartUseCase {
     }
 
     public Part createPart(String description, int maxDaysCheckedOutForStudent, int maxDaysCheckedOutForProfessor) {
-        Optional<Part> optPart = partDAO.findByDescription(description);
-        if (optPart.isEmpty()) {
-            //Session.getLoggedTechnician();
-            Part newPart = new Part(description, maxDaysCheckedOutForStudent, maxDaysCheckedOutForProfessor);
-            int id = partDAO.create(newPart);
-            newPart.setId(id);
-
-            return newPart;
-        }
-        return optPart.get();
+        if (description == null || maxDaysCheckedOutForStudent == 0 || maxDaysCheckedOutForProfessor == 0 )
+            throw new IllegalArgumentException("There are missing input fields.");
+        if (partDAO.findByDescription(description).isPresent())
+            throw new IllegalArgumentException("Informed part type already exists in data base.");
+        Part newPart = new Part(description, maxDaysCheckedOutForStudent, maxDaysCheckedOutForProfessor);
+        int id = partDAO.create(newPart);
+        newPart.setId(id);
+        return newPart;
     }
 }

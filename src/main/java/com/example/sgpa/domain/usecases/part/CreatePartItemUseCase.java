@@ -18,20 +18,12 @@ public class CreatePartItemUseCase {
     }
 
 
-    public PartItem createPartItem(int patrimonialId, Part part) {
-        Optional<Part> optPart = partDAO.findOne(part.getId());
-        if (optPart.isEmpty()) {
-            throw new EntityNotFoundException("Part not found");
-        }
-
-        Optional<PartItem> optPartItem = partItemDAO.findOne(patrimonialId);
-        if (optPartItem.isEmpty()) {
-            Session.getLoggedTechnician();
-            PartItem newPartItem = new PartItem(patrimonialId, StatusPart.AVAILABLE, "nova", part);
-            partItemDAO.create(newPartItem);
-            return newPartItem;
-        }
-
-        return optPartItem.get();
+    public PartItem createPartItem(Part part, String observation) throws Exception {
+        if (part == null) throw new IllegalArgumentException("Inform the part to be save.");
+        Part foundPart = partDAO.findOne(part.getId()).orElseThrow(()-> new EntityNotFoundException("Part not found"));
+        PartItem newPartItem = new PartItem(StatusPart.AVAILABLE, observation, part);
+        int patrimonialId = partItemDAO.create(newPartItem);
+        newPartItem.setPatrimonialId(patrimonialId);
+        return newPartItem;
     }
 }

@@ -55,15 +55,20 @@ public class Part {
     }
 
     @Override
+    public String toString() {
+        return type;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Part part = (Part) o;
-        return id == part.id;
+        return id == part.id && type.equals(part.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, type);
     }
 }

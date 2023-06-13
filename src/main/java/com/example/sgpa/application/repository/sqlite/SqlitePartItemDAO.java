@@ -71,8 +71,17 @@ public class SqlitePartItemDAO implements PartItemDAO {
         return parts;
     }
     @Override
-    public Integer create(PartItem obj) {
-        return null;
+    public Integer create(PartItem partItem) {
+        String sql = "insert into part_item(status, observation, part_id) values (?, ?, ?);";
+        try(PreparedStatement ps = ConnectionFactory.getPreparedStatement(sql)) {
+            ps.setString(1,StatusPart.AVAILABLE.toString());
+            ps.setString(2,partItem.getObservation());
+            ps.setInt(3,partItem.getPart().getId());
+            ps.executeUpdate();
+            return ps.getGeneratedKeys().getInt(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
     @Override
     public Optional<PartItem> findOne(Integer patrimonialId) {

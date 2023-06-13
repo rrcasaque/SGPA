@@ -39,17 +39,17 @@ public class Main {
         Part valve = createPartUseCase.createPart("Válvula", 10, 30);
         Part brakePad = createPartUseCase.createPart("Pastilha de freio", 8, 30);
         //criar itens-peças
-        createPartItemUseCase.createPartItem(1, propeller);
-        createPartItemUseCase.createPartItem(2, propeller);
-        createPartItemUseCase.createPartItem(3, propeller);
-
-        createPartItemUseCase.createPartItem(1, valve);
-        createPartItemUseCase.createPartItem(2, valve);
-        createPartItemUseCase.createPartItem(3, valve);
-
-        createPartItemUseCase.createPartItem(1, brakePad);
-        createPartItemUseCase.createPartItem(2, brakePad);
-        createPartItemUseCase.createPartItem(3, brakePad);
+//        createPartItemUseCase.createPartItem(1, propeller);
+//        createPartItemUseCase.createPartItem(2, propeller);
+//        createPartItemUseCase.createPartItem(3, propeller);
+//
+//        createPartItemUseCase.createPartItem(1, valve);
+//        createPartItemUseCase.createPartItem(2, valve);
+//        createPartItemUseCase.createPartItem(3, valve);
+//
+//        createPartItemUseCase.createPartItem(1, brakePad);
+//        createPartItemUseCase.createPartItem(2, brakePad);
+//        createPartItemUseCase.createPartItem(3, brakePad);
 
         //criar tecnico
         //criar professor
