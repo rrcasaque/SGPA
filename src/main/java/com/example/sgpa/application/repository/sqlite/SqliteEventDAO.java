@@ -49,13 +49,65 @@ public class SqliteEventDAO implements EventDAO {
         return events;
     }
     @Override
-    public List<Event> getReportByUser(int userId, LocalDateTime start, LocalDateTime end) {
-        return null;
+public List<Event> getReportByUser(int userId, LocalDateTime start, LocalDateTime end) {
+    PartItemDAO partItemDAO = new SqlitePartItemDAO();
+    UserDAO userDAO = new SqliteUserDAO();
+    List<Event> events = new ArrayList<>();
+    String sql = "SELECT * FROM event " +
+                 "WHERE user_id = ? " +
+                 "AND datetime(time_stamp) BETWEEN datetime(?) AND datetime(?);";
+    try (PreparedStatement ps = ConnectionFactory.getPreparedStatement(sql)) {
+        ps.setInt(1, userId);
+        ps.setString(2, start.toString());
+        ps.setString(3, end.toString());
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            int part_item_id = rs.getInt("part_item_id");
+            PartItem partItem = partItemDAO.findOne(part_item_id).orElseThrow();
+            int user_id = rs.getInt("user_id");
+            User requester = userDAO.findOne(user_id).orElseThrow();
+            int technician_id = rs.getInt("technician_id");
+            User technician = userDAO.findOne(technician_id).orElseThrow();
+            LocalDateTime time_stamp = LocalDateTime.parse(rs.getString("time_stamp"));
+            EventType event_type = EventType.strToEnum(rs.getString("event_type"));
+            Event event = new Event(event_type, requester, technician, partItem, time_stamp);
+            events.add(event);
+        }
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
     }
-    @Override
-    public List<Event> getReportByDate(LocalDateTime start, LocalDateTime end) {
-        return null;
+    return events;
+}
+
+@Override
+public List<Event> getReportByDate(LocalDateTime start, LocalDateTime end) {
+    PartItemDAO partItemDAO = new SqlitePartItemDAO();
+    UserDAO userDAO = new SqliteUserDAO();
+    List<Event> events = new ArrayList<>();
+    String sql = "SELECT * FROM event " +
+                 "WHERE datetime(time_stamp) BETWEEN datetime(?) AND datetime(?);";
+    try (PreparedStatement ps = ConnectionFactory.getPreparedStatement(sql)) {
+        ps.setString(1, start.toString());
+        ps.setString(2, end.toString());
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            int part_item_id = rs.getInt("part_item_id");
+            PartItem partItem = partItemDAO.findOne(part_item_id).orElseThrow();
+            int user_id = rs.getInt("user_id");
+            User requester = userDAO.findOne(user_id).orElseThrow();
+            int technician_id = rs.getInt("technician_id");
+            User technician = userDAO.findOne(technician_id).orElseThrow();
+            LocalDateTime time_stamp = LocalDateTime.parse(rs.getString("time_stamp"));
+            EventType event_type = EventType.strToEnum(rs.getString("event_type"));
+            Event event = new Event(event_type, requester, technician, partItem, time_stamp);
+            events.add(event);
+        }
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
     }
+    return events;
+}
+
     @Override
     public Integer create(Event event) {
         int createdId;
