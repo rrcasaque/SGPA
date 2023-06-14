@@ -4,11 +4,11 @@ public class Student extends User {
     public Student() {
     }
 
-    public Student(String institutionalId) {
+    public Student(int institutionalId) {
         super(institutionalId);
     }
 
-    public Student(String institutionalId, String name, String email, String phone) {
+    public Student(int institutionalId, String name, String email, String phone) {
         super(institutionalId, name, email, phone, UserType.Student);
     }
 }

@@ -9,26 +9,17 @@ import com.example.sgpa.domain.usecases.utils.validation.DateType;
 import com.example.sgpa.domain.usecases.utils.validation.VerifyDateUseCase;
 
 public class GenerateReportUseCase {
-	private EventDAO eventDAO;	
-
-	public GenerateReportUseCase( EventDAO eventDAO) {				
+	private final EventDAO eventDAO;
+	public GenerateReportUseCase(EventDAO eventDAO) {
 		this.eventDAO = eventDAO;
 	}
-	
 	public List<Event> generate(LocalDateTime start, LocalDateTime end) {
-		try {
-			VerifyDateUseCase.verify(DateType.START, start);
-			VerifyDateUseCase.verify(DateType.END, end);
-			
-			List<Event> eventList = eventDAO.getReportByDate(start, end);
-			
-			if(eventList.isEmpty())
-				throw new RuntimeException("data not found for the informed parameters");
-			return eventList;
-		} catch (Exception e) {
-			throw new RuntimeException(e.getMessage());
-		}		
+		VerifyDateUseCase.verify(start, end);
+		List<Event> eventList = eventDAO.getReportByDate(start, end);		
+		System.out.println(eventList);
+		if (eventList.isEmpty())
+			throw new RuntimeException("data not found for the informed parameters");
+		return eventList;
 	}
-	
-	
+
 }

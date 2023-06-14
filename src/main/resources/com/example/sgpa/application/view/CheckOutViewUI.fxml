@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sgpa.application.controller.CheckOutViewUIController">
+   <children>
+      <TableView fx:id="tvCheckouts" layoutX="78.0" layoutY="96.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="78.0" AnchorPane.topAnchor="96.0">
+        <columns>
+          <TableColumn fx:id="tcCheckoutId" prefWidth="42.0" text="Id" />
+          <TableColumn fx:id="tcUserId" prefWidth="73.0" text="Id usuário" />
+            <TableColumn fx:id="tcCheckOutDate" prefWidth="84.0" text="Data retirada" />
+        </columns>
+      </TableView>
+      <Label layoutX="116.0" layoutY="71.0" text="Empréstimos realizados" AnchorPane.leftAnchor="116.0" AnchorPane.topAnchor="71.0" />
+      <Button fx:id="btnSee" layoutX="210.0" layoutY="304.0" mnemonicParsing="false" onAction="#seeCheckOutItems" text="Ver peças" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="304.0" />
+      <TableView fx:id="tvParts" layoutX="316.0" layoutY="96.0" prefHeight="200.0" prefWidth="296.0" AnchorPane.leftAnchor="316.0" AnchorPane.topAnchor="96.0">
+        <columns>
+          <TableColumn fx:id="tcPatrimonialId" prefWidth="75.0" text="Patrimônio" />
+          <TableColumn fx:id="tcType" prefWidth="58.0" text="Tipo" />
+            <TableColumn fx:id="tcDueDate" prefWidth="90.0" text="Prazo devolução" />
+            <TableColumn fx:id="tcStatus" minWidth="9.0" prefWidth="72.0" text="Status" />
+        </columns>
+      </TableView>
+      <Label layoutX="450.0" layoutY="71.0" text="Peças" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="71.0" />
+      <Button fx:id="btnBack" layoutX="564.0" layoutY="342.0" mnemonicParsing="false" onAction="#backToPreviousScene" text="Voltar" AnchorPane.leftAnchor="564.0" AnchorPane.topAnchor="342.0" />
+   </children>
+</AnchorPane>

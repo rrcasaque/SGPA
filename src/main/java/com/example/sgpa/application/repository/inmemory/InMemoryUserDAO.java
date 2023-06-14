@@ -9,17 +9,22 @@ import java.util.Optional;
 
 public class InMemoryUserDAO implements UserDAO {
     @Override
-    public Optional<User> findOneByIdAndType(UserType type, String institutionalId) {
+    public Optional<User> findOneByIdAndType(UserType type, int institutionalId) {
         return Optional.empty();
     }
 
     @Override
-    public String create(User obj) {
-        return null;
+    public Optional<User> findOneByLoginAndPassword(String login, String password) {
+        return Optional.empty();
     }
 
     @Override
-    public Optional<User> findOne(String type) {
+    public Integer create(User obj) {
+        return 0;
+    }
+
+    @Override
+    public Optional<User> findOne(Integer type) {
         return Optional.empty();
     }
 

@@ -15,7 +15,7 @@ public class DeletePartItemUserCase {
         this.partItemDAO = itemPartDAO;
     }
 
-    public boolean deletePartItem(String patrimonialId) {
+    public boolean deletePartItem(int patrimonialId) {
         Optional<PartItem> optPartItem = partItemDAO.findOne(patrimonialId);
         if (optPartItem.isEmpty())
             throw new EntityNotFoundException("Part Item not found");

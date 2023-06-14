@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="400.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sgpa.application.controller.NewCheckOutUIController">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane prefHeight="104.0" prefWidth="690.0">
+               <children>
+                  <TextField fx:id="txtUserId" layoutX="62.0" layoutY="17.0" prefHeight="25.0" prefWidth="225.0" promptText="Digite o Id do usuário" />
+                  <Button fx:id="bntFindUser" layoutX="294.0" layoutY="17.0" mnemonicParsing="false" onAction="#findUser" text="Buscar" />
+                  <Label fx:id="lblSelectedUser" layoutX="62.0" layoutY="56.0" text="Usuário: " />
+               </children>
+            </Pane>
+            <Pane prefHeight="280.0" prefWidth="690.0">
+               <children>
+                  <TableView fx:id="tvSelectedParts" layoutX="380.0" layoutY="34.0" prefHeight="182.0" prefWidth="250.0">
+                    <columns>
+                      <TableColumn fx:id="tcPatrimonialIdSelectedPart" prefWidth="96.0" text="Patrimônio" />
+                      <TableColumn fx:id="tcTypeSelectedPart" prefWidth="145.0" text="Tipo" />
+                    </columns>
+                  </TableView>
+                  <TextField fx:id="txtFindPart" layoutX="61.0" promptText="Digite o tipo da peça" />
+                  <TableView fx:id="tvFoundParts" layoutX="61.0" layoutY="34.0" prefHeight="182.0" prefWidth="225.0">
+                    <columns>
+                      <TableColumn fx:id="tcPatrimonialIdFoundPart" prefWidth="75.0" text="Patrimônio" />
+                      <TableColumn fx:id="tcTypeFoundPart" prefWidth="75.0" text="Tipo" />
+                        <TableColumn fx:id="tcStatusFoundPart" prefWidth="75.0" text="Status" />
+                    </columns>
+                  </TableView>
+                  <Button fx:id="btnGetPart" layoutX="234.0" mnemonicParsing="false" onAction="#findParts" text="Buscar" />
+                  <Button fx:id="btnAddPartToSelected" layoutX="135.0" layoutY="231.0" mnemonicParsing="false" onAction="#addPart" text="Adicionar ao emprestimo" />
+                  <Button fx:id="btnRemovePartFromSelected" layoutX="566.0" layoutY="231.0" mnemonicParsing="false" onAction="#removePart" text="Remover" />
+                  <Label layoutX="451.0" layoutY="5.0" text="Itens de Empréstimo" />
+               </children>
+            </Pane>
+            <Pane prefHeight="58.0" prefWidth="600.0">
+               <children>
+                  <Button fx:id="btnFinish" layoutX="349.0" layoutY="10.0" mnemonicParsing="false" onAction="#createCheckOut" text="Finalizar" />
+                  <Button fx:id="btnCancel" layoutX="282.0" layoutY="10.0" mnemonicParsing="false" onAction="#backToPreviousScene" text="Voltar" />
+               </children>
+            </Pane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

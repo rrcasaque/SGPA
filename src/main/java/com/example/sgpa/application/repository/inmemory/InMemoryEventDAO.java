@@ -45,12 +45,12 @@ public class InMemoryEventDAO implements EventDAO {
 		return null;
 	}
 	@Override
-	public List<Event> getReportByUser(User user, LocalDateTime start, LocalDateTime end) {
+	public List<Event> getReportByUser(int userId, LocalDateTime start, LocalDateTime end) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
-	public List<Event> getReportByPart(Part part, LocalDateTime start, LocalDateTime end) {
+	public List<Event> getReportByPart(int patrimonialId, LocalDateTime start, LocalDateTime end) {
 		// TODO Auto-generated method stub
 		return null;
 	}

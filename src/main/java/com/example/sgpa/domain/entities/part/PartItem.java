@@ -3,10 +3,14 @@ package com.example.sgpa.domain.entities.part;
 import java.util.Objects;
 
 public class PartItem {
-    private String patrimonialId;
+    private int patrimonialId;
     private StatusPart status;
     private String observation;
     private Part part;
+
+    public String getType(){
+        return part.getType();
+    }
 
     public PartItem() {
     }
@@ -17,18 +21,18 @@ public class PartItem {
         this.part = part;
     }
 
-    public PartItem(String patrimonialId, StatusPart status, String observation, Part part) {
+    public PartItem(int patrimonialId, StatusPart status, String observation, Part part) {
         this.patrimonialId = patrimonialId;
         this.status = status;
         this.observation = observation;
         this.part = part;
     }
 
-    public String getPatrimonialId() {
+    public int getPatrimonialId() {
         return patrimonialId;
     }
 
-    public void setPatrimonialId(String patrimonialId) {
+    public void setPatrimonialId(int patrimonialId) {
         this.patrimonialId = patrimonialId;
     }
 
@@ -67,5 +71,12 @@ public class PartItem {
     @Override
     public int hashCode() {
         return Objects.hash(patrimonialId);
+    }
+
+    public boolean isAvailable() {
+        return status == StatusPart.AVAILABLE;
+    }
+    public boolean isNotAvailable() {
+        return status != StatusPart.AVAILABLE;
     }
 }

@@ -13,19 +13,12 @@ public class UpdatePartItemUseCase {
     public UpdatePartItemUseCase(PartItemDAO itemPartDAO) {
         this.partItemDAO = itemPartDAO;
     }
-
-    // faz sentido ter o local de armazenamento salvo?
-    public PartItem updatePartItem(String patrimonialId, String newObservation) {
-        Optional<PartItem> optPartItem = partItemDAO.findOne(patrimonialId);
-        if (optPartItem.isEmpty())
-            throw new EntityNotFoundException("Part Item not found");
-        if (Objects.equals(newObservation, "")) {
-            throw new RuntimeException("Invalid null description");
-        }
-        Session.getLoggedTechnician();
-        optPartItem.get().setObservation(newObservation);
-        partItemDAO.update(optPartItem.get());
-        return optPartItem.get();
+    public PartItem updatePartItem(PartItem partItem) {
+        if (partItem == null)
+            throw new IllegalArgumentException("Part item mus be not null.");
+        PartItem optPartItem = partItemDAO.findOne(partItem.getPatrimonialId()).orElseThrow(()->new RuntimeException("Part Item not found"));
+        partItemDAO.update(partItem);
+        return partItem;
     }
 
 }
