@@ -12,10 +12,6 @@ public enum UserType {
         this.label = lable;
     }
 
-    public static UserType strToEnum(String userType){
-      return Arrays.stream(UserType.values()).filter(ut -> ut.toString().equals(userType)).findAny().orElseThrow();
-    }
-
     @Override
     public String toString() {
         return label;

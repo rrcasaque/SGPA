@@ -8,27 +8,27 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sgpa.application.controller.NewUserUIController">
    <children>
-      <TextField fx:id="txtUserId" layoutX="48.0" layoutY="63.0" prefHeight="25.0" prefWidth="239.0" promptText="Digite o prontuário do usuário" />
+      <TextField fx:id="txtProntuario" layoutX="48.0" layoutY="63.0" prefHeight="25.0" prefWidth="239.0" promptText="Digite o prontuário do usuário" />
       <Label layoutX="48.0" layoutY="44.0" text="prontuário do usuário" />
       <Label fx:id="lblSelectedUser" layoutX="48.0" layoutY="67.0" text="Usuário selecionado: " visible="false" />
       <Label layoutX="392.0" layoutY="44.0" text="nome do usuário" />
-      <TextField fx:id="txtFindPart" layoutX="392.0" layoutY="63.0" prefHeight="25.0" prefWidth="239.0" promptText="Digite o nome do usuário" />
+      <TextField fx:id="txtNome" layoutX="392.0" layoutY="63.0" prefHeight="25.0" prefWidth="239.0" promptText="Digite o nome do usuário" />
       <Button fx:id="btnCancel" layoutX="361.0" layoutY="350.0" mnemonicParsing="false" onAction="#cancelRegister" text="Voltar" />
-      <Button fx:id="btnConcludeReservation" layoutX="281.0" layoutY="350.0" mnemonicParsing="false" onAction="#registerUser" text="Cadastrar" />
+      <Button fx:id="btnConcludeRegister" layoutX="281.0" layoutY="350.0" mnemonicParsing="false" onAction="#registerUser" text="Cadastrar" />
       <Label layoutX="49.0" layoutY="101.0" text="email do usuário" />
-      <TextField fx:id="txtFindPart1" layoutX="49.0" layoutY="120.0" prefHeight="25.0" prefWidth="239.0" promptText="Digite o email do usuário" />
+      <TextField fx:id="txtEmail" layoutX="49.0" layoutY="120.0" prefHeight="25.0" prefWidth="239.0" promptText="Digite o email do usuário" />
       <Label layoutX="393.0" layoutY="101.0" text="telefone do usuário" />
-      <TextField fx:id="txtFindPart11" layoutX="393.0" layoutY="120.0" prefHeight="25.0" prefWidth="239.0" promptText="Digite o telefone do usuário" />
+      <TextField fx:id="txtTelefone" layoutX="393.0" layoutY="120.0" prefHeight="25.0" prefWidth="239.0" promptText="Digite o telefone do usuário" />
       <Label layoutX="394.0" layoutY="158.0" text="login do usuário" />
-      <TextField fx:id="txtFindPart12" layoutX="394.0" layoutY="177.0" prefHeight="25.0" prefWidth="239.0" promptText="Digite o login do usuário" />
+      <TextField fx:id="txtLogin" layoutX="394.0" layoutY="177.0" prefHeight="25.0" prefWidth="239.0" promptText="Digite o login do usuário" />
       <Label layoutX="51.0" layoutY="219.0" text="senha do usuário" />
-      <TextField fx:id="txtFindPart111" layoutX="51.0" layoutY="238.0" prefHeight="25.0" prefWidth="239.0" promptText="Digite a senha do usuário" />
+      <TextField fx:id="txtSenha" layoutX="51.0" layoutY="238.0" prefHeight="25.0" prefWidth="239.0" promptText="Digite a senha do usuário" />
       <Label layoutX="50.0" layoutY="158.0" text="sala do usuário" />
-      <TextField fx:id="txtFindPart112" layoutX="50.0" layoutY="177.0" prefHeight="25.0" prefWidth="239.0" promptText="Digite o nº da sala do usuário" />      
+      <TextField fx:id="txtSala" layoutX="50.0" layoutY="177.0" prefHeight="25.0" prefWidth="239.0" promptText="Digite o nº da sala do usuário" />
       <Label layoutX="395.0" layoutY="219.0" text="tipo de usuário" />
-      <RadioButton layoutX="395.0" layoutY="242.0" mnemonicParsing="false" text="Estudante" />
-      <RadioButton layoutX="483.0" layoutY="242.0" mnemonicParsing="false" text="Técnico" />
-      <RadioButton layoutX="560.0" layoutY="242.0" mnemonicParsing="false" text="Professor" />
+      <RadioButton fx:id="radioButtonEstudante" layoutX="395.0" layoutY="242.0" mnemonicParsing="false" text="Estudante" />
+      <RadioButton fx:id="radioButtonTecnico" layoutX="483.0" layoutY="242.0" mnemonicParsing="false" text="Técnico" />
+      <RadioButton fx:id="radioButtonProfessor" layoutX="560.0" layoutY="242.0" mnemonicParsing="false" text="Professor" />
    </children>
 </AnchorPane>
  

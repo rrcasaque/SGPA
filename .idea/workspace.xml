@@ -4,7 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6fbb332b-4071-4051-9f94-181fc77e905c" name="Changes" comment="feat: (CDU005) UpdatePartItemUseCase" />
+    <list default="true" id="6fbb332b-4071-4051-9f94-181fc77e905c" name="Changes" comment="feat: (CDU005) UpdatePartItemUseCase">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/application/controller/ListUserUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/application/controller/ListUserUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/application/controller/NewUserUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/application/controller/NewUserUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/application/repository/inmemory/InMemoryUserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/application/repository/inmemory/InMemoryUserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/application/repository/sqlite/DataBaseBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/application/repository/sqlite/DataBaseBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/application/repository/sqlite/SqliteUserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/application/repository/sqlite/SqliteUserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/checkout/CheckedOutItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/checkout/CheckedOutItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/user/Professor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/user/Professor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/user/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/user/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/user/Technician.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/user/Technician.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/user/UserType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/user/UserType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/user/CreateUserUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/user/CreateUserUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/user/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/user/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/sgpa/application/view/ListUserUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/sgpa/application/view/ListUserUI.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/sgpa/application/view/NewUserUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/sgpa/application/view/NewUserUI.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,6 +56,9 @@
       </MavenGeneralSettings>
     </option>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
   <component name="ProjectId" id="2PLk7NkOhQhbuwWo80CH0q6EQfn" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -56,11 +77,11 @@
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
 }</component>
-  <component name="RunManager">
-    <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.WindowLoader">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="corretto-17" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="com.example.sgpa.HelloApplication" />
+      <option name="MAIN_CLASS_NAME" value="com.example.sgpa.application.Main" />
       <module name="SGPA" />
       <extension name="coverage">
         <pattern>
@@ -72,9 +93,27 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="WindowLoader" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.sgpa.application.view.WindowLoader" />
+      <module name="SGPA" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.sgpa.application.view.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.WindowLoader" />
+      <item itemvalue="Application.Main" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.HelloApplication" />
+        <item itemvalue="Application.WindowLoader" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -134,5 +173,16 @@
     <MESSAGE value="feat: criação dos métodos de CreatePartUseCase" />
     <MESSAGE value="feat: (CDU005) UpdatePartItemUseCase" />
     <option name="LAST_COMMIT_MESSAGE" value="feat: (CDU005) UpdatePartItemUseCase" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/sgpa/application/view/WindowLoader.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
