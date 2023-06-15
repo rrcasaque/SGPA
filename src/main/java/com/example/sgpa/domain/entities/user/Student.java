@@ -9,6 +9,6 @@ public class Student extends User {
     }
 
     public Student(int institutionalId, String name, String email, String phone) {
-        super(institutionalId, name, email, phone, UserType.Student);
+        super(institutionalId, name, email, phone, UserType.Student.toString());
     }
 }

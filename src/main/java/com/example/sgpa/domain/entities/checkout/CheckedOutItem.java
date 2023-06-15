@@ -34,7 +34,7 @@ public class CheckedOutItem {
         setDueDate();
     }
     private void setDueDate(){
-        if (relatedCheckout.getUser().getUserType() == UserType.PROFESSOR) {
+        if (relatedCheckout.getUser().getUserType() == UserType.PROFESSOR.toString()) {
             this.dueDate = LocalDate.now().plusDays(partItem.getPart().getMaxDaysCheckedOutForProfessor());
         }else {
             this.dueDate = LocalDate.now().plusDays(partItem.getPart().getMaxDaysCheckedOutForStudent());

@@ -140,7 +140,7 @@ public class DataBaseBuilder {
     private String buildUserTable() {
         String sql =
         "CREATE TABLE user (\n"+
-        "        institutional_id INTEGER PRIMARY KEY AUTOINCREMENT,\n"+
+        "        institutional_id INTEGER PRIMARY KEY,\n"+
         "        name TEXT NOT NULL,\n"+
         "        email TEXT,\n"+
         "        phone TEXT,\n"+
@@ -170,10 +170,10 @@ public class DataBaseBuilder {
     }
 
     private String populateUserTable(){
-       String sql = "insert into user(name, email, phone, user_type, login, password) \n" +
-               "values ('Mário', 'mario@email.com','16887766776', 'Técnico', 'mprado', 'm1234'),\n" +
-               "       ('Paula', 'paula@email.com','16887766776', 'Professor', NULL , NULL),\n" +
-               "       ('Carmen', 'carmen@email.com','16887766776', 'Estudante', NULL, NULL);";
+       String sql = "insert into user(institutional_id, name, email, phone, user_type, room, login, password) \n" +
+               "values (1, 'Mário', 'mario@email.com','16887766776', 'Técnico', NULL, 'mprado', 'm1234'),\n" +
+               "       (2, 'Paula', 'paula@email.com','16887766776', 'Professor', 7, NULL , NULL),\n" +
+               "       (3, 'Carmen', 'carmen@email.com','16887766776', 'Estudante', NULL, NULL, NULL);";
         System.out.println(sql);
         return sql;
     }

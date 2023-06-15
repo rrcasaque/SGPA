@@ -5,36 +5,39 @@ public class User {
     private String name;
     private String email;
     private String phone;
-    private UserType userType;
+    private String userType;
     private int room;
     private String login;
+    private String password;
+
 	public User() {
     }
     public User(int institutionalId) {
         this.institutionalId = institutionalId;
     }
-    public User(int institutionalId, String name, String email, String phone, UserType userType) {
+    public User(int institutionalId, String name, String email, String phone, String userType) {
         this.institutionalId = institutionalId;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.userType = userType;
     }
-    public User(int institutionalId, String name, String email, String phone, UserType userType, Integer room) {
+    public User(int institutionalId, String name, String email, String phone, String userType, Integer room) {
         this.institutionalId = institutionalId;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.userType = userType;
-        this.room =room;
+        this.room = room;
     }
-    public User(int institutionalId, String name, String email, String phone, UserType userType, String login) {
+    public User(int institutionalId, String name, String email, String phone, String userType, String login, String password) {
         this.institutionalId = institutionalId;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.userType = userType;
         this.login = login;
+        this.password = password;
     }
     public int getInstitutionalId() {
         return institutionalId;
@@ -57,10 +60,10 @@ public class User {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    public UserType getUserType() {
+    public String getUserType() {
 		return userType;
 	}
-	public void setUserType(UserType userType) {
+	public void setUserType(String userType) {
 		this.userType = userType;
 	}
     public void setInstitutionalId(int institutionalId) {
@@ -79,6 +82,13 @@ public class User {
         this.login = login;
     }
 
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.login = password;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -86,9 +96,10 @@ public class User {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
-                ", userType=" + userType +
-                ", room=" + room +
+                ", userType='" + userType + '\'' +
+                ", room='" + room + '\'' +
                 ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }

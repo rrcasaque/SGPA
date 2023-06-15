@@ -16,12 +16,9 @@ public class Technician extends User {
     }
 
     public Technician(int institutionalId, String name, String email, String phone, String login, String password) {
-        super(institutionalId, name, email, phone, UserType.TECHNICIAN, password);
+        super(institutionalId, name, email, phone, UserType.TECHNICIAN.toString(), login, password);
         this.login = login;
         this.password = password;
     }
 
-    public String getPassword() {
-        return password;
-    }
 }
