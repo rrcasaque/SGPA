@@ -5,6 +5,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.PasswordField?>
 
 <AnchorPane prefHeight="400.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sgpa.application.controller.NewUserUIController">
    <children>
@@ -22,7 +23,7 @@
       <Label layoutX="394.0" layoutY="158.0" text="login do usuário" />
       <TextField fx:id="txtLogin" layoutX="394.0" layoutY="177.0" prefHeight="25.0" prefWidth="239.0" promptText="Digite o login do usuário" />
       <Label layoutX="51.0" layoutY="219.0" text="senha do usuário" />
-      <TextField fx:id="txtSenha" layoutX="51.0" layoutY="238.0" prefHeight="25.0" prefWidth="239.0" promptText="Digite a senha do usuário" />
+      <PasswordField fx:id="txtSenha" layoutX="51.0" layoutY="238.0" prefHeight="25.0" prefWidth="239.0" promptText="Digite a senha do usuário" />
       <Label layoutX="50.0" layoutY="158.0" text="sala do usuário" />
       <TextField fx:id="txtSala" layoutX="50.0" layoutY="177.0" prefHeight="25.0" prefWidth="239.0" promptText="Digite o nº da sala do usuário" />
       <Label layoutX="395.0" layoutY="219.0" text="tipo de usuário" />

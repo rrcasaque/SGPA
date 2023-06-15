@@ -2,12 +2,18 @@ package com.example.sgpa.application.controller;
 
 import java.io.IOException;
 
+import com.example.sgpa.application.repository.sqlite.SqliteReservationDAO;
+import com.example.sgpa.application.repository.sqlite.SqliteUserDAO;
 import com.example.sgpa.application.view.WindowLoader;
 
+import com.example.sgpa.domain.entities.user.Student;
 import com.example.sgpa.domain.entities.user.User;
 import com.example.sgpa.domain.entities.user.UserType;
 import com.example.sgpa.domain.usecases.checkout.CreateCheckOutUseCase;
+import com.example.sgpa.domain.usecases.reservation.CreateReservationUseCase;
+import com.example.sgpa.domain.usecases.reservation.ReservationDAO;
 import com.example.sgpa.domain.usecases.user.CreateUserUseCase;
+import com.example.sgpa.domain.usecases.user.UserDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -42,7 +48,7 @@ public class NewUserUIController {
     private TextField txtLogin;
 
     @FXML
-    private TextField txtSenha;
+    private PasswordField txtSenha;
 
     @FXML
     private TextField txtSala;
@@ -56,6 +62,10 @@ public class NewUserUIController {
     @FXML
     private RadioButton radioButtonProfessor;
 
+    private final UserDAO userDAO  = new SqliteUserDAO();
+
+    private CreateUserUseCase createUserUseCase;
+
     @FXML
     void cancelRegister(ActionEvent event) throws IOException {
         WindowLoader.setRoot("MainUI.fxml");
@@ -63,38 +73,46 @@ public class NewUserUIController {
 
     @FXML
     private void initialize() {
+        this.createUserUseCase = new CreateUserUseCase(userDAO);
         radioButtonTecnico.setToggleGroup(toggleGroup);
         radioButtonEstudante.setToggleGroup(toggleGroup);
         radioButtonProfessor.setToggleGroup(toggleGroup);
-
     }
 
     @FXML
     private void registerUser() {
         if (toggleGroup.getSelectedToggle() == radioButtonProfessor) {
 
-        } else if (toggleGroup.getSelectedToggle() == radioButtonEstudante) {
             try{
-                User newUser = new User(Integer.parseInt(txtProntuario.getText()), txtNome.getText(),
-                        txtEmail.getText(), txtTelefone.getText(), UserType.Student.toString());
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText("SGPA informa");
-                alert.setContentText("Estudante registrado com sucesso.");
-                alert.showAndWait();
-                clearFields();
+                createUserUseCase.createProfessor(Integer.parseInt(txtProntuario.getText()), txtNome.getText(),
+                        txtEmail.getText(), txtTelefone.getText(), Integer.parseInt(txtSala.getText()));
+                showSuccessAlert();
             } catch (Exception e) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText("SGPA informa");
-                alert.setContentText(e.getMessage());
-                alert.showAndWait();
+                showErrorAlert(e);
             }
+
+        } else if (toggleGroup.getSelectedToggle() == radioButtonEstudante) {
+
+            try{
+                createUserUseCase.createStudent(Integer.parseInt(txtProntuario.getText()), txtNome.getText(),
+                        txtEmail.getText(), txtTelefone.getText());
+                showSuccessAlert();
+            } catch (Exception e) {
+                showErrorAlert(e);
+            }
+
         } else if (toggleGroup.getSelectedToggle() == radioButtonTecnico) {
 
+            try{
+                createUserUseCase.createTechnician(Integer.parseInt(txtProntuario.getText()), txtNome.getText(),
+                        txtEmail.getText(), txtTelefone.getText(), txtLogin.getText(), txtSenha.getText());
+                showSuccessAlert();
+            } catch (Exception e) {
+                showErrorAlert(e);
+            }
+
         } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText("SGPA informa");
-            alert.setContentText("Selecione um tipo de usuário.");
-            alert.showAndWait();
+            showWarningAlert("Selecione um tipo de usuário.");
         }
     }
 
@@ -106,6 +124,27 @@ public class NewUserUIController {
         txtEmail.clear();
         txtSala.clear();
     }
-    // Outros métodos e lógica adicionais
+
+    private void showErrorAlert(Exception e) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("SGPA informa");
+        alert.setContentText(e.getLocalizedMessage());
+        alert.showAndWait();
+    }
+
+    private void showSuccessAlert() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("SGPA informa");
+        alert.setContentText("Usuário registrado com sucesso.");
+        alert.showAndWait();
+        clearFields();
+    }
+
+    private void showWarningAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("SGPA informa");
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 
 }

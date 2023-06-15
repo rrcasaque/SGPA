@@ -13,6 +13,7 @@ public class Professor extends User {
 
     public Professor(int institutionalId, String name, String email, String phone, int room) {
         super(institutionalId, name, email, phone, UserType.PROFESSOR.toString(), room);
+        this.room = room;
     }
 
     public int getRoom() {

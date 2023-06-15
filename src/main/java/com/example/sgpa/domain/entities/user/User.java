@@ -28,7 +28,7 @@ public class User {
         this.email = email;
         this.phone = phone;
         this.userType = userType;
-        this.room =room;
+        this.room = room;
     }
     public User(int institutionalId, String name, String email, String phone, String userType, String login, String password) {
         this.institutionalId = institutionalId;
