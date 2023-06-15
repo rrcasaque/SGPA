@@ -104,6 +104,7 @@ public class SqliteReservationDAO implements ReservationDAO {
             e.printStackTrace();
         }
     }
+
     public List<Reservation> findExpired() {
         List<Reservation> reservations = new ArrayList<>();
         String sql = "select * from reservation " +

@@ -7,9 +7,6 @@ import com.example.sgpa.domain.entities.user.Professor;
 import com.example.sgpa.domain.entities.user.Student;
 import com.example.sgpa.domain.entities.user.Technician;
 
-import com.example.sgpa.domain.entities.user.UserType;
-import com.example.sgpa.domain.usecases.reservation.CreateReservationUseCase;
-
 public class CreateUserUseCase {
 	private UserDAO userDAO;
 	public Exception duplicatedID = new IllegalArgumentException("This institutional ID already exists.");

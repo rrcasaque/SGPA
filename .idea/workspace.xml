@@ -5,13 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6fbb332b-4071-4051-9f94-181fc77e905c" name="Changes" comment="feat: (CDU005) UpdatePartItemUseCase">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/utils/SGPAlerts.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sgpa.db" beforeDir="false" afterPath="$PROJECT_DIR$/sgpa.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/application/controller/EditUserUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/application/controller/EditUserUIController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/application/controller/NewUserUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/application/controller/NewUserUIController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/user/Professor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/user/Professor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/entities/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/application/repository/sqlite/SqliteReservationDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/application/repository/sqlite/SqliteReservationDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/application/repository/sqlite/SqliteUserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/application/repository/sqlite/SqliteUserDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/user/CreateUserUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/user/CreateUserUseCase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/sgpa/application/view/NewUserUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/sgpa/application/view/NewUserUI.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/user/UpdateUserUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sgpa/domain/usecases/user/UpdateUserUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/sgpa/application/view/EditUserUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/sgpa/application/view/EditUserUI.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,12 +174,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/example/sgpa/application/view/WindowLoader.java</url>
           <line>13</line>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-field">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/sgpa/application/controller/LoginUIController.java</url>
-          <line>20</line>
-          <properties field="pswdInput" class="com.example.sgpa.application.controller.LoginUIController" />
-          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

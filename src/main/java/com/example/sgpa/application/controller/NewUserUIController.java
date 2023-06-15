@@ -2,18 +2,13 @@ package com.example.sgpa.application.controller;
 
 import java.io.IOException;
 
-import com.example.sgpa.application.repository.sqlite.SqliteReservationDAO;
 import com.example.sgpa.application.repository.sqlite.SqliteUserDAO;
 import com.example.sgpa.application.view.WindowLoader;
 
-import com.example.sgpa.domain.entities.user.Student;
-import com.example.sgpa.domain.entities.user.User;
-import com.example.sgpa.domain.entities.user.UserType;
-import com.example.sgpa.domain.usecases.checkout.CreateCheckOutUseCase;
-import com.example.sgpa.domain.usecases.reservation.CreateReservationUseCase;
-import com.example.sgpa.domain.usecases.reservation.ReservationDAO;
+
 import com.example.sgpa.domain.usecases.user.CreateUserUseCase;
 import com.example.sgpa.domain.usecases.user.UserDAO;
+import com.example.sgpa.domain.usecases.utils.SGPAlerts;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -66,6 +61,8 @@ public class NewUserUIController {
 
     private CreateUserUseCase createUserUseCase;
 
+    private final SGPAlerts sgpAlerts = new SGPAlerts();
+
     @FXML
     void cancelRegister(ActionEvent event) throws IOException {
         WindowLoader.setRoot("MainUI.fxml");
@@ -86,9 +83,10 @@ public class NewUserUIController {
             try{
                 createUserUseCase.createProfessor(Integer.parseInt(txtProntuario.getText()), txtNome.getText(),
                         txtEmail.getText(), txtTelefone.getText(), Integer.parseInt(txtSala.getText()));
-                showSuccessAlert();
+                sgpAlerts.showSuccessAlert("Professor registrado com sucesso.");
+                clearFields();
             } catch (Exception e) {
-                showErrorAlert(e);
+                sgpAlerts.showErrorAlert(e);
             }
 
         } else if (toggleGroup.getSelectedToggle() == radioButtonEstudante) {
@@ -96,9 +94,10 @@ public class NewUserUIController {
             try{
                 createUserUseCase.createStudent(Integer.parseInt(txtProntuario.getText()), txtNome.getText(),
                         txtEmail.getText(), txtTelefone.getText());
-                showSuccessAlert();
+                sgpAlerts.showSuccessAlert("Estudante registrado com sucesso.");
+                clearFields();
             } catch (Exception e) {
-                showErrorAlert(e);
+                sgpAlerts.showErrorAlert(e);
             }
 
         } else if (toggleGroup.getSelectedToggle() == radioButtonTecnico) {
@@ -106,13 +105,14 @@ public class NewUserUIController {
             try{
                 createUserUseCase.createTechnician(Integer.parseInt(txtProntuario.getText()), txtNome.getText(),
                         txtEmail.getText(), txtTelefone.getText(), txtLogin.getText(), txtSenha.getText());
-                showSuccessAlert();
+                sgpAlerts.showSuccessAlert("Técnico registrado com sucesso.");
+                clearFields();
             } catch (Exception e) {
-                showErrorAlert(e);
+                sgpAlerts.showErrorAlert(e);
             }
 
         } else {
-            showWarningAlert("Selecione um tipo de usuário.");
+            sgpAlerts.showWarningAlert("Selecione um tipo de usuário.");
         }
     }
 
@@ -120,31 +120,11 @@ public class NewUserUIController {
         txtProntuario.clear();
         txtNome.clear();
         txtLogin.clear();
+        txtSenha.clear();
         txtTelefone.clear();
         txtEmail.clear();
         txtSala.clear();
     }
 
-    private void showErrorAlert(Exception e) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText("SGPA informa");
-        alert.setContentText(e.getLocalizedMessage());
-        alert.showAndWait();
-    }
-
-    private void showSuccessAlert() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText("SGPA informa");
-        alert.setContentText("Usuário registrado com sucesso.");
-        alert.showAndWait();
-        clearFields();
-    }
-
-    private void showWarningAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText("SGPA informa");
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 
 }

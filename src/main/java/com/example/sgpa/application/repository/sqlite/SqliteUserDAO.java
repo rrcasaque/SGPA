@@ -134,8 +134,23 @@ public class SqliteUserDAO implements UserDAO {
         return users;
     }
     @Override
-    public void update(User obj) {
-
+    public void update(User user) {
+        String sql ="UPDATE user \n" +
+                "SET  name = ?, email = ?, phone = ?, user_type = ?, room = ?, login = ?, password = ?\n" +
+                "WHERE institutional_id = ?;";
+        try(PreparedStatement ps = ConnectionFactory.getPreparedStatement(sql)){
+            ps.setString(1,user.getName());
+            ps.setString(2,user.getEmail());
+            ps.setString(3,user.getPhone());
+            ps.setString(4, user.getUserType());
+            ps.setInt(5, user.getRoom());
+            ps.setString(6, user.getLogin());
+            ps.setString(7, user.getPassword());
+            ps.setInt(8,user.getInstitutionalId());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     @Override
     public boolean delete(User obj) {
